@@ -1,0 +1,13 @@
+version: "2"
+sql:
+  - schema: db/migrations
+    queries: queries
+    engine: "sqlite"
+    gen:
+      go:
+        package: database
+        out: internal/database
+        sql_package: "database/sql"
+        overrides:
+          - column: congress_trades.sentiment
+            go_type: "float64"

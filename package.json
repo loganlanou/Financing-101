@@ -1,0 +1,27 @@
+{
+  "name": "financing-101",
+  "version": "1.0.0",
+  "description": "SSR-first Investing 101 rebuild backed by Go/Echo with templated UI.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "sass assets/styles/app.scss web/static/app.css --no-source-map --load-path=node_modules",
+    "watch:css": "npm run build:css -- --watch",
+    "playwright:test": "playwright test",
+    "test": "npm run playwright:test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loganlanou/Financing-101.git"
+  },
+  "keywords": [],
+  "author": "Logan Lanou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loganlanou/Financing-101/issues"
+  },
+  "homepage": "https://github.com/loganlanou/Financing-101#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "sass": "^1.77.0"
+  }
+}

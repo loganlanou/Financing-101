@@ -1,0 +1,224 @@
+package components
+
+import (
+    "fmt"
+    "strings"
+    "time"
+
+    "github.com/loganlanou/Financing-101/internal/services"
+)
+
+type DashboardPageData struct {
+    News            []services.NewsHeadline
+    Stocks          []services.StockSnapshot
+    Trades          []services.Trade
+    Recommendations []services.Recommendation
+    Metrics         DashboardMetrics
+}
+
+type DashboardMetrics struct {
+    NewsCount           int
+    StocksOutperforming int
+    CongressionalTrades int
+    AvgConviction       float64
+}
+
+func formatPercent(value float64) string {
+    return fmt.Sprintf("%.1f%%", value)
+}
+
+func formatDate(t time.Time) string {
+    return t.Format("Jan 02, 2006")
+}
+
+func sentimentClass(score float64) string {
+    if score >= 0 {
+        return "tag tag--bullish"
+    }
+    return "tag tag--bearish"
+}
+
+func joinTickers(tickers []string) string {
+    return strings.Join(tickers, ", ")
+}
+
+func formatFloat(value float64, decimals int) string {
+    format := fmt.Sprintf("%%.%df", decimals)
+    return fmt.Sprintf(format, value)
+}
+
+templ DashboardPage(data DashboardPageData) {
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Financing 101</title>
+        <link rel="stylesheet" href="/static/app.css"/>
+      </head>
+      <body>
+        <header>
+          <div class="navbar">
+            <div>
+              <strong>Financing 101</strong>
+            </div>
+            <nav class="nav-links">
+              <a href="#news">News</a>
+              <a href="#stocks">Stock Lab</a>
+              <a href="#congress">Congress Watch</a>
+              <a href="#recs">AI Desk</a>
+            </nav>
+          </div>
+        </header>
+        <main>
+          <section class="grid grid--two">
+            <div class="panel">
+              <div class="panel__header">
+                <div>
+                  <p class="panel__title">news coverage</p>
+                  <h2>{ data.Metrics.NewsCount } Curated Signals</h2>
+                </div>
+                <span class="tag">AI SENTIMENT</span>
+              </div>
+              <div class="metrics">
+                <div class="metric">
+                  <p class="metric__label">Avg Conviction</p>
+                  <p class="metric__value">{ formatFloat(data.Metrics.AvgConviction, 1) }</p>
+                </div>
+                <div class="metric">
+                  <p class="metric__label">Outperformers</p>
+                  <p class="metric__value">{ data.Metrics.StocksOutperforming }</p>
+                </div>
+                <div class="metric">
+                  <p class="metric__label">Congress trades</p>
+                  <p class="metric__value">{ data.Metrics.CongressionalTrades }</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel__header">
+                <p class="panel__title">mission brief</p>
+                <span class="tag">Alpha Pipeline</span>
+              </div>
+              <p>
+                We rebuild Investing101 on a modern Go + Templ stack, mirroring the
+                Python prototype's intelligence: multi-source news scraping, NLP sentiment,
+                S&P 500 benchmarking, congressional trade tracking, and curated recommendations.
+              </p>
+              <a class="cta" href="#recs">Review Playbook -&gt;</a>
+            </div>
+          </section>
+
+          <section id="news" class="panel" style="margin-top:2rem;">
+            <div class="panel__header">
+              <p class="panel__title">news + sentiment</p>
+              <span class="tag">Live</span>
+            </div>
+            <ul class="list">
+              if len(data.News) == 0 {
+                <li>No articles yet.</li>
+              } else {
+                for _, article := range data.News {
+                  <li class="list-item">
+                    <div>
+                      <p class="list-item__title">{ article.Title }</p>
+                      <p class="list-item__meta">{ article.Source } &middot; { formatDate(article.PublishedAt) }</p>
+                      <p class="list-item__meta">{ joinTickers(article.Tickers) }</p>
+                    </div>
+                    <div>
+                      <a class={ sentimentClass(article.Sentiment) } href={ article.URL } target="_blank" rel="noreferrer">
+                        { formatFloat(article.Sentiment, 2) }
+                      </a>
+                    </div>
+                  </li>
+                }
+              }
+            </ul>
+          </section>
+
+          <section id="stocks" class="panel" style="margin-top:2rem;">
+            <div class="panel__header">
+              <p class="panel__title">stock lab</p>
+              <span class="tag">vs S&P 500</span>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Ticker</th>
+                  <th>30D</th>
+                  <th>90D</th>
+                  <th>1Y</th>
+                  <th>vs S&P (90D)</th>
+                </tr>
+              </thead>
+              <tbody>
+                if len(data.Stocks) == 0 {
+                  <tr><td colspan="5">No stock snapshots.</td></tr>
+                } else {
+                  for _, stock := range data.Stocks {
+                    <tr>
+                      <td>
+                        <div class="list-item__title">{ stock.Symbol }</div>
+                        <div class="list-item__meta">{ stock.Name }</div>
+                      </td>
+                      <td>{ formatPercent(stock.Change30) }</td>
+                      <td>{ formatPercent(stock.Change90) }</td>
+                      <td>{ formatPercent(stock.Change365) }</td>
+                      <td>{ formatPercent(stock.VsSP500_90) }</td>
+                    </tr>
+                  }
+                }
+              </tbody>
+            </table>
+          </section>
+
+          <section id="congress" class="panel" style="margin-top:2rem;">
+            <div class="panel__header">
+              <p class="panel__title">congress watch</p>
+              <span class="tag">disclosures</span>
+            </div>
+            <ul class="list">
+              if len(data.Trades) == 0 {
+                <li>No congressional trades recorded.</li>
+              } else {
+                for _, trade := range data.Trades {
+                  <li class="list-item">
+                    <div>
+                      <p class="list-item__title">{ trade.Member } &middot; { trade.Symbol } ({ trade.Action })</p>
+                      <p class="list-item__meta">{ trade.Amount } &middot; { formatDate(trade.ExecutedAt) }</p>
+                    </div>
+                    <span class="badge">
+                      <span class="status-dot"></span>
+                      { formatFloat(trade.Sentiment, 2) }
+                    </span>
+                  </li>
+                }
+              }
+            </ul>
+          </section>
+
+          <section id="recs" class="panel" style="margin-top:2rem;">
+            <div class="panel__header">
+              <p class="panel__title">ai recommendations</p>
+              <span class="tag">Alpha Desk</span>
+            </div>
+            <ul class="list">
+              if len(data.Recommendations) == 0 {
+                <li>No recommendations published.</li>
+              } else {
+                for _, rec := range data.Recommendations {
+                  <li class="list-item">
+                    <div>
+                      <p class="list-item__title">{ rec.Symbol } &middot; { rec.Conviction }</p>
+                      <p class="list-item__meta">{ rec.Thesis }</p>
+                    </div>
+                    <span>{ formatFloat(rec.Score, 1) }</span>
+                  </li>
+                }
+              }
+            </ul>
+          </section>
+        </main>
+      </body>
+    </html>
+}
