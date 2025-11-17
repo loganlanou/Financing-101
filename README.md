@@ -40,6 +40,12 @@ go run ./cmd/web
 ```
 Visit `http://localhost:8080`.
 
+### GitHub Pages Preview
+`docs/index.html` + `docs/app.css` provide a static snapshot of the dashboard for
+GitHub Pages. Point Pages at the `docs/` folder (Settings → Pages → Build and deployment → Source: Deploy from branch → Branch: `main`, Folder: `/docs`).  
+After the next push, `https://<user>.github.io/Financing-101/` will render the live-looking preview instead
+of the README.
+
 ### Configuration
 - `NEWS_FEEDS`: comma-separated RSS feeds (defaults to Yahoo Finance + WSJ Markets).
 - `NEWS_POLL_INTERVAL`: cadence for refreshing feeds (default `30m`).
