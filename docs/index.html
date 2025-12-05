@@ -3,41 +3,59 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Financing 101 Intelligence Dashboard</title>
+    <title>Financing 101 - Financial Intelligence Dashboard</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Real-time financial intelligence dashboard featuring AI-powered news sentiment analysis, stock performance tracking vs S&P 500, congressional trading disclosures, and investment recommendations." />
+    <meta name="keywords" content="finance, stocks, investing, sentiment analysis, congressional trading, AI recommendations, S&P 500" />
+    <meta name="author" content="Financing 101" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Financing 101 - Financial Intelligence Dashboard" />
+    <meta property="og:description" content="AI-powered financial intelligence with news sentiment, stock tracking, and congressional trade monitoring." />
+    <meta property="og:url" content="https://loganlanou.github.io/Financing-101/" />
+    <meta property="og:site_name" content="Financing 101" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Financing 101 - Financial Intelligence Dashboard" />
+    <meta name="twitter:description" content="AI-powered financial intelligence with news sentiment, stock tracking, and congressional trade monitoring." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#030712" />
+
     <link rel="stylesheet" href="app.css" />
-    <style>
-      @media (max-width: 768px) {
-        main {
-          padding: 1.5rem;
-        }
-        .navbar {
-          flex-direction: column;
-          gap: 1rem;
-          text-align: center;
-        }
-        .nav-links {
-          flex-wrap: wrap;
-          justify-content: center;
-        }
-      }
-    </style>
+    <!-- Inline styles removed - now handled by app.css -->
   </head>
   <body>
-    <header>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
       <div class="navbar">
-        <div>
-          <strong>Financing 101</strong>
-          <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;">Signal Lab Preview</p>
+        <div class="brand">
+          <strong class="brand__name">Financing 101</strong>
+          <span class="brand__tagline">Signal Lab Preview</span>
         </div>
-        <nav class="nav-links">
-          <a href="#news">News</a>
-          <a href="#stocks">Stock Lab</a>
-          <a href="#congress">Congress Watch</a>
-          <a href="#recs">AI Desk</a>
+        <nav class="nav-links" role="navigation" aria-label="Main navigation">
+          <a href="#news" class="nav-link">News</a>
+          <a href="#stocks" class="nav-link">Stock Lab</a>
+          <a href="#congress" class="nav-link">Congress Watch</a>
+          <a href="#recs" class="nav-link">AI Desk</a>
         </nav>
       </div>
     </header>
-    <main>
+    <main id="main-content" role="main">
       <section class="grid grid--two">
         <div class="panel">
           <div class="panel__header">
@@ -76,7 +94,7 @@
         </div>
       </section>
 
-      <section id="news" class="panel" style="margin-top: 2rem;">
+      <section id="news" class="panel section">
         <div class="panel__header">
           <p class="panel__title">news + sentiment</p>
           <span class="tag">Live Feed</span>
@@ -109,7 +127,7 @@
         </ul>
       </section>
 
-      <section id="stocks" class="panel" style="margin-top: 2rem;">
+      <section id="stocks" class="panel section">
         <div class="panel__header">
           <p class="panel__title">stock lab</p>
           <span class="tag">vs S&amp;P 500</span>
@@ -130,46 +148,46 @@
                 <div class="list-item__title">NVDA</div>
                 <div class="list-item__meta">NVIDIA Corp</div>
               </td>
-              <td>+14.2%</td>
-              <td>+32.8%</td>
-              <td>+155.4%</td>
-              <td>+21.3%</td>
+              <td class="perf--positive">+14.2%</td>
+              <td class="perf--positive">+32.8%</td>
+              <td class="perf--positive">+155.4%</td>
+              <td class="perf--positive">+21.3%</td>
             </tr>
             <tr>
               <td>
                 <div class="list-item__title">MSFT</div>
                 <div class="list-item__meta">Microsoft Corp</div>
               </td>
-              <td>+6.5%</td>
-              <td>+18.1%</td>
-              <td>+38.0%</td>
-              <td>+6.2%</td>
+              <td class="perf--positive">+6.5%</td>
+              <td class="perf--positive">+18.1%</td>
+              <td class="perf--positive">+38.0%</td>
+              <td class="perf--positive">+6.2%</td>
             </tr>
             <tr>
               <td>
                 <div class="list-item__title">LMT</div>
                 <div class="list-item__meta">Lockheed Martin</div>
               </td>
-              <td>+2.2%</td>
-              <td>+7.4%</td>
-              <td>+15.1%</td>
-              <td>+1.8%</td>
+              <td class="perf--positive">+2.2%</td>
+              <td class="perf--positive">+7.4%</td>
+              <td class="perf--positive">+15.1%</td>
+              <td class="perf--positive">+1.8%</td>
             </tr>
             <tr>
               <td>
                 <div class="list-item__title">TSLA</div>
                 <div class="list-item__meta">Tesla Inc</div>
               </td>
-              <td>-4.3%</td>
-              <td>+5.1%</td>
-              <td>+12.4%</td>
-              <td>-6.8%</td>
+              <td class="perf--negative">-4.3%</td>
+              <td class="perf--positive">+5.1%</td>
+              <td class="perf--positive">+12.4%</td>
+              <td class="perf--negative">-6.8%</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <section id="congress" class="panel" style="margin-top: 2rem;">
+      <section id="congress" class="panel section">
         <div class="panel__header">
           <p class="panel__title">congress watch</p>
           <span class="tag">Disclosures</span>
@@ -180,56 +198,65 @@
               <p class="list-item__title">Nancy Pelosi · NVDA (Buy)</p>
               <p class="list-item__meta">$1M - $5M · Dec 10 2024</p>
             </div>
-            <span class="badge"><span class="status-dot"></span>0.75</span>
+            <span class="tag tag--bullish">0.75</span>
           </li>
           <li class="list-item">
             <div>
               <p class="list-item__title">Dan Crenshaw · XOM (Buy)</p>
               <p class="list-item__meta">$50k - $100k · Dec 05 2024</p>
             </div>
-            <span class="badge"><span class="status-dot"></span>0.22</span>
+            <span class="tag tag--neutral">0.22</span>
           </li>
           <li class="list-item">
             <div>
               <p class="list-item__title">Ro Khanna · TSLA (Sell)</p>
               <p class="list-item__meta">$100k - $250k · Nov 28 2024</p>
             </div>
-            <span class="badge"><span class="status-dot"></span>-0.18</span>
+            <span class="tag tag--neutral">-0.18</span>
           </li>
         </ul>
       </section>
 
-      <section id="recs" class="panel" style="margin-top: 2rem;">
+      <section id="recs" class="panel section">
         <div class="panel__header">
-          <p class="panel__title">ai desk</p>
-          <span class="tag">Alpha</span>
+          <p class="panel__title">ai recommendations</p>
+          <span class="tag">Alpha Desk</span>
         </div>
         <ul class="list">
           <li class="list-item">
             <div>
-              <p class="list-item__title">MSFT · High Conviction</p>
+              <p class="list-item__title">MSFT</p>
               <p class="list-item__meta">Azure OpenAI + Copilot seat expansion sustaining 20% cloud ARR.</p>
             </div>
-            <span>8.7</span>
+            <div class="rec-score">
+              <span class="conviction conviction--high">High</span>
+              <span class="score-badge">8.7</span>
+            </div>
           </li>
           <li class="list-item">
             <div>
-              <p class="list-item__title">NVDA · Medium Conviction</p>
+              <p class="list-item__title">NVDA</p>
               <p class="list-item__meta">Blackwell ramp and networking mix keep beats coming.</p>
             </div>
-            <span>7.9</span>
+            <div class="rec-score">
+              <span class="conviction conviction--medium">Medium</span>
+              <span class="score-badge">7.9</span>
+            </div>
           </li>
           <li class="list-item">
             <div>
-              <p class="list-item__title">LMT · Watchlist</p>
+              <p class="list-item__title">LMT</p>
               <p class="list-item__meta">Supplemental defense package lifts book-to-bill above 1.3x.</p>
             </div>
-            <span>6.1</span>
+            <div class="rec-score">
+              <span class="conviction conviction--low">Watchlist</span>
+              <span class="score-badge">6.1</span>
+            </div>
           </li>
         </ul>
       </section>
 
-      <section class="panel" style="margin-top: 2rem;">
+      <section class="panel section">
         <div class="panel__header">
           <p class="panel__title">backend preview</p>
           <span class="tag">Go + Echo</span>
@@ -239,10 +266,44 @@
           powers the same experiences with live data, SSR rendering, and service-layer orchestration. This
           static build simply gives stakeholders a quick look without running the backend locally.
         </p>
-        <a class="cta" href="https://github.com/loganlanou/Financing-101" target="_blank" rel="noreferrer">
+        <a class="cta" href="https://github.com/loganlanou/Financing-101" target="_blank" rel="noopener noreferrer">
           View Source →
         </a>
       </section>
     </main>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top" aria-label="Back to top" title="Back to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6"/>
+      </svg>
+    </a>
+
+    <footer class="footer" role="contentinfo">
+      <div class="footer__content">
+        <div class="footer__brand">
+          <strong>Financing 101</strong>
+          <p>AI-powered financial intelligence for informed investing decisions.</p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__section">
+            <h4>Quick Links</h4>
+            <a href="#news">News + Sentiment</a>
+            <a href="#stocks">Stock Lab</a>
+            <a href="#congress">Congress Watch</a>
+            <a href="#recs">AI Recommendations</a>
+          </div>
+          <div class="footer__section">
+            <h4>Resources</h4>
+            <a href="https://github.com/loganlanou/Financing-101" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/loganlanou/Financing-101#readme" target="_blank" rel="noopener noreferrer">Documentation</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2024 Financing 101. Built with Go, Echo, and Templ.</p>
+        <p class="footer__disclaimer">For educational purposes only. Not financial advice.</p>
+      </div>
+    </footer>
   </body>
 </html>

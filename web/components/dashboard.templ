@@ -32,10 +32,34 @@ func formatDate(t time.Time) string {
 }
 
 func sentimentClass(score float64) string {
-    if score >= 0 {
+    if score > 0.2 {
         return "tag tag--bullish"
     }
-    return "tag tag--bearish"
+    if score < -0.2 {
+        return "tag tag--bearish"
+    }
+    return "tag tag--neutral"
+}
+
+func performanceClass(value float64) string {
+    if value > 0 {
+        return "perf perf--positive"
+    }
+    if value < 0 {
+        return "perf perf--negative"
+    }
+    return "perf"
+}
+
+func convictionClass(level string) string {
+    switch level {
+    case "High":
+        return "conviction conviction--high"
+    case "Medium":
+        return "conviction conviction--medium"
+    default:
+        return "conviction conviction--low"
+    }
 }
 
 func joinTickers(tickers []string) string {
@@ -109,7 +133,7 @@ templ DashboardPage(data DashboardPageData) {
             </div>
           </section>
 
-          <section id="news" class="panel" style="margin-top:2rem;">
+          <section id="news" class="panel section">
             <div class="panel__header">
               <p class="panel__title">news + sentiment</p>
               <span class="tag">Live</span>
@@ -136,7 +160,7 @@ templ DashboardPage(data DashboardPageData) {
             </ul>
           </section>
 
-          <section id="stocks" class="panel" style="margin-top:2rem;">
+          <section id="stocks" class="panel section">
             <div class="panel__header">
               <p class="panel__title">stock lab</p>
               <span class="tag">vs S&P 500</span>
@@ -161,10 +185,10 @@ templ DashboardPage(data DashboardPageData) {
                         <div class="list-item__title">{ stock.Symbol }</div>
                         <div class="list-item__meta">{ stock.Name }</div>
                       </td>
-                      <td>{ formatPercent(stock.Change30) }</td>
-                      <td>{ formatPercent(stock.Change90) }</td>
-                      <td>{ formatPercent(stock.Change365) }</td>
-                      <td>{ formatPercent(stock.VsSP500_90) }</td>
+                      <td class={ performanceClass(stock.Change30) }>{ formatPercent(stock.Change30) }</td>
+                      <td class={ performanceClass(stock.Change90) }>{ formatPercent(stock.Change90) }</td>
+                      <td class={ performanceClass(stock.Change365) }>{ formatPercent(stock.Change365) }</td>
+                      <td class={ performanceClass(stock.VsSP500_90) }>{ formatPercent(stock.VsSP500_90) }</td>
                     </tr>
                   }
                 }
@@ -172,7 +196,7 @@ templ DashboardPage(data DashboardPageData) {
             </table>
           </section>
 
-          <section id="congress" class="panel" style="margin-top:2rem;">
+          <section id="congress" class="panel section">
             <div class="panel__header">
               <p class="panel__title">congress watch</p>
               <span class="tag">disclosures</span>
@@ -187,8 +211,7 @@ templ DashboardPage(data DashboardPageData) {
                       <p class="list-item__title">{ trade.Member } &middot; { trade.Symbol } ({ trade.Action })</p>
                       <p class="list-item__meta">{ trade.Amount } &middot; { formatDate(trade.ExecutedAt) }</p>
                     </div>
-                    <span class="badge">
-                      <span class="status-dot"></span>
+                    <span class={ sentimentClass(trade.Sentiment) }>
                       { formatFloat(trade.Sentiment, 2) }
                     </span>
                   </li>
@@ -197,7 +220,7 @@ templ DashboardPage(data DashboardPageData) {
             </ul>
           </section>
 
-          <section id="recs" class="panel" style="margin-top:2rem;">
+          <section id="recs" class="panel section">
             <div class="panel__header">
               <p class="panel__title">ai recommendations</p>
               <span class="tag">Alpha Desk</span>
@@ -209,10 +232,13 @@ templ DashboardPage(data DashboardPageData) {
                 for _, rec := range data.Recommendations {
                   <li class="list-item">
                     <div>
-                      <p class="list-item__title">{ rec.Symbol } &middot; { rec.Conviction }</p>
+                      <p class="list-item__title">{ rec.Symbol }</p>
                       <p class="list-item__meta">{ rec.Thesis }</p>
                     </div>
-                    <span>{ formatFloat(rec.Score, 1) }</span>
+                    <div class="rec-score">
+                      <span class={ convictionClass(rec.Conviction) }>{ rec.Conviction }</span>
+                      <span class="score-badge">{ formatFloat(rec.Score, 1) }</span>
+                    </div>
                   </li>
                 }
               }
