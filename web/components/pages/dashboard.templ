@@ -1,0 +1,240 @@
+package pages
+
+import (
+	"fmt"
+	"time"
+	"github.com/loganlanou/Financing-101/web/components"
+	"github.com/loganlanou/Financing-101/internal/services"
+)
+
+// DashboardData contains all data for the dashboard page
+type DashboardData struct {
+	Indices         []services.IndexQuote
+	TopGainers      []services.StockQuote
+	TopLosers       []services.StockQuote
+	RecentNews      []services.NewsHeadline
+	CongressTrades  []services.Trade
+	Recommendations []services.Recommendation
+	MarketStatus    string
+	LastUpdated     time.Time
+}
+
+templ DashboardPage(data DashboardData) {
+	@components.Layout(components.PageMeta{
+		Title:       "Dashboard",
+		Description: "Real-time financial intelligence dashboard with market data, news sentiment, and AI recommendations.",
+		CurrentPath: "/",
+	}) {
+		<!-- Market Indices Strip -->
+		<div class="market-strip mb-lg">
+			<div class="grid grid--4">
+				for _, idx := range data.Indices {
+					<div class="card">
+						<div class="card__title">{ idx.Name }</div>
+						<div class="card__value">{ fmt.Sprintf("%.2f", idx.Price) }</div>
+						<div class={ "card__subtitle", templ.KV("text-positive", idx.Change >= 0), templ.KV("text-negative", idx.Change < 0) }>
+							if idx.Change >= 0 {
+								+
+							}
+							{ fmt.Sprintf("%.2f (%.2f%%)", idx.Change, idx.ChangePercent) }
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+
+		<!-- Stats Overview -->
+		<div class="stats-grid mb-xl">
+			<div class="stat-card">
+				<div class="stat-card__icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+						<polyline points="17 6 23 6 23 12"/>
+					</svg>
+				</div>
+				<div class="stat-card__label">Market Status</div>
+				<div class="stat-card__value">
+					if data.MarketStatus == "open" {
+						Open
+					} else if data.MarketStatus == "pre-market" {
+						Pre-Market
+					} else if data.MarketStatus == "after-hours" {
+						After Hours
+					} else {
+						Closed
+					}
+				</div>
+				<div class={ "stat-card__change", templ.KV("stat-card__change--positive", data.MarketStatus == "open") }>
+					{ time.Now().Format("Mon, Jan 2 3:04 PM") }
+				</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-card__icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/>
+					</svg>
+				</div>
+				<div class="stat-card__label">News Signals</div>
+				<div class="stat-card__value">{ fmt.Sprintf("%d", len(data.RecentNews)) }</div>
+				<div class="stat-card__change">Live sentiment analysis</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-card__icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M3 21h18M5 21V7l7-4 7 4v14"/>
+					</svg>
+				</div>
+				<div class="stat-card__label">Congress Trades</div>
+				<div class="stat-card__value">{ fmt.Sprintf("%d", len(data.CongressTrades)) }</div>
+				<div class="stat-card__change">Recent disclosures</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-card__icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="12" cy="12" r="10"/>
+						<path d="M12 6v6l4 2"/>
+					</svg>
+				</div>
+				<div class="stat-card__label">AI Recommendations</div>
+				<div class="stat-card__value">{ fmt.Sprintf("%d", len(data.Recommendations)) }</div>
+				<div class="stat-card__change">High conviction picks</div>
+			</div>
+		</div>
+
+		<!-- Main Content Grid -->
+		<div class="grid grid--2 mb-xl">
+			<!-- Top Movers -->
+			<div class="panel">
+				<div class="panel__header">
+					<span class="panel__title">Top Gainers</span>
+					<a href="/stocks" class="btn btn--ghost btn--sm">View All</a>
+				</div>
+				<div class="panel__body">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>Symbol</th>
+								<th>Price</th>
+								<th>Change</th>
+							</tr>
+						</thead>
+						<tbody>
+							for _, stock := range data.TopGainers {
+								<tr>
+									<td>
+										<div class="col-symbol">{ stock.Symbol }</div>
+										<div class="col-name">{ stock.Name }</div>
+									</td>
+									<td class="col-price">{ fmt.Sprintf("$%.2f", stock.Price) }</td>
+									<td class={ "col-change", templ.KV("col-change--positive", stock.ChangePercent >= 0), templ.KV("col-change--negative", stock.ChangePercent < 0) }>
+										if stock.ChangePercent >= 0 {
+											+
+										}
+										{ fmt.Sprintf("%.2f%%", stock.ChangePercent) }
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- Latest News -->
+			<div class="panel">
+				<div class="panel__header">
+					<span class="panel__title">Market News</span>
+					<a href="/news" class="btn btn--ghost btn--sm">View All</a>
+				</div>
+				<div class="news-list">
+					for _, news := range data.RecentNews {
+						<div class="news-item">
+							<div class="news-item__content">
+								<h4 class="news-item__title">
+									<a href={ templ.SafeURL(news.URL) } target="_blank" rel="noopener">{ news.Title }</a>
+								</h4>
+								<div class="news-item__meta">
+									<span class="news-item__source">{ news.Source }</span>
+									<span>{ news.PublishedAt.Format("Jan 2, 3:04 PM") }</span>
+									<div class="news-item__tickers">
+										for _, ticker := range news.Tickers {
+											<span class="tag tag--ticker">{ ticker }</span>
+										}
+									</div>
+								</div>
+							</div>
+							<span class={ "tag", sentimentTagClass(news.Sentiment) }>
+								{ fmt.Sprintf("%.2f", news.Sentiment) }
+							</span>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+
+		<!-- Bottom Row -->
+		<div class="grid grid--2">
+			<!-- Congress Trades -->
+			<div class="panel">
+				<div class="panel__header">
+					<span class="panel__title">Congressional Trades</span>
+					<a href="/congress" class="btn btn--ghost btn--sm">View All</a>
+				</div>
+				<ul class="list">
+					for _, trade := range data.CongressTrades {
+						<li class="list-item">
+							<div>
+								<p class="list-item__title">{ trade.Member } · { trade.Symbol } ({ trade.Action })</p>
+								<p class="list-item__meta">{ trade.Amount } · { trade.ExecutedAt.Format("Jan 2, 2006") }</p>
+							</div>
+							<span class={ "tag", sentimentTagClass(trade.Sentiment) }>
+								{ fmt.Sprintf("%.2f", trade.Sentiment) }
+							</span>
+						</li>
+					}
+				</ul>
+			</div>
+
+			<!-- AI Recommendations -->
+			<div class="panel">
+				<div class="panel__header">
+					<span class="panel__title">AI Recommendations</span>
+					<a href="/ai" class="btn btn--ghost btn--sm">View All</a>
+				</div>
+				<ul class="list">
+					for _, rec := range data.Recommendations {
+						<li class="list-item">
+							<div>
+								<p class="list-item__title">{ rec.Symbol }</p>
+								<p class="list-item__meta">{ rec.Thesis }</p>
+							</div>
+							<div class="rec-score">
+								<span class={ "conviction", convictionClass(rec.Conviction) }>{ rec.Conviction }</span>
+								<span class="score-badge">{ fmt.Sprintf("%.1f", rec.Score*10) }</span>
+							</div>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	}
+}
+
+func sentimentTagClass(sentiment float64) string {
+	if sentiment > 0.2 {
+		return "tag--bullish"
+	} else if sentiment < -0.2 {
+		return "tag--bearish"
+	}
+	return "tag--neutral"
+}
+
+func convictionClass(conviction string) string {
+	switch conviction {
+	case "High":
+		return "conviction--high"
+	case "Medium":
+		return "conviction--medium"
+	default:
+		return "conviction--low"
+	}
+}

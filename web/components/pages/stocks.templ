@@ -1,0 +1,175 @@
+package pages
+
+import (
+	"fmt"
+	"github.com/loganlanou/Financing-101/web/components"
+	"github.com/loganlanou/Financing-101/internal/services"
+)
+
+// StocksData contains data for the stocks page
+type StocksData struct {
+	Stocks       []services.StockQuote
+	FeaturedStock *services.StockQuote
+}
+
+templ StocksPage(data StocksData) {
+	@components.Layout(components.PageMeta{
+		Title:       "Stocks",
+		Description: "Browse stocks, view detailed quotes, and track performance against benchmarks.",
+		CurrentPath: "/stocks",
+	}) {
+		<!-- Search and Filters -->
+		<div class="flex justify-between items-center mb-xl">
+			<div>
+				<h2 class="section-header__title">Stock Browser</h2>
+				<p class="section-header__subtitle">Browse and analyze individual stocks</p>
+			</div>
+			<div class="flex gap-md">
+				<input type="search" class="form-input" placeholder="Search by symbol or name..." style="width: 300px"/>
+				<select class="form-select" style="width: 150px">
+					<option>All Sectors</option>
+					<option>Technology</option>
+					<option>Healthcare</option>
+					<option>Financials</option>
+					<option>Energy</option>
+					<option>Consumer</option>
+				</select>
+			</div>
+		</div>
+
+		if data.FeaturedStock != nil {
+			<!-- Featured Stock Quote -->
+			<div class="panel mb-xl">
+				<div class="panel__body">
+					<div class="quote-card">
+						<div class="quote-card__header">
+							<div>
+								<h2 class="quote-card__symbol">{ data.FeaturedStock.Symbol }</h2>
+								<p class="quote-card__name">{ data.FeaturedStock.Name }</p>
+							</div>
+							<div class="flex gap-sm">
+								<button class="btn btn--secondary btn--sm">+ Watchlist</button>
+								<button class="btn btn--primary btn--sm">Trade</button>
+							</div>
+						</div>
+						<div class="flex items-center gap-lg">
+							<span class="quote-card__price">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Price) }</span>
+							<span class={ "quote-card__change", templ.KV("quote-card__change--positive", data.FeaturedStock.ChangePercent >= 0), templ.KV("quote-card__change--negative", data.FeaturedStock.ChangePercent < 0) }>
+								if data.FeaturedStock.ChangePercent >= 0 {
+									↑ +
+								} else {
+									↓
+								}
+								{ fmt.Sprintf("%.2f (%.2f%%)", data.FeaturedStock.Change, data.FeaturedStock.ChangePercent) }
+							</span>
+						</div>
+						<div class="chart-container mt-lg">
+							Chart visualization would appear here (TradingView widget recommended)
+						</div>
+						<div class="quote-card__stats mt-lg">
+							<div class="stat-item">
+								<span class="stat-item__label">Open</span>
+								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Open) }</span>
+							</div>
+							<div class="stat-item">
+								<span class="stat-item__label">High</span>
+								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.High) }</span>
+							</div>
+							<div class="stat-item">
+								<span class="stat-item__label">Low</span>
+								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Low) }</span>
+							</div>
+							<div class="stat-item">
+								<span class="stat-item__label">Prev Close</span>
+								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.PrevClose) }</span>
+							</div>
+							<div class="stat-item">
+								<span class="stat-item__label">Volume</span>
+								<span class="stat-item__value">{ formatVolume(data.FeaturedStock.Volume) }</span>
+							</div>
+							<div class="stat-item">
+								<span class="stat-item__label">Market Cap</span>
+								<span class="stat-item__value">{ formatMarketCap(data.FeaturedStock.MarketCap) }</span>
+							</div>
+							<div class="stat-item">
+								<span class="stat-item__label">P/E Ratio</span>
+								<span class="stat-item__value">{ fmt.Sprintf("%.2f", data.FeaturedStock.PE) }</span>
+							</div>
+							<div class="stat-item">
+								<span class="stat-item__label">52W High</span>
+								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Week52High) }</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+
+		<!-- Stock List -->
+		<div class="panel">
+			<div class="panel__header">
+				<span class="panel__title">All Stocks</span>
+				<div class="flex gap-sm">
+					<button class="btn btn--ghost btn--sm">Export</button>
+				</div>
+			</div>
+			<table class="data-table">
+				<thead>
+					<tr>
+						<th>Symbol</th>
+						<th>Price</th>
+						<th>Change</th>
+						<th>Volume</th>
+						<th>Market Cap</th>
+						<th>P/E</th>
+						<th>52W Range</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					for _, stock := range data.Stocks {
+						<tr>
+							<td>
+								<div class="col-symbol">{ stock.Symbol }</div>
+								<div class="col-name">{ stock.Name }</div>
+							</td>
+							<td class="col-price">{ fmt.Sprintf("$%.2f", stock.Price) }</td>
+							<td class={ "col-change", templ.KV("col-change--positive", stock.ChangePercent >= 0), templ.KV("col-change--negative", stock.ChangePercent < 0) }>
+								if stock.ChangePercent >= 0 {
+									+
+								}
+								{ fmt.Sprintf("%.2f%%", stock.ChangePercent) }
+							</td>
+							<td class="col-volume">{ formatVolume(stock.Volume) }</td>
+							<td>{ formatMarketCap(stock.MarketCap) }</td>
+							<td>{ fmt.Sprintf("%.1f", stock.PE) }</td>
+							<td class="text-muted">
+								{ fmt.Sprintf("$%.0f - $%.0f", stock.Week52Low, stock.Week52High) }
+							</td>
+							<td class="col-actions">
+								<button class="btn btn--ghost btn--sm btn--icon" aria-label="Add to watchlist">
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+									</svg>
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	}
+}
+
+func formatMarketCap(cap int64) string {
+	if cap >= 1_000_000_000_000 {
+		return fmt.Sprintf("$%.1fT", float64(cap)/1_000_000_000_000)
+	}
+	if cap >= 1_000_000_000 {
+		return fmt.Sprintf("$%.1fB", float64(cap)/1_000_000_000)
+	}
+	if cap >= 1_000_000 {
+		return fmt.Sprintf("$%.1fM", float64(cap)/1_000_000)
+	}
+	return fmt.Sprintf("$%d", cap)
+}

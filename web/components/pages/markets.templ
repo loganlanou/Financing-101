@@ -1,0 +1,221 @@
+package pages
+
+import (
+	"fmt"
+	"github.com/loganlanou/Financing-101/web/components"
+	"github.com/loganlanou/Financing-101/internal/services"
+)
+
+// MarketsData contains data for the markets overview page
+type MarketsData struct {
+	Indices     []services.IndexQuote
+	Sectors     []services.SectorPerf
+	TopGainers  []services.StockQuote
+	TopLosers   []services.StockQuote
+	MostActive  []services.StockQuote
+	MarketStatus string
+}
+
+templ MarketsPage(data MarketsData) {
+	@components.Layout(components.PageMeta{
+		Title:       "Markets",
+		Description: "Real-time market overview with major indices, sector performance, and market movers.",
+		CurrentPath: "/markets",
+	}) {
+		<!-- Market Status Banner -->
+		<div class={ "market-status-banner", "mb-xl", templ.KV("market-status-banner--open", data.MarketStatus == "open") }>
+			<div class="flex items-center gap-md">
+				<span class={ "status-dot", templ.KV("status-dot--live", data.MarketStatus == "open"), templ.KV("status-dot--closed", data.MarketStatus == "closed") }></span>
+				<span class="market-status-text">
+					if data.MarketStatus == "open" {
+						US Markets are Open
+					} else if data.MarketStatus == "pre-market" {
+						Pre-Market Trading
+					} else if data.MarketStatus == "after-hours" {
+						After Hours Trading
+					} else {
+						US Markets are Closed
+					}
+				</span>
+			</div>
+		</div>
+
+		<!-- Major Indices -->
+		<div class="section-header">
+			<div>
+				<h2 class="section-header__title">Major Indices</h2>
+				<p class="section-header__subtitle">Real-time quotes from NYSE, NASDAQ, and more</p>
+			</div>
+		</div>
+		<div class="grid grid--4 mb-xl">
+			for _, idx := range data.Indices {
+				<div class="card card--interactive">
+					<div class="card__header">
+						<span class="card__title">{ idx.Name }</span>
+						<span class="tag tag--default">{ idx.Symbol }</span>
+					</div>
+					<div class="card__value">{ fmt.Sprintf("%.2f", idx.Price) }</div>
+					<div class={ "card__subtitle flex items-center gap-sm", templ.KV("text-positive", idx.Change >= 0), templ.KV("text-negative", idx.Change < 0) }>
+						if idx.Change >= 0 {
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M18 15l-6-6-6 6"/>
+							</svg>
+						} else {
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M6 9l6 6 6-6"/>
+							</svg>
+						}
+						<span>
+							if idx.Change >= 0 {
+								+
+							}
+							{ fmt.Sprintf("%.2f (%.2f%%)", idx.Change, idx.ChangePercent) }
+						</span>
+					</div>
+				</div>
+			}
+		</div>
+
+		<!-- Sector Performance -->
+		<div class="section-header">
+			<div>
+				<h2 class="section-header__title">Sector Performance</h2>
+				<p class="section-header__subtitle">Today's sector ETF performance</p>
+			</div>
+		</div>
+		<div class="panel mb-xl">
+			<div class="panel__body">
+				<div class="sector-grid">
+					for _, sector := range data.Sectors {
+						<div class="sector-item">
+							<span class="sector-item__name">{ sector.Sector }</span>
+							<span class={ "sector-item__change", templ.KV("text-positive", sector.ChangePercent >= 0), templ.KV("text-negative", sector.ChangePercent < 0) }>
+								if sector.ChangePercent >= 0 {
+									+
+								}
+								{ fmt.Sprintf("%.2f%%", sector.ChangePercent) }
+							</span>
+							<div class="sector-item__bar">
+								<div
+									class={ "sector-item__fill", templ.KV("sector-item__fill--positive", sector.ChangePercent >= 0), templ.KV("sector-item__fill--negative", sector.ChangePercent < 0) }
+									style={ fmt.Sprintf("width: %d%%", absInt(int(sector.ChangePercent*10))) }
+								></div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+
+		<!-- Market Movers -->
+		<div class="grid grid--3">
+			<!-- Top Gainers -->
+			<div class="panel">
+				<div class="panel__header">
+					<span class="panel__title">Top Gainers</span>
+					<span class="tag tag--positive">↑</span>
+				</div>
+				<table class="data-table">
+					<thead>
+						<tr>
+							<th>Symbol</th>
+							<th>Price</th>
+							<th>Change</th>
+						</tr>
+					</thead>
+					<tbody>
+						for _, stock := range data.TopGainers {
+							<tr>
+								<td>
+									<div class="col-symbol">{ stock.Symbol }</div>
+								</td>
+								<td class="col-price">{ fmt.Sprintf("$%.2f", stock.Price) }</td>
+								<td class="col-change col-change--positive">
+									+{ fmt.Sprintf("%.2f%%", stock.ChangePercent) }
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Top Losers -->
+			<div class="panel">
+				<div class="panel__header">
+					<span class="panel__title">Top Losers</span>
+					<span class="tag tag--negative">↓</span>
+				</div>
+				<table class="data-table">
+					<thead>
+						<tr>
+							<th>Symbol</th>
+							<th>Price</th>
+							<th>Change</th>
+						</tr>
+					</thead>
+					<tbody>
+						for _, stock := range data.TopLosers {
+							<tr>
+								<td>
+									<div class="col-symbol">{ stock.Symbol }</div>
+								</td>
+								<td class="col-price">{ fmt.Sprintf("$%.2f", stock.Price) }</td>
+								<td class="col-change col-change--negative">
+									{ fmt.Sprintf("%.2f%%", stock.ChangePercent) }
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Most Active -->
+			<div class="panel">
+				<div class="panel__header">
+					<span class="panel__title">Most Active</span>
+					<span class="tag tag--default">Vol</span>
+				</div>
+				<table class="data-table">
+					<thead>
+						<tr>
+							<th>Symbol</th>
+							<th>Price</th>
+							<th>Volume</th>
+						</tr>
+					</thead>
+					<tbody>
+						for _, stock := range data.MostActive {
+							<tr>
+								<td>
+									<div class="col-symbol">{ stock.Symbol }</div>
+								</td>
+								<td class="col-price">{ fmt.Sprintf("$%.2f", stock.Price) }</td>
+								<td class="col-volume">{ formatVolume(stock.Volume) }</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	}
+}
+
+func absInt(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
+
+func formatVolume(vol int64) string {
+	if vol >= 1_000_000_000 {
+		return fmt.Sprintf("%.1fB", float64(vol)/1_000_000_000)
+	}
+	if vol >= 1_000_000 {
+		return fmt.Sprintf("%.1fM", float64(vol)/1_000_000)
+	}
+	if vol >= 1_000 {
+		return fmt.Sprintf("%.1fK", float64(vol)/1_000)
+	}
+	return fmt.Sprintf("%d", vol)
+}
