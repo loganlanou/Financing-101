@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Insights | Financing 101</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI-powered investment insights and recommendations. Get personalized stock picks, market analysis, and portfolio optimization suggestions." />
+    <meta name="keywords" content="AI investing, stock recommendations, market analysis, portfolio optimization, machine learning stocks" />
+    <meta name="author" content="Financing 101" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AI Insights | Financing 101" />
+    <meta property="og:description" content="AI-powered investment insights and recommendations." />
+    <meta property="og:url" content="https://loganlanou.github.io/Financing-101/ai.html" />
+    <meta property="og:site_name" content="Financing 101" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Insights | Financing 101" />
+    <meta name="twitter:description" content="AI-powered investment insights and recommendations." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0f1a" />
+
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" role="navigation" aria-label="Main navigation">
+        <div class="sidebar__brand">
+          <a href="index.html" class="brand-link">
+            <div class="brand-logo">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="url(#brand-gradient)" />
+                <path d="M8 20L12 14L16 17L24 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="24" cy="9" r="2" fill="white" />
+                <defs>
+                  <linearGradient id="brand-gradient" x1="0" y1="0" x2="32" y2="32">
+                    <stop stop-color="#3b82f6" />
+                    <stop offset="1" stop-color="#1d4ed8" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">Financing 101</span>
+              <span class="brand-tagline">Intelligence Platform</span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="sidebar__nav">
+          <ul class="nav-list">
+            <li>
+              <a href="index.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="9" rx="1" />
+                  <rect x="14" y="3" width="7" height="5" rx="1" />
+                  <rect x="14" y="12" width="7" height="9" rx="1" />
+                  <rect x="3" y="16" width="7" height="5" rx="1" />
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="markets.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                  <polyline points="17 6 23 6 23 12" />
+                </svg>
+                <span>Markets</span>
+              </a>
+            </li>
+            <li>
+              <a href="stocks.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3v18h18" />
+                  <path d="M18 9l-5 5-4-4-3 3" />
+                </svg>
+                <span>Stocks</span>
+              </a>
+            </li>
+            <li>
+              <a href="news.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2" />
+                  <path d="M18 14h-8M18 18h-8M18 10h-8" />
+                </svg>
+                <span>News</span>
+              </a>
+            </li>
+            <li>
+              <a href="congress.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
+                  <path d="M9 9h1M14 9h1M9 13h1M14 13h1" />
+                </svg>
+                <span>Congress</span>
+              </a>
+            </li>
+            <li>
+              <a href="screener.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+                <span>Screener</span>
+              </a>
+            </li>
+            <li>
+              <a href="watchlist.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <span>Watchlist</span>
+              </a>
+            </li>
+            <li>
+              <a href="ai.html" class="nav-item nav-item--active" aria-current="page">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+                <span>AI Insights</span>
+              </a>
+            </li>
+            <li>
+              <a href="learn.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                </svg>
+                <span>Learn</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar__footer">
+          <div class="market-status">
+            <span class="status-indicator status-indicator--open"></span>
+            <span class="status-text">Markets Open</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content" id="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="header__search">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input type="search" placeholder="Ask AI about any stock..." class="search-input" aria-label="Search" />
+            <kbd class="search-shortcut">⌘K</kbd>
+          </div>
+          <div class="header__actions">
+            <button class="header-btn" aria-label="Notifications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+              </svg>
+            </button>
+            <div class="user-menu">
+              <div class="user-avatar">JD</div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content">
+          <div class="page-header">
+            <div class="page-header__title">
+              <h1>AI Insights</h1>
+              <p class="page-subtitle">AI-powered analysis and investment recommendations</p>
+            </div>
+            <div class="page-header__actions">
+              <div class="ai-model-badge">
+                <span class="model-dot"></span>
+                Model: GPT-4 Turbo
+              </div>
+              <button class="btn btn--primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                </svg>
+                Generate Report
+              </button>
+            </div>
+          </div>
+
+          <!-- AI Summary Card -->
+          <div class="ai-summary-card">
+            <div class="ai-summary-card__header">
+              <div class="ai-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+              </div>
+              <div class="ai-summary-card__title">
+                <h2>Market Summary</h2>
+                <span class="ai-timestamp">Updated 5 minutes ago</span>
+              </div>
+            </div>
+            <div class="ai-summary-card__content">
+              <p>Markets are showing <strong class="positive">bullish momentum</strong> today, driven by better-than-expected employment data and easing inflation concerns. The S&P 500 is up 0.8% with Technology and Healthcare sectors leading gains.</p>
+              <p>Key observations:</p>
+              <ul>
+                <li>Fed futures now pricing in <strong>78% probability</strong> of a rate hold at the December meeting</li>
+                <li>AI-related stocks continue to outperform with <strong>NVDA, AMD, and MSFT</strong> making new highs</li>
+                <li>Treasury yields have stabilized around 4.2%, reducing pressure on growth stocks</li>
+                <li>Congressional trading activity shows increased buying in <strong>technology and defense</strong> sectors</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- AI Recommendations Grid -->
+          <div class="section-header">
+            <h2 class="section-title">Today's Recommendations</h2>
+            <div class="section-tabs">
+              <button class="section-tab section-tab--active">All</button>
+              <button class="section-tab">Strong Buy</button>
+              <button class="section-tab">Buy</button>
+              <button class="section-tab">Hold</button>
+              <button class="section-tab">Sell</button>
+            </div>
+          </div>
+
+          <div class="ai-recommendations-grid">
+            <!-- Strong Buy Recommendation -->
+            <div class="ai-rec-card ai-rec-card--strong-buy">
+              <div class="ai-rec-card__header">
+                <div class="ai-rec-card__stock">
+                  <span class="stock-symbol">NVDA</span>
+                  <span class="stock-name">NVIDIA Corp</span>
+                </div>
+                <span class="ai-rating ai-rating--strong-buy">Strong Buy</span>
+              </div>
+              <div class="ai-rec-card__price">
+                <span class="current-price">$467.23</span>
+                <span class="price-change positive">+3.42%</span>
+              </div>
+              <div class="ai-rec-card__target">
+                <div class="target-row">
+                  <span class="target-label">AI Price Target</span>
+                  <span class="target-value">$580.00</span>
+                </div>
+                <div class="target-upside positive">+24.1% Upside</div>
+              </div>
+              <div class="ai-rec-card__reasoning">
+                <h4>Why Buy?</h4>
+                <ul>
+                  <li>Dominant position in AI/ML chip market</li>
+                  <li>Data center revenue up 279% YoY</li>
+                  <li>Strong forward guidance</li>
+                  <li>Expanding into automotive AI</li>
+                </ul>
+              </div>
+              <div class="ai-rec-card__confidence">
+                <span class="confidence-label">Confidence</span>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: 92%"></div>
+                </div>
+                <span class="confidence-value">92%</span>
+              </div>
+            </div>
+
+            <!-- Buy Recommendation -->
+            <div class="ai-rec-card ai-rec-card--buy">
+              <div class="ai-rec-card__header">
+                <div class="ai-rec-card__stock">
+                  <span class="stock-symbol">MSFT</span>
+                  <span class="stock-name">Microsoft Corp</span>
+                </div>
+                <span class="ai-rating ai-rating--buy">Buy</span>
+              </div>
+              <div class="ai-rec-card__price">
+                <span class="current-price">$378.91</span>
+                <span class="price-change positive">+0.87%</span>
+              </div>
+              <div class="ai-rec-card__target">
+                <div class="target-row">
+                  <span class="target-label">AI Price Target</span>
+                  <span class="target-value">$425.00</span>
+                </div>
+                <div class="target-upside positive">+12.2% Upside</div>
+              </div>
+              <div class="ai-rec-card__reasoning">
+                <h4>Why Buy?</h4>
+                <ul>
+                  <li>Azure AI services growing rapidly</li>
+                  <li>Copilot integration across products</li>
+                  <li>Strong enterprise relationships</li>
+                  <li>Diversified revenue streams</li>
+                </ul>
+              </div>
+              <div class="ai-rec-card__confidence">
+                <span class="confidence-label">Confidence</span>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: 87%"></div>
+                </div>
+                <span class="confidence-value">87%</span>
+              </div>
+            </div>
+
+            <!-- Buy Recommendation -->
+            <div class="ai-rec-card ai-rec-card--buy">
+              <div class="ai-rec-card__header">
+                <div class="ai-rec-card__stock">
+                  <span class="stock-symbol">AMZN</span>
+                  <span class="stock-name">Amazon.com Inc</span>
+                </div>
+                <span class="ai-rating ai-rating--buy">Buy</span>
+              </div>
+              <div class="ai-rec-card__price">
+                <span class="current-price">$153.42</span>
+                <span class="price-change positive">+1.23%</span>
+              </div>
+              <div class="ai-rec-card__target">
+                <div class="target-row">
+                  <span class="target-label">AI Price Target</span>
+                  <span class="target-value">$180.00</span>
+                </div>
+                <div class="target-upside positive">+17.3% Upside</div>
+              </div>
+              <div class="ai-rec-card__reasoning">
+                <h4>Why Buy?</h4>
+                <ul>
+                  <li>AWS remains cloud leader</li>
+                  <li>E-commerce margin expansion</li>
+                  <li>Advertising business growing</li>
+                  <li>Cost optimization paying off</li>
+                </ul>
+              </div>
+              <div class="ai-rec-card__confidence">
+                <span class="confidence-label">Confidence</span>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: 84%"></div>
+                </div>
+                <span class="confidence-value">84%</span>
+              </div>
+            </div>
+
+            <!-- Hold Recommendation -->
+            <div class="ai-rec-card ai-rec-card--hold">
+              <div class="ai-rec-card__header">
+                <div class="ai-rec-card__stock">
+                  <span class="stock-symbol">AAPL</span>
+                  <span class="stock-name">Apple Inc</span>
+                </div>
+                <span class="ai-rating ai-rating--hold">Hold</span>
+              </div>
+              <div class="ai-rec-card__price">
+                <span class="current-price">$189.84</span>
+                <span class="price-change positive">+1.24%</span>
+              </div>
+              <div class="ai-rec-card__target">
+                <div class="target-row">
+                  <span class="target-label">AI Price Target</span>
+                  <span class="target-value">$195.00</span>
+                </div>
+                <div class="target-upside neutral">+2.7% Upside</div>
+              </div>
+              <div class="ai-rec-card__reasoning">
+                <h4>Analysis</h4>
+                <ul>
+                  <li>iPhone sales plateauing in key markets</li>
+                  <li>Services revenue growing steadily</li>
+                  <li>Vision Pro launch uncertain</li>
+                  <li>Valuation at fair value</li>
+                </ul>
+              </div>
+              <div class="ai-rec-card__confidence">
+                <span class="confidence-label">Confidence</span>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: 76%"></div>
+                </div>
+                <span class="confidence-value">76%</span>
+              </div>
+            </div>
+
+            <!-- Sell Recommendation -->
+            <div class="ai-rec-card ai-rec-card--sell">
+              <div class="ai-rec-card__header">
+                <div class="ai-rec-card__stock">
+                  <span class="stock-symbol">TSLA</span>
+                  <span class="stock-name">Tesla Inc</span>
+                </div>
+                <span class="ai-rating ai-rating--sell">Sell</span>
+              </div>
+              <div class="ai-rec-card__price">
+                <span class="current-price">$238.45</span>
+                <span class="price-change negative">-1.82%</span>
+              </div>
+              <div class="ai-rec-card__target">
+                <div class="target-row">
+                  <span class="target-label">AI Price Target</span>
+                  <span class="target-value">$195.00</span>
+                </div>
+                <div class="target-upside negative">-18.2% Downside</div>
+              </div>
+              <div class="ai-rec-card__reasoning">
+                <h4>Concerns</h4>
+                <ul>
+                  <li>Increased EV competition globally</li>
+                  <li>Margin pressure from price cuts</li>
+                  <li>Cybertruck production challenges</li>
+                  <li>CEO distraction concerns</li>
+                </ul>
+              </div>
+              <div class="ai-rec-card__confidence">
+                <span class="confidence-label">Confidence</span>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: 71%"></div>
+                </div>
+                <span class="confidence-value">71%</span>
+              </div>
+            </div>
+
+            <!-- Buy Recommendation -->
+            <div class="ai-rec-card ai-rec-card--buy">
+              <div class="ai-rec-card__header">
+                <div class="ai-rec-card__stock">
+                  <span class="stock-symbol">LLY</span>
+                  <span class="stock-name">Eli Lilly & Co</span>
+                </div>
+                <span class="ai-rating ai-rating--buy">Buy</span>
+              </div>
+              <div class="ai-rec-card__price">
+                <span class="current-price">$587.23</span>
+                <span class="price-change positive">+2.15%</span>
+              </div>
+              <div class="ai-rec-card__target">
+                <div class="target-row">
+                  <span class="target-label">AI Price Target</span>
+                  <span class="target-value">$680.00</span>
+                </div>
+                <div class="target-upside positive">+15.8% Upside</div>
+              </div>
+              <div class="ai-rec-card__reasoning">
+                <h4>Why Buy?</h4>
+                <ul>
+                  <li>GLP-1 drugs dominating market</li>
+                  <li>Strong pipeline momentum</li>
+                  <li>Alzheimer's drug approval</li>
+                  <li>Expanding production capacity</li>
+                </ul>
+              </div>
+              <div class="ai-rec-card__confidence">
+                <span class="confidence-label">Confidence</span>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: 89%"></div>
+                </div>
+                <span class="confidence-value">89%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Two Column Layout -->
+          <div class="grid grid--2">
+            <!-- Portfolio Analysis -->
+            <div class="panel">
+              <div class="panel__header">
+                <h3 class="panel__title">Portfolio Analysis</h3>
+                <span class="ai-badge">AI-Powered</span>
+              </div>
+              <div class="panel__content">
+                <div class="portfolio-analysis">
+                  <div class="analysis-section">
+                    <h4>Diversification Score</h4>
+                    <div class="score-display">
+                      <div class="score-circle score-circle--good">
+                        <span class="score-value">78</span>
+                        <span class="score-label">Good</span>
+                      </div>
+                      <div class="score-details">
+                        <p>Your portfolio is well-diversified across sectors but has <strong>overweight exposure to Technology (45%)</strong>.</p>
+                        <p class="suggestion">Consider adding Healthcare or Consumer Staples to balance risk.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="analysis-section">
+                    <h4>Risk Assessment</h4>
+                    <div class="risk-meter">
+                      <div class="risk-bar">
+                        <div class="risk-fill" style="width: 62%"></div>
+                        <div class="risk-marker" style="left: 62%"></div>
+                      </div>
+                      <div class="risk-labels">
+                        <span>Conservative</span>
+                        <span>Moderate</span>
+                        <span>Aggressive</span>
+                      </div>
+                    </div>
+                    <p class="risk-description">Your portfolio has <strong>moderate-high risk</strong> with a beta of 1.24. Consider adding some defensive positions.</p>
+                  </div>
+
+                  <div class="analysis-section">
+                    <h4>Suggested Actions</h4>
+                    <div class="action-list">
+                      <div class="action-item">
+                        <span class="action-type sell">Reduce</span>
+                        <span class="action-stock">TSLA</span>
+                        <span class="action-desc">High volatility, uncertain outlook</span>
+                      </div>
+                      <div class="action-item">
+                        <span class="action-type buy">Add</span>
+                        <span class="action-stock">JNJ</span>
+                        <span class="action-desc">Defensive, dividend growth</span>
+                      </div>
+                      <div class="action-item">
+                        <span class="action-type buy">Add</span>
+                        <span class="action-stock">VZ</span>
+                        <span class="action-desc">High dividend, low beta</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sector Outlook -->
+            <div class="panel">
+              <div class="panel__header">
+                <h3 class="panel__title">Sector Outlook</h3>
+                <span class="panel__subtitle">Next 3 months</span>
+              </div>
+              <div class="panel__content">
+                <div class="sector-outlook-list">
+                  <div class="sector-outlook-item">
+                    <div class="sector-info">
+                      <span class="sector-name">Technology</span>
+                      <span class="sector-rating bullish">Bullish</span>
+                    </div>
+                    <div class="sector-bar">
+                      <div class="sector-bar-fill bullish" style="width: 85%"></div>
+                    </div>
+                    <p class="sector-reason">AI spending continues to drive growth. Cloud and enterprise software remain strong.</p>
+                  </div>
+                  <div class="sector-outlook-item">
+                    <div class="sector-info">
+                      <span class="sector-name">Healthcare</span>
+                      <span class="sector-rating bullish">Bullish</span>
+                    </div>
+                    <div class="sector-bar">
+                      <div class="sector-bar-fill bullish" style="width: 78%"></div>
+                    </div>
+                    <p class="sector-reason">GLP-1 drugs driving pharma growth. Biotech M&A activity expected to increase.</p>
+                  </div>
+                  <div class="sector-outlook-item">
+                    <div class="sector-info">
+                      <span class="sector-name">Financials</span>
+                      <span class="sector-rating neutral">Neutral</span>
+                    </div>
+                    <div class="sector-bar">
+                      <div class="sector-bar-fill neutral" style="width: 52%"></div>
+                    </div>
+                    <p class="sector-reason">Net interest income peaking. Credit quality remains stable but watch for loan losses.</p>
+                  </div>
+                  <div class="sector-outlook-item">
+                    <div class="sector-info">
+                      <span class="sector-name">Energy</span>
+                      <span class="sector-rating neutral">Neutral</span>
+                    </div>
+                    <div class="sector-bar">
+                      <div class="sector-bar-fill neutral" style="width: 48%"></div>
+                    </div>
+                    <p class="sector-reason">Oil prices stabilizing. Transition to renewables creates uncertainty.</p>
+                  </div>
+                  <div class="sector-outlook-item">
+                    <div class="sector-info">
+                      <span class="sector-name">Consumer Discretionary</span>
+                      <span class="sector-rating bearish">Bearish</span>
+                    </div>
+                    <div class="sector-bar">
+                      <div class="sector-bar-fill bearish" style="width: 32%"></div>
+                    </div>
+                    <p class="sector-reason">Consumer spending slowing. High interest rates impacting big-ticket purchases.</p>
+                  </div>
+                  <div class="sector-outlook-item">
+                    <div class="sector-info">
+                      <span class="sector-name">Real Estate</span>
+                      <span class="sector-rating bearish">Bearish</span>
+                    </div>
+                    <div class="sector-bar">
+                      <div class="sector-bar-fill bearish" style="width: 28%"></div>
+                    </div>
+                    <p class="sector-reason">Office vacancy rates elevated. Rising rates pressure valuations.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Chat Interface -->
+          <div class="panel ai-chat-panel">
+            <div class="panel__header">
+              <h3 class="panel__title">Ask AI Analyst</h3>
+              <span class="ai-badge">Powered by GPT-4</span>
+            </div>
+            <div class="panel__content">
+              <div class="ai-chat">
+                <div class="ai-chat__messages">
+                  <div class="chat-message chat-message--ai">
+                    <div class="chat-avatar">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </div>
+                    <div class="chat-content">
+                      <p>Hello! I'm your AI investment analyst. I can help you analyze stocks, understand market trends, evaluate your portfolio, or answer any investing questions you have.</p>
+                      <p>Try asking me about:</p>
+                      <ul>
+                        <li>"What do you think about NVDA's valuation?"</li>
+                        <li>"Is now a good time to buy tech stocks?"</li>
+                        <li>"Analyze my portfolio for risks"</li>
+                        <li>"Compare MSFT vs GOOGL"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="ai-chat__input">
+                  <input type="text" placeholder="Ask anything about stocks, markets, or your portfolio..." class="chat-input" />
+                  <button class="chat-send-btn" aria-label="Send message">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="footer__content">
+            <p class="footer__text">
+              &copy; 2024 Financing 101. AI recommendations are for educational purposes only. Not financial advice.
+              <a href="#" class="footer__link">Terms</a> &middot;
+              <a href="#" class="footer__link">Privacy</a> &middot;
+              <a href="#" class="footer__link">API</a>
+            </p>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+  </body>
+</html>

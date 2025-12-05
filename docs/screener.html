@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stock Screener | Financing 101</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Powerful stock screener with advanced filtering. Screen stocks by market cap, P/E ratio, dividend yield, sector, and dozens of other criteria." />
+    <meta name="keywords" content="stock screener, stock filter, find stocks, value stocks, growth stocks, dividend stocks, technical screening" />
+    <meta name="author" content="Financing 101" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Stock Screener | Financing 101" />
+    <meta property="og:description" content="Powerful stock screener with advanced filtering criteria." />
+    <meta property="og:url" content="https://loganlanou.github.io/Financing-101/screener.html" />
+    <meta property="og:site_name" content="Financing 101" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Stock Screener | Financing 101" />
+    <meta name="twitter:description" content="Powerful stock screener with advanced filtering criteria." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0f1a" />
+
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" role="navigation" aria-label="Main navigation">
+        <div class="sidebar__brand">
+          <a href="index.html" class="brand-link">
+            <div class="brand-logo">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="url(#brand-gradient)" />
+                <path d="M8 20L12 14L16 17L24 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="24" cy="9" r="2" fill="white" />
+                <defs>
+                  <linearGradient id="brand-gradient" x1="0" y1="0" x2="32" y2="32">
+                    <stop stop-color="#3b82f6" />
+                    <stop offset="1" stop-color="#1d4ed8" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">Financing 101</span>
+              <span class="brand-tagline">Intelligence Platform</span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="sidebar__nav">
+          <ul class="nav-list">
+            <li>
+              <a href="index.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="9" rx="1" />
+                  <rect x="14" y="3" width="7" height="5" rx="1" />
+                  <rect x="14" y="12" width="7" height="9" rx="1" />
+                  <rect x="3" y="16" width="7" height="5" rx="1" />
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="markets.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                  <polyline points="17 6 23 6 23 12" />
+                </svg>
+                <span>Markets</span>
+              </a>
+            </li>
+            <li>
+              <a href="stocks.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3v18h18" />
+                  <path d="M18 9l-5 5-4-4-3 3" />
+                </svg>
+                <span>Stocks</span>
+              </a>
+            </li>
+            <li>
+              <a href="news.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2" />
+                  <path d="M18 14h-8M18 18h-8M18 10h-8" />
+                </svg>
+                <span>News</span>
+              </a>
+            </li>
+            <li>
+              <a href="congress.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
+                  <path d="M9 9h1M14 9h1M9 13h1M14 13h1" />
+                </svg>
+                <span>Congress</span>
+              </a>
+            </li>
+            <li>
+              <a href="screener.html" class="nav-item nav-item--active" aria-current="page">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+                <span>Screener</span>
+              </a>
+            </li>
+            <li>
+              <a href="watchlist.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <span>Watchlist</span>
+              </a>
+            </li>
+            <li>
+              <a href="ai.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+                <span>AI Insights</span>
+              </a>
+            </li>
+            <li>
+              <a href="learn.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                </svg>
+                <span>Learn</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar__footer">
+          <div class="market-status">
+            <span class="status-indicator status-indicator--open"></span>
+            <span class="status-text">Markets Open</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content" id="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="header__search">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input type="search" placeholder="Search stocks..." class="search-input" aria-label="Search" />
+            <kbd class="search-shortcut">⌘K</kbd>
+          </div>
+          <div class="header__actions">
+            <button class="header-btn" aria-label="Notifications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+              </svg>
+            </button>
+            <div class="user-menu">
+              <div class="user-avatar">JD</div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content">
+          <div class="page-header">
+            <div class="page-header__title">
+              <h1>Stock Screener</h1>
+              <p class="page-subtitle">Filter stocks using fundamental and technical criteria</p>
+            </div>
+            <div class="page-header__actions">
+              <button class="btn btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                  <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                  <polyline points="7 3 7 8 15 8" />
+                </svg>
+                Save Screen
+              </button>
+              <button class="btn btn--primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+                Apply Filters
+              </button>
+            </div>
+          </div>
+
+          <!-- Preset Screens -->
+          <div class="preset-screens">
+            <span class="preset-label">Quick Screens:</span>
+            <button class="preset-btn preset-btn--active">All Stocks</button>
+            <button class="preset-btn">Value Picks</button>
+            <button class="preset-btn">Growth Leaders</button>
+            <button class="preset-btn">High Dividend</button>
+            <button class="preset-btn">Momentum</button>
+            <button class="preset-btn">Oversold</button>
+            <button class="preset-btn">New Highs</button>
+          </div>
+
+          <!-- Filter Panels -->
+          <div class="screener-filters">
+            <div class="filter-group">
+              <h3 class="filter-group__title">Market</h3>
+              <div class="filter-group__content">
+                <div class="filter-row">
+                  <label class="filter-label">Exchange</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>NYSE</option>
+                    <option>NASDAQ</option>
+                    <option>AMEX</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Market Cap</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Mega ($200B+)</option>
+                    <option>Large ($10B-$200B)</option>
+                    <option>Mid ($2B-$10B)</option>
+                    <option>Small ($300M-$2B)</option>
+                    <option>Micro ($50M-$300M)</option>
+                    <option>Nano (&lt;$50M)</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Sector</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Technology</option>
+                    <option>Healthcare</option>
+                    <option>Financial</option>
+                    <option>Consumer Cyclical</option>
+                    <option>Consumer Defensive</option>
+                    <option>Energy</option>
+                    <option>Industrials</option>
+                    <option>Basic Materials</option>
+                    <option>Real Estate</option>
+                    <option>Utilities</option>
+                    <option>Communication</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-group__title">Valuation</h3>
+              <div class="filter-group__content">
+                <div class="filter-row">
+                  <label class="filter-label">P/E Ratio</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max" />
+                  </div>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Forward P/E</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max" />
+                  </div>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">PEG Ratio</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max" />
+                  </div>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Price/Book</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max" />
+                  </div>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Price/Sales</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-group__title">Financials</h3>
+              <div class="filter-group__content">
+                <div class="filter-row">
+                  <label class="filter-label">Dividend Yield</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>None (0%)</option>
+                    <option>Positive (&gt;0%)</option>
+                    <option>High (&gt;5%)</option>
+                    <option>Very High (&gt;10%)</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Profit Margin</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min %" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max %" />
+                  </div>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">ROE</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min %" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max %" />
+                  </div>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Debt/Equity</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-group__title">Performance</h3>
+              <div class="filter-group__content">
+                <div class="filter-row">
+                  <label class="filter-label">Change Today</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Up</option>
+                    <option>Up &gt;5%</option>
+                    <option>Up &gt;10%</option>
+                    <option>Down</option>
+                    <option>Down &gt;5%</option>
+                    <option>Down &gt;10%</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">52-Week Range</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>New High</option>
+                    <option>Near High (&gt;90%)</option>
+                    <option>Near Low (&lt;10%)</option>
+                    <option>New Low</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">YTD Return</label>
+                  <div class="range-inputs">
+                    <input type="number" class="form-input form-input--sm" placeholder="Min %" />
+                    <span class="range-separator">to</span>
+                    <input type="number" class="form-input form-input--sm" placeholder="Max %" />
+                  </div>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Avg Volume</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>&gt;50K</option>
+                    <option>&gt;100K</option>
+                    <option>&gt;500K</option>
+                    <option>&gt;1M</option>
+                    <option>&gt;5M</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-group__title">Technical</h3>
+              <div class="filter-group__content">
+                <div class="filter-row">
+                  <label class="filter-label">RSI (14)</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Oversold (&lt;30)</option>
+                    <option>Neutral (30-70)</option>
+                    <option>Overbought (&gt;70)</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">50-Day SMA</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Price Above</option>
+                    <option>Price Below</option>
+                    <option>Price Crossed Above</option>
+                    <option>Price Crossed Below</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">200-Day SMA</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Price Above</option>
+                    <option>Price Below</option>
+                    <option>Price Crossed Above</option>
+                    <option>Price Crossed Below</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Pattern</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Double Bottom</option>
+                    <option>Double Top</option>
+                    <option>Head & Shoulders</option>
+                    <option>Wedge Up</option>
+                    <option>Wedge Down</option>
+                    <option>Channel Up</option>
+                    <option>Channel Down</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-group__title">Analyst</h3>
+              <div class="filter-group__content">
+                <div class="filter-row">
+                  <label class="filter-label">Rating</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>Strong Buy</option>
+                    <option>Buy</option>
+                    <option>Hold</option>
+                    <option>Sell</option>
+                    <option>Strong Sell</option>
+                  </select>
+                </div>
+                <div class="filter-row">
+                  <label class="filter-label">Price Target</label>
+                  <select class="form-select">
+                    <option>Any</option>
+                    <option>&gt;20% Upside</option>
+                    <option>&gt;10% Upside</option>
+                    <option>&gt;0% Upside</option>
+                    <option>&gt;10% Downside</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Filters -->
+          <div class="active-filters">
+            <span class="active-filters__label">Active Filters:</span>
+            <div class="filter-tags">
+              <span class="filter-tag">
+                Market Cap: Large
+                <button class="filter-tag__remove" aria-label="Remove filter">&times;</button>
+              </span>
+              <span class="filter-tag">
+                Sector: Technology
+                <button class="filter-tag__remove" aria-label="Remove filter">&times;</button>
+              </span>
+              <span class="filter-tag">
+                P/E: 0-30
+                <button class="filter-tag__remove" aria-label="Remove filter">&times;</button>
+              </span>
+            </div>
+            <button class="clear-filters-btn">Clear All</button>
+          </div>
+
+          <!-- Results -->
+          <div class="panel">
+            <div class="panel__header">
+              <h2 class="panel__title">Results</h2>
+              <span class="results-count">247 stocks found</span>
+              <div class="panel__actions">
+                <select class="form-select form-select--sm">
+                  <option>Sort by: Market Cap</option>
+                  <option>Sort by: Price</option>
+                  <option>Sort by: Change %</option>
+                  <option>Sort by: Volume</option>
+                  <option>Sort by: P/E Ratio</option>
+                  <option>Sort by: Dividend Yield</option>
+                </select>
+                <button class="btn btn--sm btn--secondary">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                  </svg>
+                  Export
+                </button>
+              </div>
+            </div>
+            <div class="panel__content panel__content--no-padding">
+              <div class="data-table-wrapper">
+                <table class="data-table data-table--hoverable">
+                  <thead>
+                    <tr>
+                      <th class="sticky-col">Symbol</th>
+                      <th>Company</th>
+                      <th>Sector</th>
+                      <th class="text-right">Price</th>
+                      <th class="text-right">Change</th>
+                      <th class="text-right">Market Cap</th>
+                      <th class="text-right">P/E</th>
+                      <th class="text-right">Div Yield</th>
+                      <th class="text-right">Volume</th>
+                      <th class="text-right">52W High</th>
+                      <th class="text-center">Rating</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">AAPL</a></td>
+                      <td>Apple Inc.</td>
+                      <td>Technology</td>
+                      <td class="text-right">$189.84</td>
+                      <td class="text-right positive">+1.24%</td>
+                      <td class="text-right">$2.94T</td>
+                      <td class="text-right">29.4</td>
+                      <td class="text-right">0.51%</td>
+                      <td class="text-right">48.2M</td>
+                      <td class="text-right">95%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--buy">Buy</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">MSFT</a></td>
+                      <td>Microsoft Corp</td>
+                      <td>Technology</td>
+                      <td class="text-right">$378.91</td>
+                      <td class="text-right positive">+0.87%</td>
+                      <td class="text-right">$2.81T</td>
+                      <td class="text-right">35.2</td>
+                      <td class="text-right">0.79%</td>
+                      <td class="text-right">21.4M</td>
+                      <td class="text-right">98%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--strong-buy">Strong Buy</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">NVDA</a></td>
+                      <td>NVIDIA Corp</td>
+                      <td>Technology</td>
+                      <td class="text-right">$467.23</td>
+                      <td class="text-right positive">+3.42%</td>
+                      <td class="text-right">$1.15T</td>
+                      <td class="text-right">62.8</td>
+                      <td class="text-right">0.04%</td>
+                      <td class="text-right">52.1M</td>
+                      <td class="text-right">92%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--strong-buy">Strong Buy</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">GOOGL</a></td>
+                      <td>Alphabet Inc</td>
+                      <td>Technology</td>
+                      <td class="text-right">$141.80</td>
+                      <td class="text-right positive">+0.65%</td>
+                      <td class="text-right">$1.76T</td>
+                      <td class="text-right">24.1</td>
+                      <td class="text-right">—</td>
+                      <td class="text-right">28.7M</td>
+                      <td class="text-right">89%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--buy">Buy</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">META</a></td>
+                      <td>Meta Platforms</td>
+                      <td>Technology</td>
+                      <td class="text-right">$326.49</td>
+                      <td class="text-right negative">-0.34%</td>
+                      <td class="text-right">$836B</td>
+                      <td class="text-right">26.8</td>
+                      <td class="text-right">0.43%</td>
+                      <td class="text-right">14.2M</td>
+                      <td class="text-right">94%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--buy">Buy</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">CRM</a></td>
+                      <td>Salesforce Inc</td>
+                      <td>Technology</td>
+                      <td class="text-right">$263.18</td>
+                      <td class="text-right positive">+1.89%</td>
+                      <td class="text-right">$254B</td>
+                      <td class="text-right">48.2</td>
+                      <td class="text-right">0.58%</td>
+                      <td class="text-right">6.8M</td>
+                      <td class="text-right">87%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--buy">Buy</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">ADBE</a></td>
+                      <td>Adobe Inc</td>
+                      <td>Technology</td>
+                      <td class="text-right">$542.67</td>
+                      <td class="text-right positive">+0.92%</td>
+                      <td class="text-right">$241B</td>
+                      <td class="text-right">44.1</td>
+                      <td class="text-right">—</td>
+                      <td class="text-right">3.1M</td>
+                      <td class="text-right">82%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--hold">Hold</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                    <tr>
+                      <td class="sticky-col"><a href="stocks.html" class="stock-link">INTC</a></td>
+                      <td>Intel Corp</td>
+                      <td>Technology</td>
+                      <td class="text-right">$43.21</td>
+                      <td class="text-right negative">-1.24%</td>
+                      <td class="text-right">$181B</td>
+                      <td class="text-right">108.2</td>
+                      <td class="text-right">1.16%</td>
+                      <td class="text-right">31.4M</td>
+                      <td class="text-right">68%</td>
+                      <td class="text-center"><span class="rating-badge rating-badge--hold">Hold</span></td>
+                      <td><button class="icon-btn" aria-label="Add to watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel__footer">
+              <div class="pagination">
+                <button class="pagination__btn" disabled>Previous</button>
+                <div class="pagination__pages">
+                  <button class="pagination__page pagination__page--active">1</button>
+                  <button class="pagination__page">2</button>
+                  <button class="pagination__page">3</button>
+                  <span class="pagination__ellipsis">...</span>
+                  <button class="pagination__page">25</button>
+                </div>
+                <button class="pagination__btn">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="footer__content">
+            <p class="footer__text">
+              &copy; 2024 Financing 101. Market data provided for educational purposes.
+              <a href="#" class="footer__link">Terms</a> &middot;
+              <a href="#" class="footer__link">Privacy</a> &middot;
+              <a href="#" class="footer__link">API</a>
+            </p>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+  </body>
+</html>

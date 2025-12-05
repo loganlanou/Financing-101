@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>News | Financing 101</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Real-time financial news with AI-powered sentiment analysis. Stay informed with market-moving headlines, earnings reports, and expert analysis." />
+    <meta name="keywords" content="financial news, market news, stock news, sentiment analysis, earnings reports, market analysis" />
+    <meta name="author" content="Financing 101" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="News | Financing 101" />
+    <meta property="og:description" content="Real-time financial news with AI-powered sentiment analysis." />
+    <meta property="og:url" content="https://loganlanou.github.io/Financing-101/news.html" />
+    <meta property="og:site_name" content="Financing 101" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="News | Financing 101" />
+    <meta name="twitter:description" content="Real-time financial news with AI-powered sentiment analysis." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0f1a" />
+
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" role="navigation" aria-label="Main navigation">
+        <div class="sidebar__brand">
+          <a href="index.html" class="brand-link">
+            <div class="brand-logo">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="url(#brand-gradient)" />
+                <path d="M8 20L12 14L16 17L24 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="24" cy="9" r="2" fill="white" />
+                <defs>
+                  <linearGradient id="brand-gradient" x1="0" y1="0" x2="32" y2="32">
+                    <stop stop-color="#3b82f6" />
+                    <stop offset="1" stop-color="#1d4ed8" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">Financing 101</span>
+              <span class="brand-tagline">Intelligence Platform</span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="sidebar__nav">
+          <ul class="nav-list">
+            <li>
+              <a href="index.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="9" rx="1" />
+                  <rect x="14" y="3" width="7" height="5" rx="1" />
+                  <rect x="14" y="12" width="7" height="9" rx="1" />
+                  <rect x="3" y="16" width="7" height="5" rx="1" />
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="markets.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                  <polyline points="17 6 23 6 23 12" />
+                </svg>
+                <span>Markets</span>
+              </a>
+            </li>
+            <li>
+              <a href="stocks.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3v18h18" />
+                  <path d="M18 9l-5 5-4-4-3 3" />
+                </svg>
+                <span>Stocks</span>
+              </a>
+            </li>
+            <li>
+              <a href="news.html" class="nav-item nav-item--active" aria-current="page">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2" />
+                  <path d="M18 14h-8M18 18h-8M18 10h-8" />
+                </svg>
+                <span>News</span>
+              </a>
+            </li>
+            <li>
+              <a href="congress.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
+                  <path d="M9 9h1M14 9h1M9 13h1M14 13h1" />
+                </svg>
+                <span>Congress</span>
+              </a>
+            </li>
+            <li>
+              <a href="screener.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+                <span>Screener</span>
+              </a>
+            </li>
+            <li>
+              <a href="watchlist.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <span>Watchlist</span>
+              </a>
+            </li>
+            <li>
+              <a href="ai.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+                <span>AI Insights</span>
+              </a>
+            </li>
+            <li>
+              <a href="learn.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                </svg>
+                <span>Learn</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar__footer">
+          <div class="market-status">
+            <span class="status-indicator status-indicator--open"></span>
+            <span class="status-text">Markets Open</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content" id="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="header__search">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input type="search" placeholder="Search news, topics, or tickers..." class="search-input" aria-label="Search" />
+            <kbd class="search-shortcut">⌘K</kbd>
+          </div>
+          <div class="header__actions">
+            <button class="header-btn" aria-label="Notifications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+              </svg>
+              <span class="notification-badge">5</span>
+            </button>
+            <div class="user-menu">
+              <div class="user-avatar">JD</div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content">
+          <div class="page-header">
+            <div class="page-header__title">
+              <h1>Financial News</h1>
+              <p class="page-subtitle">Real-time market news with AI-powered sentiment analysis</p>
+            </div>
+            <div class="page-header__actions">
+              <div class="view-toggle">
+                <button class="view-btn view-btn--active" aria-label="Card view">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                  </svg>
+                </button>
+                <button class="view-btn" aria-label="List view">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sentiment Filter Tabs -->
+          <div class="filter-tabs">
+            <button class="filter-tab filter-tab--active">All News</button>
+            <button class="filter-tab">
+              <span class="sentiment-dot sentiment-dot--bullish"></span>
+              Bullish
+            </button>
+            <button class="filter-tab">
+              <span class="sentiment-dot sentiment-dot--bearish"></span>
+              Bearish
+            </button>
+            <button class="filter-tab">
+              <span class="sentiment-dot sentiment-dot--neutral"></span>
+              Neutral
+            </button>
+            <div class="filter-divider"></div>
+            <button class="filter-tab">Breaking</button>
+            <button class="filter-tab">Earnings</button>
+            <button class="filter-tab">Economy</button>
+            <button class="filter-tab">Tech</button>
+          </div>
+
+          <!-- Breaking News Banner -->
+          <div class="breaking-news-banner">
+            <span class="breaking-label">BREAKING</span>
+            <div class="breaking-ticker">
+              <span class="ticker-item">Fed signals potential rate cut in upcoming meeting</span>
+              <span class="ticker-separator">•</span>
+              <span class="ticker-item">NVIDIA announces new AI chip architecture</span>
+              <span class="ticker-separator">•</span>
+              <span class="ticker-item">Oil prices surge on supply concerns</span>
+            </div>
+          </div>
+
+          <!-- News Content Grid -->
+          <div class="news-layout">
+            <!-- Featured Story -->
+            <article class="news-featured">
+              <div class="news-featured__image">
+                <div class="image-placeholder image-placeholder--large">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                  </svg>
+                </div>
+              </div>
+              <div class="news-featured__content">
+                <div class="news-meta">
+                  <span class="news-source">Bloomberg</span>
+                  <span class="news-time">2 hours ago</span>
+                  <span class="sentiment-tag sentiment-tag--bullish">Bullish</span>
+                </div>
+                <h2 class="news-featured__title">
+                  Federal Reserve Signals Confidence in Economy, Markets Rally to New Highs
+                </h2>
+                <p class="news-featured__excerpt">
+                  In a closely watched speech, Fed Chair indicated that the central bank remains confident in the economy's resilience despite global uncertainties. Markets responded positively, with major indices reaching record levels.
+                </p>
+                <div class="news-tickers">
+                  <span class="ticker-tag ticker-tag--positive">SPY +1.2%</span>
+                  <span class="ticker-tag ticker-tag--positive">QQQ +1.5%</span>
+                  <span class="ticker-tag ticker-tag--positive">DIA +0.8%</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- News Grid -->
+            <div class="news-grid">
+              <!-- News Card 1 -->
+              <article class="news-card">
+                <div class="news-card__header">
+                  <div class="news-meta">
+                    <span class="news-source">Reuters</span>
+                    <span class="news-time">3 hours ago</span>
+                  </div>
+                  <span class="sentiment-tag sentiment-tag--bullish">Bullish</span>
+                </div>
+                <h3 class="news-card__title">
+                  Apple Unveils Revolutionary AI Features, Stock Surges in After-Hours Trading
+                </h3>
+                <p class="news-card__excerpt">
+                  Apple announced groundbreaking AI integration across its product lineup, sending shares up 4% in extended trading.
+                </p>
+                <div class="news-tickers">
+                  <span class="ticker-tag ticker-tag--positive">AAPL +4.2%</span>
+                </div>
+              </article>
+
+              <!-- News Card 2 -->
+              <article class="news-card">
+                <div class="news-card__header">
+                  <div class="news-meta">
+                    <span class="news-source">CNBC</span>
+                    <span class="news-time">4 hours ago</span>
+                  </div>
+                  <span class="sentiment-tag sentiment-tag--bearish">Bearish</span>
+                </div>
+                <h3 class="news-card__title">
+                  Tesla Faces Production Challenges in Berlin Factory, Analyst Downgrades
+                </h3>
+                <p class="news-card__excerpt">
+                  Multiple analysts cut price targets following reports of supply chain disruptions at Tesla's European manufacturing hub.
+                </p>
+                <div class="news-tickers">
+                  <span class="ticker-tag ticker-tag--negative">TSLA -2.8%</span>
+                </div>
+              </article>
+
+              <!-- News Card 3 -->
+              <article class="news-card">
+                <div class="news-card__header">
+                  <div class="news-meta">
+                    <span class="news-source">WSJ</span>
+                    <span class="news-time">5 hours ago</span>
+                  </div>
+                  <span class="sentiment-tag sentiment-tag--neutral">Neutral</span>
+                </div>
+                <h3 class="news-card__title">
+                  Microsoft Announces $10B Investment in AI Infrastructure Expansion
+                </h3>
+                <p class="news-card__excerpt">
+                  The tech giant plans to build new data centers across North America and Europe to support growing AI demand.
+                </p>
+                <div class="news-tickers">
+                  <span class="ticker-tag ticker-tag--positive">MSFT +0.5%</span>
+                </div>
+              </article>
+
+              <!-- News Card 4 -->
+              <article class="news-card">
+                <div class="news-card__header">
+                  <div class="news-meta">
+                    <span class="news-source">Financial Times</span>
+                    <span class="news-time">6 hours ago</span>
+                  </div>
+                  <span class="sentiment-tag sentiment-tag--bullish">Bullish</span>
+                </div>
+                <h3 class="news-card__title">
+                  Semiconductor Stocks Rally as CHIPS Act Funding Begins Distribution
+                </h3>
+                <p class="news-card__excerpt">
+                  Major chipmakers including Intel, AMD, and TSMC see gains as government incentives start flowing to U.S. manufacturing.
+                </p>
+                <div class="news-tickers">
+                  <span class="ticker-tag ticker-tag--positive">AMD +3.1%</span>
+                  <span class="ticker-tag ticker-tag--positive">INTC +2.4%</span>
+                </div>
+              </article>
+
+              <!-- News Card 5 -->
+              <article class="news-card">
+                <div class="news-card__header">
+                  <div class="news-meta">
+                    <span class="news-source">MarketWatch</span>
+                    <span class="news-time">7 hours ago</span>
+                  </div>
+                  <span class="sentiment-tag sentiment-tag--bearish">Bearish</span>
+                </div>
+                <h3 class="news-card__title">
+                  Retail Sector Warns of Slower Holiday Season Amid Consumer Pullback
+                </h3>
+                <p class="news-card__excerpt">
+                  Major retailers lower guidance as inflation-weary consumers cut discretionary spending heading into Q4.
+                </p>
+                <div class="news-tickers">
+                  <span class="ticker-tag ticker-tag--negative">WMT -1.2%</span>
+                  <span class="ticker-tag ticker-tag--negative">TGT -2.1%</span>
+                </div>
+              </article>
+
+              <!-- News Card 6 -->
+              <article class="news-card">
+                <div class="news-card__header">
+                  <div class="news-meta">
+                    <span class="news-source">Yahoo Finance</span>
+                    <span class="news-time">8 hours ago</span>
+                  </div>
+                  <span class="sentiment-tag sentiment-tag--bullish">Bullish</span>
+                </div>
+                <h3 class="news-card__title">
+                  NVIDIA Beats Earnings Expectations, Raises Full-Year Outlook
+                </h3>
+                <p class="news-card__excerpt">
+                  AI chip leader reports record revenue and increases guidance, citing unprecedented demand for data center GPUs.
+                </p>
+                <div class="news-tickers">
+                  <span class="ticker-tag ticker-tag--positive">NVDA +8.5%</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Sentiment Overview Panel -->
+          <aside class="sentiment-panel">
+            <div class="panel">
+              <div class="panel__header">
+                <h3 class="panel__title">Market Sentiment</h3>
+                <span class="panel__subtitle">Last 24 hours</span>
+              </div>
+              <div class="panel__content">
+                <div class="sentiment-gauge">
+                  <div class="gauge-bar">
+                    <div class="gauge-fill gauge-fill--bullish" style="width: 58%"></div>
+                    <div class="gauge-fill gauge-fill--neutral" style="width: 24%"></div>
+                    <div class="gauge-fill gauge-fill--bearish" style="width: 18%"></div>
+                  </div>
+                  <div class="gauge-labels">
+                    <span class="gauge-label gauge-label--bullish">58% Bullish</span>
+                    <span class="gauge-label gauge-label--neutral">24% Neutral</span>
+                    <span class="gauge-label gauge-label--bearish">18% Bearish</span>
+                  </div>
+                </div>
+
+                <div class="sentiment-stats">
+                  <div class="stat-item">
+                    <span class="stat-label">Total Articles</span>
+                    <span class="stat-value">1,247</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Positive Mentions</span>
+                    <span class="stat-value positive">723</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Negative Mentions</span>
+                    <span class="stat-value negative">224</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__header">
+                <h3 class="panel__title">Trending Topics</h3>
+              </div>
+              <div class="panel__content">
+                <div class="trending-list">
+                  <div class="trending-item">
+                    <span class="trending-rank">1</span>
+                    <div class="trending-info">
+                      <span class="trending-topic">Federal Reserve</span>
+                      <span class="trending-count">342 mentions</span>
+                    </div>
+                    <span class="trending-sentiment positive">+12%</span>
+                  </div>
+                  <div class="trending-item">
+                    <span class="trending-rank">2</span>
+                    <div class="trending-info">
+                      <span class="trending-topic">AI & Machine Learning</span>
+                      <span class="trending-count">287 mentions</span>
+                    </div>
+                    <span class="trending-sentiment positive">+8%</span>
+                  </div>
+                  <div class="trending-item">
+                    <span class="trending-rank">3</span>
+                    <div class="trending-info">
+                      <span class="trending-topic">Earnings Season</span>
+                      <span class="trending-count">198 mentions</span>
+                    </div>
+                    <span class="trending-sentiment neutral">0%</span>
+                  </div>
+                  <div class="trending-item">
+                    <span class="trending-rank">4</span>
+                    <div class="trending-info">
+                      <span class="trending-topic">Oil Prices</span>
+                      <span class="trending-count">156 mentions</span>
+                    </div>
+                    <span class="trending-sentiment negative">-5%</span>
+                  </div>
+                  <div class="trending-item">
+                    <span class="trending-rank">5</span>
+                    <div class="trending-info">
+                      <span class="trending-topic">Tech Layoffs</span>
+                      <span class="trending-count">134 mentions</span>
+                    </div>
+                    <span class="trending-sentiment negative">-15%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__header">
+                <h3 class="panel__title">Most Mentioned Stocks</h3>
+              </div>
+              <div class="panel__content">
+                <div class="mentioned-stocks">
+                  <div class="stock-mention">
+                    <div class="stock-info">
+                      <span class="stock-symbol">NVDA</span>
+                      <span class="stock-mentions">89 articles</span>
+                    </div>
+                    <div class="stock-sentiment">
+                      <div class="mini-bar">
+                        <div class="mini-bar__fill positive" style="width: 78%"></div>
+                      </div>
+                      <span class="sentiment-score positive">78% Bullish</span>
+                    </div>
+                  </div>
+                  <div class="stock-mention">
+                    <div class="stock-info">
+                      <span class="stock-symbol">AAPL</span>
+                      <span class="stock-mentions">67 articles</span>
+                    </div>
+                    <div class="stock-sentiment">
+                      <div class="mini-bar">
+                        <div class="mini-bar__fill positive" style="width: 65%"></div>
+                      </div>
+                      <span class="sentiment-score positive">65% Bullish</span>
+                    </div>
+                  </div>
+                  <div class="stock-mention">
+                    <div class="stock-info">
+                      <span class="stock-symbol">TSLA</span>
+                      <span class="stock-mentions">54 articles</span>
+                    </div>
+                    <div class="stock-sentiment">
+                      <div class="mini-bar">
+                        <div class="mini-bar__fill negative" style="width: 42%"></div>
+                      </div>
+                      <span class="sentiment-score negative">42% Bearish</span>
+                    </div>
+                  </div>
+                  <div class="stock-mention">
+                    <div class="stock-info">
+                      <span class="stock-symbol">MSFT</span>
+                      <span class="stock-mentions">48 articles</span>
+                    </div>
+                    <div class="stock-sentiment">
+                      <div class="mini-bar">
+                        <div class="mini-bar__fill positive" style="width: 71%"></div>
+                      </div>
+                      <span class="sentiment-score positive">71% Bullish</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="footer__content">
+            <p class="footer__text">
+              &copy; 2024 Financing 101. Market data provided for educational purposes.
+              <a href="#" class="footer__link">Terms</a> &middot;
+              <a href="#" class="footer__link">Privacy</a> &middot;
+              <a href="#" class="footer__link">API</a>
+            </p>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+  </body>
+</html>
