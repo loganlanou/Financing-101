@@ -42,6 +42,12 @@
     <div class="app-container">
       <!-- Sidebar Navigation -->
       <aside class="sidebar" role="navigation" aria-label="Main navigation">
+        <!-- Sidebar Toggle Button -->
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" onclick="document.querySelector('.app-container').classList.toggle('sidebar-collapsed')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
         <div class="sidebar__brand">
           <a href="index.html" class="brand-link">
             <div class="brand-logo">

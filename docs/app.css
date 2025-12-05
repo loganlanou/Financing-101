@@ -72,6 +72,45 @@ a:hover {
   display: flex;
   min-height: 100vh;
 }
+.app-container.sidebar-collapsed .sidebar {
+  width: 72px;
+}
+.app-container.sidebar-collapsed .sidebar .brand-text,
+.app-container.sidebar-collapsed .sidebar .nav-item span,
+.app-container.sidebar-collapsed .sidebar .status-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+.app-container.sidebar-collapsed .sidebar .sidebar__brand {
+  padding: 1rem;
+  justify-content: center;
+}
+.app-container.sidebar-collapsed .sidebar .brand-link {
+  justify-content: center;
+}
+.app-container.sidebar-collapsed .sidebar .brand-logo {
+  margin-right: 0;
+}
+.app-container.sidebar-collapsed .sidebar .nav-item {
+  justify-content: center;
+  padding: 0.5rem 1rem;
+}
+.app-container.sidebar-collapsed .sidebar .nav-icon {
+  margin-right: 0;
+}
+.app-container.sidebar-collapsed .sidebar .market-status {
+  justify-content: center;
+}
+.app-container.sidebar-collapsed .sidebar .status-indicator {
+  margin-right: 0;
+}
+.app-container.sidebar-collapsed .sidebar .sidebar-toggle svg {
+  transform: rotate(180deg);
+}
+.app-container.sidebar-collapsed .main-content {
+  margin-left: 72px;
+}
 
 .main-wrapper {
   flex: 1;
@@ -79,6 +118,7 @@ a:hover {
   flex-direction: column;
   margin-left: 260px;
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
 }
 @media (max-width: 1024px) {
   .main-wrapper {
@@ -91,7 +131,13 @@ a:hover {
   padding: 2rem 3rem 4rem;
   max-width: 1600px;
   width: 100%;
-  margin: 0 auto;
+  margin-left: 260px;
+  transition: margin-left 0.3s ease;
+}
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0;
+  }
 }
 @media (max-width: 768px) {
   .main-content {
@@ -110,7 +156,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   z-index: 100;
-  transition: transform 200ms ease;
+  transition: width 0.3s ease;
 }
 @media (max-width: 1024px) {
   .sidebar {
@@ -218,6 +264,34 @@ a:hover {
   gap: 0.5rem;
   font-size: 0.8rem;
   color: #94a3b8;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111827;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 50%;
+  color: #64748b;
+  cursor: pointer;
+  z-index: 101;
+  transition: all 150ms ease;
+}
+.sidebar-toggle svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+.sidebar-toggle:hover {
+  background: #1f2937;
+  color: #f8fafc;
+  border-color: #3b82f6;
 }
 
 .status-dot {

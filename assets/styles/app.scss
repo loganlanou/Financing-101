@@ -143,6 +143,59 @@ a {
 .app-container {
   display: flex;
   min-height: 100vh;
+
+  // Collapsed sidebar state - applied via JavaScript
+  &.sidebar-collapsed {
+    .sidebar {
+      width: 72px;
+
+      .brand-text,
+      .nav-item span,
+      .status-text {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+      }
+
+      .sidebar__brand {
+        padding: $space-md;
+        justify-content: center;
+      }
+
+      .brand-link {
+        justify-content: center;
+      }
+
+      .brand-logo {
+        margin-right: 0;
+      }
+
+      .nav-item {
+        justify-content: center;
+        padding: $space-sm $space-md;
+      }
+
+      .nav-icon {
+        margin-right: 0;
+      }
+
+      .market-status {
+        justify-content: center;
+      }
+
+      .status-indicator {
+        margin-right: 0;
+      }
+
+      .sidebar-toggle svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .main-content {
+      margin-left: 72px;
+    }
+  }
 }
 
 .main-wrapper {
@@ -151,6 +204,7 @@ a {
   flex-direction: column;
   margin-left: 260px;
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
 
   @media (max-width: 1024px) {
     margin-left: 0;
@@ -162,7 +216,12 @@ a {
   padding: $space-xl $space-2xl $space-3xl;
   max-width: 1600px;
   width: 100%;
-  margin: 0 auto;
+  margin-left: 260px;
+  transition: margin-left 0.3s ease;
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
 
   @media (max-width: 768px) {
     padding: $space-lg $space-md $space-xl;
@@ -184,7 +243,7 @@ a {
   display: flex;
   flex-direction: column;
   z-index: 100;
-  transition: transform $transition-base;
+  transition: width 0.3s ease;
 
   @media (max-width: 1024px) {
     transform: translateX(-100%);
@@ -301,6 +360,37 @@ a {
   gap: $space-sm;
   font-size: 0.8rem;
   color: $color-text-secondary;
+}
+
+// Sidebar Toggle Button
+.sidebar-toggle {
+  position: absolute;
+  top: $space-lg;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border;
+  border-radius: 50%;
+  color: $color-text-muted;
+  cursor: pointer;
+  z-index: 101;
+  transition: all $transition-fast;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: $color-bg-tertiary;
+    color: $color-text-primary;
+    border-color: $color-accent-primary;
+  }
 }
 
 .status-dot {
