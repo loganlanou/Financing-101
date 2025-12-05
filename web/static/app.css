@@ -1485,6 +1485,142 @@ a:hover {
   }
 }
 
+.news-sources-panel {
+  background: #111827;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.news-sources-panel .panel__header {
+  margin-bottom: 1.5rem;
+}
+
+.news-sources-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 1200px) {
+  .news-sources-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .news-sources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .news-sources-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.news-source-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #1f2937;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.news-source-card:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+}
+.news-source-card:hover .external-link-icon {
+  opacity: 1;
+  color: #3b82f6;
+}
+
+.source-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: white;
+  flex-shrink: 0;
+}
+.source-icon--bloomberg {
+  background: linear-gradient(135deg, #2800d7, #000);
+}
+.source-icon--reuters {
+  background: linear-gradient(135deg, #ff8000, #e65c00);
+}
+.source-icon--cnbc {
+  background: linear-gradient(135deg, #005594, #003d66);
+}
+.source-icon--wsj {
+  background: linear-gradient(135deg, #0080c3, #005a8c);
+}
+.source-icon--yahoo {
+  background: linear-gradient(135deg, #6001d2, #410094);
+}
+.source-icon--marketwatch {
+  background: linear-gradient(135deg, #00ac4e, #008a3e);
+}
+.source-icon--ft {
+  background: linear-gradient(135deg, #fff1e5, #f2d1b3);
+  color: #000;
+}
+.source-icon--seekingalpha {
+  background: linear-gradient(135deg, #f58220, #d46a10);
+}
+.source-icon--benzinga {
+  background: linear-gradient(135deg, #00d26a, #00a854);
+}
+.source-icon--investopedia {
+  background: linear-gradient(135deg, #1a73e8, #1557b0);
+}
+.source-icon--barrons {
+  background: linear-gradient(135deg, #0080c3, #005a8c);
+}
+.source-icon--fool {
+  background: linear-gradient(135deg, #5558af, #3e4194);
+}
+
+.source-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.source-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source-desc {
+  font-size: 0.75rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.external-link-icon {
+  width: 16px;
+  height: 16px;
+  color: #64748b;
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
 .news-featured {
   display: grid;
   grid-template-columns: 1fr 1fr;

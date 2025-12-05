@@ -253,36 +253,135 @@
 
           <!-- News Content Grid -->
           <div class="news-layout">
-            <!-- Featured Story -->
-            <article class="news-featured">
-              <div class="news-featured__image">
-                <div class="image-placeholder image-placeholder--large">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <polyline points="21 15 16 10 5 21" />
+            <!-- Live News Sources -->
+            <div class="news-sources-panel">
+              <div class="panel__header">
+                <h2 class="panel__title">Live News Sources</h2>
+                <span class="panel__subtitle">Click to visit • Updated in real-time</span>
+              </div>
+              <div class="news-sources-grid">
+                <a href="https://www.bloomberg.com/markets" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--bloomberg">B</div>
+                  <div class="source-info">
+                    <span class="source-name">Bloomberg Markets</span>
+                    <span class="source-desc">Global financial news & analysis</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
                   </svg>
-                </div>
+                </a>
+                <a href="https://www.reuters.com/markets/" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--reuters">R</div>
+                  <div class="source-info">
+                    <span class="source-name">Reuters Markets</span>
+                    <span class="source-desc">Breaking business & market news</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.cnbc.com/markets/" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--cnbc">C</div>
+                  <div class="source-info">
+                    <span class="source-name">CNBC Markets</span>
+                    <span class="source-desc">Stock market news & data</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.wsj.com/news/markets" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--wsj">WSJ</div>
+                  <div class="source-info">
+                    <span class="source-name">Wall Street Journal</span>
+                    <span class="source-desc">Markets & economy coverage</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://finance.yahoo.com/news/" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--yahoo">Y!</div>
+                  <div class="source-info">
+                    <span class="source-name">Yahoo Finance</span>
+                    <span class="source-desc">Free quotes & financial news</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.marketwatch.com/" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--marketwatch">MW</div>
+                  <div class="source-info">
+                    <span class="source-name">MarketWatch</span>
+                    <span class="source-desc">Stock market quotes & analysis</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.ft.com/markets" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--ft">FT</div>
+                  <div class="source-info">
+                    <span class="source-name">Financial Times</span>
+                    <span class="source-desc">International markets coverage</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://seekingalpha.com/market-news" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--seekingalpha">SA</div>
+                  <div class="source-info">
+                    <span class="source-name">Seeking Alpha</span>
+                    <span class="source-desc">Stock analysis & research</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.benzinga.com/" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--benzinga">BZ</div>
+                  <div class="source-info">
+                    <span class="source-name">Benzinga</span>
+                    <span class="source-desc">Actionable trading ideas</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.investopedia.com/markets-news-4427704" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--investopedia">Inv</div>
+                  <div class="source-info">
+                    <span class="source-name">Investopedia</span>
+                    <span class="source-desc">Financial education & news</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.barrons.com/" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--barrons">B's</div>
+                  <div class="source-info">
+                    <span class="source-name">Barron's</span>
+                    <span class="source-desc">Investment ideas & insights</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
+                <a href="https://www.fool.com/investing-news/" target="_blank" rel="noopener noreferrer" class="news-source-card">
+                  <div class="source-icon source-icon--fool">MF</div>
+                  <div class="source-info">
+                    <span class="source-name">Motley Fool</span>
+                    <span class="source-desc">Stock picks & investing tips</span>
+                  </div>
+                  <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                </a>
               </div>
-              <div class="news-featured__content">
-                <div class="news-meta">
-                  <span class="news-source">Bloomberg</span>
-                  <span class="news-time">2 hours ago</span>
-                  <span class="sentiment-tag sentiment-tag--bullish">Bullish</span>
-                </div>
-                <h2 class="news-featured__title">
-                  Federal Reserve Signals Confidence in Economy, Markets Rally to New Highs
-                </h2>
-                <p class="news-featured__excerpt">
-                  In a closely watched speech, Fed Chair indicated that the central bank remains confident in the economy's resilience despite global uncertainties. Markets responded positively, with major indices reaching record levels.
-                </p>
-                <div class="news-tickers">
-                  <span class="ticker-tag ticker-tag--positive">SPY +1.2%</span>
-                  <span class="ticker-tag ticker-tag--positive">QQQ +1.5%</span>
-                  <span class="ticker-tag ticker-tag--positive">DIA +0.8%</span>
-                </div>
-              </div>
-            </article>
+            </div>
 
             <!-- News Grid -->
             <div class="news-grid">

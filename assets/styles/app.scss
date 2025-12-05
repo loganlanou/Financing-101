@@ -1652,6 +1652,120 @@ a {
   }
 }
 
+// News Sources Panel
+.news-sources-panel {
+  background: $color-bg-secondary;
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  margin-bottom: $space-lg;
+
+  .panel__header {
+    margin-bottom: $space-lg;
+  }
+}
+
+.news-sources-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-md;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.news-source-card {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-md;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba($color-accent-primary, 0.1);
+    border-color: $color-accent-primary;
+    transform: translateY(-2px);
+
+    .external-link-icon {
+      opacity: 1;
+      color: $color-accent-primary;
+    }
+  }
+}
+
+.source-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: white;
+  flex-shrink: 0;
+
+  &--bloomberg { background: linear-gradient(135deg, #2800d7, #000); }
+  &--reuters { background: linear-gradient(135deg, #ff8000, #e65c00); }
+  &--cnbc { background: linear-gradient(135deg, #005594, #003d66); }
+  &--wsj { background: linear-gradient(135deg, #0080c3, #005a8c); }
+  &--yahoo { background: linear-gradient(135deg, #6001d2, #410094); }
+  &--marketwatch { background: linear-gradient(135deg, #00ac4e, #008a3e); }
+  &--ft { background: linear-gradient(135deg, #fff1e5, #f2d1b3); color: #000; }
+  &--seekingalpha { background: linear-gradient(135deg, #f58220, #d46a10); }
+  &--benzinga { background: linear-gradient(135deg, #00d26a, #00a854); }
+  &--investopedia { background: linear-gradient(135deg, #1a73e8, #1557b0); }
+  &--barrons { background: linear-gradient(135deg, #0080c3, #005a8c); }
+  &--fool { background: linear-gradient(135deg, #5558af, #3e4194); }
+}
+
+.source-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.source-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source-desc {
+  font-size: 0.75rem;
+  color: $color-text-muted;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.external-link-icon {
+  width: 16px;
+  height: 16px;
+  color: $color-text-muted;
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+// Legacy - keep for other pages
 .news-featured {
   display: grid;
   grid-template-columns: 1fr 1fr;
