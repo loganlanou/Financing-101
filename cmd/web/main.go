@@ -63,7 +63,7 @@ func run(ctx context.Context, cfg config.Config, log *slog.Logger) error {
 	if err := goose.SetDialect("sqlite3"); err != nil {
 		return err
 	}
-	if err := goose.Up(db, "db/migrations"); err != nil {
+	if err := goose.Up(db, "."); err != nil {
 		return err
 	}
 

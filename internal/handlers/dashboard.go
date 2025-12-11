@@ -40,7 +40,7 @@ func (h *DashboardHandler) RegisterRoutes(e *echo.Echo) {
 }
 
 func (h *DashboardHandler) dashboard(c echo.Context) error {
-    ctx := c.Request().Context()
+    reqCtx := c.Request().Context()
     var (
         news []services.NewsHeadline
         stocks []services.StockSnapshot
@@ -48,7 +48,7 @@ func (h *DashboardHandler) dashboard(c echo.Context) error {
         recs []services.Recommendation
     )
 
-    g, ctx := errgroup.WithContext(ctx)
+    g, ctx := errgroup.WithContext(reqCtx)
 
     g.Go(func() error {
         data, err := h.newsService.Latest(ctx, 6)
@@ -107,7 +107,8 @@ func (h *DashboardHandler) dashboard(c echo.Context) error {
     })
 
     c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
-    if err := page.Render(ctx, c.Response()); err != nil {
+    if err := page.Render(reqCtx, c.Response()); err != nil {
+        h.log.Error("template render failed", slog.Any("err", err))
         return err
     }
 
