@@ -54,6 +54,13 @@ $space-lg: 1.5rem;
 $space-xl: 2rem;
 $space-2xl: 3rem;
 $space-3xl: 4rem;
+$space-4xl: 5rem;
+$space-5xl: 6rem;
+
+// Breakpoints for large monitors
+$breakpoint-xl: 1440px;
+$breakpoint-2xl: 1920px;
+$breakpoint-3xl: 2560px;
 
 // Shadows
 $shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -89,6 +96,19 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  // Scale up base font for large monitors
+  @media (min-width: 1440px) {
+    font-size: 17px;
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 18px;
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 19px;
+  }
 }
 
 body {
@@ -223,6 +243,19 @@ a {
   max-width: 100%;
   overflow-x: auto;
   box-sizing: border-box;
+
+  // Large monitor enhancements
+  @media (min-width: $breakpoint-xl) {
+    padding: $space-2xl $space-3xl $space-4xl;
+  }
+
+  @media (min-width: $breakpoint-2xl) {
+    padding: $space-3xl $space-4xl $space-5xl;
+  }
+
+  @media (min-width: $breakpoint-3xl) {
+    padding: $space-4xl $space-5xl $space-5xl;
+  }
 
   @media (max-width: 1200px) {
     padding: $space-lg $space-xl $space-2xl;
@@ -719,6 +752,8 @@ a {
   &--2 { grid-template-columns: repeat(2, 1fr); }
   &--3 { grid-template-columns: repeat(3, 1fr); }
   &--4 { grid-template-columns: repeat(4, 1fr); }
+  &--5 { grid-template-columns: repeat(5, 1fr); }
+  &--6 { grid-template-columns: repeat(6, 1fr); }
 
   &--auto-fit {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -726,6 +761,33 @@ a {
 
   &--auto-fill {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  // Large monitor enhancements - more columns & larger gaps
+  @media (min-width: $breakpoint-xl) {
+    gap: $space-xl;
+    &--3 { grid-template-columns: repeat(4, 1fr); }
+    &--4 { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  @media (min-width: $breakpoint-2xl) {
+    gap: $space-2xl;
+    &--2 { grid-template-columns: repeat(3, 1fr); }
+    &--3 { grid-template-columns: repeat(5, 1fr); }
+    &--4 { grid-template-columns: repeat(6, 1fr); }
+    &--auto-fit {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    &--auto-fill {
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    }
+  }
+
+  @media (min-width: $breakpoint-3xl) {
+    gap: $space-2xl;
+    &--2 { grid-template-columns: repeat(4, 1fr); }
+    &--3 { grid-template-columns: repeat(6, 1fr); }
+    &--4 { grid-template-columns: repeat(8, 1fr); }
   }
 
   @media (max-width: 1200px) {
@@ -743,7 +805,7 @@ a {
   }
 
   @media (max-width: 640px) {
-    &--2, &--3, &--4 { grid-template-columns: 1fr; }
+    &--2, &--3, &--4, &--5, &--6 { grid-template-columns: 1fr; }
     gap: $space-md;
   }
 
@@ -789,6 +851,20 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: $space-md;
+
+  @media (min-width: $breakpoint-xl) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-lg;
+  }
+
+  @media (min-width: $breakpoint-2xl) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: $space-xl;
+  }
+
+  @media (min-width: $breakpoint-3xl) {
+    grid-template-columns: repeat(6, 1fr);
+  }
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
@@ -1706,12 +1782,25 @@ a {
   padding: $space-2xl;
   margin-top: $space-3xl;
 
+  @media (min-width: $breakpoint-xl) {
+    padding: $space-3xl;
+  }
+
+  @media (min-width: $breakpoint-2xl) {
+    padding: $space-4xl;
+  }
+
   &__content {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: $space-2xl;
+
+    @media (min-width: $breakpoint-2xl) {
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: $space-3xl;
+    }
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr 1fr;
@@ -1755,7 +1844,7 @@ a {
   }
 
   &__bottom {
-    max-width: 1200px;
+    max-width: 100%;
     margin: $space-xl auto 0;
     padding-top: $space-lg;
     border-top: 1px solid $color-border;
@@ -1764,6 +1853,10 @@ a {
     align-items: center;
     font-size: 0.8rem;
     color: $color-text-muted;
+
+    @media (min-width: $breakpoint-2xl) {
+      font-size: 0.875rem;
+    }
 
     @media (max-width: 640px) {
       flex-direction: column;
@@ -2079,6 +2172,16 @@ a {
   grid-template-columns: 1fr 320px;
   gap: $space-xl;
 
+  @media (min-width: $breakpoint-xl) {
+    grid-template-columns: 1fr 380px;
+    gap: $space-2xl;
+  }
+
+  @media (min-width: $breakpoint-2xl) {
+    grid-template-columns: 1fr 440px;
+    gap: $space-3xl;
+  }
+
   @media (max-width: 1200px) {
     grid-template-columns: 1fr;
   }
@@ -2100,6 +2203,20 @@ a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: $space-md;
+
+  @media (min-width: $breakpoint-xl) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: $space-lg;
+  }
+
+  @media (min-width: $breakpoint-2xl) {
+    grid-template-columns: repeat(6, 1fr);
+    gap: $space-xl;
+  }
+
+  @media (min-width: $breakpoint-3xl) {
+    grid-template-columns: repeat(8, 1fr);
+  }
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
