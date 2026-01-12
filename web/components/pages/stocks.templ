@@ -18,15 +18,22 @@ templ StocksPage(data StocksData) {
 		Description: "Browse stocks, view detailed quotes, and track performance against benchmarks.",
 		CurrentPath: "/stocks",
 	}) {
-		<!-- Search and Filters -->
-		<div class="flex justify-between items-center mb-xl">
+		<div class="page-intro">
 			<div>
-				<h2 class="section-header__title">Stock Browser</h2>
-				<p class="section-header__subtitle">Browse and analyze individual stocks</p>
+				<p class="eyebrow">Stocks</p>
+				<h1 class="page-title">Single-name research, simplified.</h1>
+				<p class="page-subtitle">Compare prices, fundamentals, and liquidity with a portfolio-first view.</p>
 			</div>
-			<div class="flex gap-md">
-				<input type="search" class="form-input" placeholder="Search by symbol or name..." style="width: 300px"/>
-				<select class="form-select" style="width: 150px">
+			<div class="page-actions">
+				<button class="btn btn--ghost btn--sm">Export CSV</button>
+				<button class="btn btn--primary btn--sm">Create Screen</button>
+			</div>
+		</div>
+
+		<div class="filter-bar mb-xl">
+			<div class="filter-group">
+				<input type="search" class="form-input" placeholder="Search by symbol or name..." style="width: 280px"/>
+				<select class="form-select" style="width: 170px">
 					<option>All Sectors</option>
 					<option>Technology</option>
 					<option>Healthcare</option>
@@ -34,72 +41,79 @@ templ StocksPage(data StocksData) {
 					<option>Energy</option>
 					<option>Consumer</option>
 				</select>
+				<select class="form-select" style="width: 170px">
+					<option>All Caps</option>
+					<option>Large Cap</option>
+					<option>Mid Cap</option>
+					<option>Small Cap</option>
+				</select>
+			</div>
+			<div class="filter-group">
+				<button class="btn btn--ghost btn--sm">Save Filter</button>
+				<button class="btn btn--primary btn--sm">Run Screen</button>
 			</div>
 		</div>
 
 		if data.FeaturedStock != nil {
 			<!-- Featured Stock Quote -->
-			<div class="panel mb-xl">
-				<div class="panel__body">
-					<div class="quote-card">
-						<div class="quote-card__header">
-							<div>
-								<h2 class="quote-card__symbol">{ data.FeaturedStock.Symbol }</h2>
-								<p class="quote-card__name">{ data.FeaturedStock.Name }</p>
-							</div>
-							<div class="flex gap-sm">
-								<button class="btn btn--secondary btn--sm">+ Watchlist</button>
-								<button class="btn btn--primary btn--sm">Trade</button>
-							</div>
-						</div>
-						<div class="flex items-center gap-lg">
-							<span class="quote-card__price">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Price) }</span>
-							<span class={ "quote-card__change", templ.KV("quote-card__change--positive", data.FeaturedStock.ChangePercent >= 0), templ.KV("quote-card__change--negative", data.FeaturedStock.ChangePercent < 0) }>
-								if data.FeaturedStock.ChangePercent >= 0 {
-									↑ +
-								} else {
-									↓
-								}
-								{ fmt.Sprintf("%.2f (%.2f%%)", data.FeaturedStock.Change, data.FeaturedStock.ChangePercent) }
-							</span>
-						</div>
-						<div class="chart-container mt-lg">
-							Chart visualization would appear here (TradingView widget recommended)
-						</div>
-						<div class="quote-card__stats mt-lg">
-							<div class="stat-item">
-								<span class="stat-item__label">Open</span>
-								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Open) }</span>
-							</div>
-							<div class="stat-item">
-								<span class="stat-item__label">High</span>
-								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.High) }</span>
-							</div>
-							<div class="stat-item">
-								<span class="stat-item__label">Low</span>
-								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Low) }</span>
-							</div>
-							<div class="stat-item">
-								<span class="stat-item__label">Prev Close</span>
-								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.PrevClose) }</span>
-							</div>
-							<div class="stat-item">
-								<span class="stat-item__label">Volume</span>
-								<span class="stat-item__value">{ formatVolume(data.FeaturedStock.Volume) }</span>
-							</div>
-							<div class="stat-item">
-								<span class="stat-item__label">Market Cap</span>
-								<span class="stat-item__value">{ formatMarketCap(data.FeaturedStock.MarketCap) }</span>
-							</div>
-							<div class="stat-item">
-								<span class="stat-item__label">P/E Ratio</span>
-								<span class="stat-item__value">{ fmt.Sprintf("%.2f", data.FeaturedStock.PE) }</span>
-							</div>
-							<div class="stat-item">
-								<span class="stat-item__label">52W High</span>
-								<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Week52High) }</span>
-							</div>
-						</div>
+			<div class="quote-hero mb-xl">
+				<div class="quote-hero__header">
+					<div>
+						<p class="eyebrow">Featured</p>
+						<h2 class="quote-hero__symbol">{ data.FeaturedStock.Symbol }</h2>
+						<p class="quote-hero__name">{ data.FeaturedStock.Name }</p>
+					</div>
+					<div class="quote-hero__actions">
+						<button class="btn btn--secondary btn--sm">+ Watchlist</button>
+						<button class="btn btn--primary btn--sm">Trade</button>
+					</div>
+				</div>
+				<div class="quote-hero__price">
+					<span class="quote-hero__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Price) }</span>
+					<span class={ "quote-hero__change", templ.KV("quote-hero__change--positive", data.FeaturedStock.ChangePercent >= 0), templ.KV("quote-hero__change--negative", data.FeaturedStock.ChangePercent < 0) }>
+						if data.FeaturedStock.ChangePercent >= 0 {
+							↑ +
+						} else {
+							↓
+						}
+						{ fmt.Sprintf("%.2f (%.2f%%)", data.FeaturedStock.Change, data.FeaturedStock.ChangePercent) }
+					</span>
+				</div>
+				<div class="chart-container mt-lg">
+					Chart visualization would appear here (TradingView widget recommended)
+				</div>
+				<div class="quote-hero__stats mt-lg">
+					<div class="stat-item">
+						<span class="stat-item__label">Open</span>
+						<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Open) }</span>
+					</div>
+					<div class="stat-item">
+						<span class="stat-item__label">High</span>
+						<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.High) }</span>
+					</div>
+					<div class="stat-item">
+						<span class="stat-item__label">Low</span>
+						<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Low) }</span>
+					</div>
+					<div class="stat-item">
+						<span class="stat-item__label">Prev Close</span>
+						<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.PrevClose) }</span>
+					</div>
+					<div class="stat-item">
+						<span class="stat-item__label">Volume</span>
+						<span class="stat-item__value">{ formatVolume(data.FeaturedStock.Volume) }</span>
+					</div>
+					<div class="stat-item">
+						<span class="stat-item__label">Market Cap</span>
+						<span class="stat-item__value">{ formatMarketCap(data.FeaturedStock.MarketCap) }</span>
+					</div>
+					<div class="stat-item">
+						<span class="stat-item__label">P/E Ratio</span>
+						<span class="stat-item__value">{ fmt.Sprintf("%.2f", data.FeaturedStock.PE) }</span>
+					</div>
+					<div class="stat-item">
+						<span class="stat-item__label">52W High</span>
+						<span class="stat-item__value">{ fmt.Sprintf("$%.2f", data.FeaturedStock.Week52High) }</span>
 					</div>
 				</div>
 			</div>

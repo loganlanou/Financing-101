@@ -25,35 +25,22 @@ templ DashboardPage(data DashboardData) {
 		Description: "Real-time financial intelligence dashboard with market data, news sentiment, and AI recommendations.",
 		CurrentPath: "/",
 	}) {
-		<!-- Market Indices Strip -->
-		<div class="market-strip mb-lg">
-			<div class="grid grid--4">
-				for _, idx := range data.Indices {
-					<div class="card">
-						<div class="card__title">{ idx.Name }</div>
-						<div class="card__value">{ fmt.Sprintf("%.2f", idx.Price) }</div>
-						<div class={ "card__subtitle", templ.KV("text-positive", idx.Change >= 0), templ.KV("text-negative", idx.Change < 0) }>
-							if idx.Change >= 0 {
-								+
-							}
-							{ fmt.Sprintf("%.2f (%.2f%%)", idx.Change, idx.ChangePercent) }
-						</div>
-					</div>
-				}
+		<div class="page-intro">
+			<div>
+				<p class="eyebrow">Daily Briefing</p>
+				<h1 class="page-title">Market intelligence, curated.</h1>
+				<p class="page-subtitle">A clean snapshot of momentum, sentiment, and institutional activity.</p>
+			</div>
+			<div class="page-actions">
+				<button class="btn btn--ghost btn--sm">Export Brief</button>
+				<button class="btn btn--primary btn--sm">Create Alert</button>
 			</div>
 		</div>
 
-		<!-- Stats Overview -->
-		<div class="stats-grid mb-xl">
-			<div class="stat-card">
-				<div class="stat-card__icon">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-						<polyline points="17 6 23 6 23 12"/>
-					</svg>
-				</div>
-				<div class="stat-card__label">Market Status</div>
-				<div class="stat-card__value">
+		<div class="kpi-grid mb-xl">
+			<div class="kpi-card">
+				<div class="kpi-card__label">Market Status</div>
+				<div class="kpi-card__value">
 					if data.MarketStatus == "open" {
 						Open
 					} else if data.MarketStatus == "pre-market" {
@@ -64,41 +51,46 @@ templ DashboardPage(data DashboardData) {
 						Closed
 					}
 				</div>
-				<div class={ "stat-card__change", templ.KV("stat-card__change--positive", data.MarketStatus == "open") }>
+				<div class={ "kpi-card__meta", templ.KV("kpi-card__meta--positive", data.MarketStatus == "open") }>
 					{ time.Now().Format("Mon, Jan 2 3:04 PM") }
 				</div>
 			</div>
-			<div class="stat-card">
-				<div class="stat-card__icon">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/>
-					</svg>
-				</div>
-				<div class="stat-card__label">News Signals</div>
-				<div class="stat-card__value">{ fmt.Sprintf("%d", len(data.RecentNews)) }</div>
-				<div class="stat-card__change">Live sentiment analysis</div>
+			<div class="kpi-card">
+				<div class="kpi-card__label">News Signals</div>
+				<div class="kpi-card__value">{ fmt.Sprintf("%d", len(data.RecentNews)) }</div>
+				<div class="kpi-card__meta">Sentiment scans in progress</div>
 			</div>
-			<div class="stat-card">
-				<div class="stat-card__icon">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<path d="M3 21h18M5 21V7l7-4 7 4v14"/>
-					</svg>
-				</div>
-				<div class="stat-card__label">Congress Trades</div>
-				<div class="stat-card__value">{ fmt.Sprintf("%d", len(data.CongressTrades)) }</div>
-				<div class="stat-card__change">Recent disclosures</div>
+			<div class="kpi-card">
+				<div class="kpi-card__label">Congress Trades</div>
+				<div class="kpi-card__value">{ fmt.Sprintf("%d", len(data.CongressTrades)) }</div>
+				<div class="kpi-card__meta">Latest disclosures</div>
 			</div>
-			<div class="stat-card">
-				<div class="stat-card__icon">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<circle cx="12" cy="12" r="10"/>
-						<path d="M12 6v6l4 2"/>
-					</svg>
-				</div>
-				<div class="stat-card__label">AI Recommendations</div>
-				<div class="stat-card__value">{ fmt.Sprintf("%d", len(data.Recommendations)) }</div>
-				<div class="stat-card__change">High conviction picks</div>
+			<div class="kpi-card">
+				<div class="kpi-card__label">AI Recommendations</div>
+				<div class="kpi-card__value">{ fmt.Sprintf("%d", len(data.Recommendations)) }</div>
+				<div class="kpi-card__meta">High conviction picks</div>
 			</div>
+		</div>
+
+		<div class="section-header">
+			<div>
+				<h2 class="section-header__title">Major Indices</h2>
+				<p class="section-header__subtitle">Key benchmarks with intraday trend context</p>
+			</div>
+		</div>
+		<div class="grid grid--4 mb-xl">
+			for _, idx := range data.Indices {
+				<div class="card metric-card">
+					<div class="card__title">{ idx.Name }</div>
+					<div class="card__value">{ fmt.Sprintf("%.2f", idx.Price) }</div>
+					<div class={ "card__subtitle", templ.KV("text-positive", idx.Change >= 0), templ.KV("text-negative", idx.Change < 0) }>
+						if idx.Change >= 0 {
+							+
+						}
+						{ fmt.Sprintf("%.2f (%.2f%%)", idx.Change, idx.ChangePercent) }
+					</div>
+				</div>
+			}
 		</div>
 
 		<!-- Main Content Grid -->
@@ -107,7 +99,7 @@ templ DashboardPage(data DashboardData) {
 			<div class="panel">
 				<div class="panel__header">
 					<span class="panel__title">Top Gainers</span>
-					<a href="/stocks" class="btn btn--ghost btn--sm">View All</a>
+					<a href="/stocks" class="btn btn--ghost btn--sm">Full List</a>
 				</div>
 				<div class="panel__body">
 					<table class="data-table">
@@ -143,7 +135,7 @@ templ DashboardPage(data DashboardData) {
 			<div class="panel">
 				<div class="panel__header">
 					<span class="panel__title">Market News</span>
-					<a href="/news" class="btn btn--ghost btn--sm">View All</a>
+					<a href="/news" class="btn btn--ghost btn--sm">All Coverage</a>
 				</div>
 				<div class="news-list">
 					for _, news := range data.RecentNews {
@@ -177,7 +169,7 @@ templ DashboardPage(data DashboardData) {
 			<div class="panel">
 				<div class="panel__header">
 					<span class="panel__title">Congressional Trades</span>
-					<a href="/congress" class="btn btn--ghost btn--sm">View All</a>
+					<a href="/congress" class="btn btn--ghost btn--sm">Disclosures</a>
 				</div>
 				<ul class="list">
 					for _, trade := range data.CongressTrades {
@@ -198,7 +190,7 @@ templ DashboardPage(data DashboardData) {
 			<div class="panel">
 				<div class="panel__header">
 					<span class="panel__title">AI Recommendations</span>
-					<a href="/ai" class="btn btn--ghost btn--sm">View All</a>
+					<a href="/ai" class="btn btn--ghost btn--sm">Signal Deck</a>
 				</div>
 				<ul class="list">
 					for _, rec := range data.Recommendations {
