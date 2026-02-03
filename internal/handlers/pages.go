@@ -43,6 +43,8 @@ func (h *PagesHandler) RegisterRoutes(e *echo.Echo) {
 	e.GET("/", h.dashboard)
 	e.GET("/markets", h.markets)
 	e.GET("/stocks", h.stocks)
+	e.GET("/news", h.news)
+	e.GET("/congress", h.congress)
 	e.GET("/learn", h.learn)
 	e.GET("/learn/glossary", h.glossary)
 	e.GET("/learn/:moduleID", h.moduleDetail)
@@ -61,7 +63,7 @@ func (h *PagesHandler) dashboard(c echo.Context) error {
 	g, ctx := errgroup.WithContext(reqCtx)
 
 	g.Go(func() error {
-		data, err := h.newsService.Latest(ctx, 8)
+		data, err := h.newsService.Latest(ctx, 3)
 		if err != nil {
 			return err
 		}
@@ -70,7 +72,7 @@ func (h *PagesHandler) dashboard(c echo.Context) error {
 	})
 
 	g.Go(func() error {
-		data, err := h.tradeService.Recent(ctx, 6)
+		data, err := h.tradeService.Recent(ctx, 3)
 		if err != nil {
 			return err
 		}
@@ -79,7 +81,7 @@ func (h *PagesHandler) dashboard(c echo.Context) error {
 	})
 
 	g.Go(func() error {
-		data, err := h.recService.TopPicks(ctx, 4)
+		data, err := h.recService.TopPicks(ctx, 3)
 		if err != nil {
 			return err
 		}
@@ -169,6 +171,46 @@ func (h *PagesHandler) stocks(c echo.Context) error {
 	}
 
 	page := pages.StocksPage(data)
+	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
+	return page.Render(reqCtx, c.Response())
+}
+
+func (h *PagesHandler) news(c echo.Context) error {
+	reqCtx := c.Request().Context()
+
+	news, err := h.newsService.Latest(reqCtx, 20)
+	if err != nil {
+		h.log.Error("failed to get news", slog.Any("err", err))
+		news = []services.NewsHeadline{}
+	}
+
+	data := pages.NewsPageData{
+		News:         news,
+		FilterSource: c.QueryParam("source"),
+		FilterTicker: c.QueryParam("ticker"),
+	}
+
+	page := pages.NewsPage(data)
+	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
+	return page.Render(reqCtx, c.Response())
+}
+
+func (h *PagesHandler) congress(c echo.Context) error {
+	reqCtx := c.Request().Context()
+
+	trades, err := h.tradeService.Recent(reqCtx, 20)
+	if err != nil {
+		h.log.Error("failed to get congress trades", slog.Any("err", err))
+		trades = []services.Trade{}
+	}
+
+	data := pages.CongressPageData{
+		Trades:       trades,
+		FilterMember: c.QueryParam("member"),
+		FilterAction: c.QueryParam("action"),
+	}
+
+	page := pages.CongressPage(data)
 	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
 	return page.Render(reqCtx, c.Response())
 }

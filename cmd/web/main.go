@@ -115,7 +115,7 @@ func run(ctx context.Context, cfg config.Config, log *slog.Logger) error {
 
 	srv := server.New(cfg, log)
 
-	pagesHandler := handlers.NewPagesHandler(log, newsService, stockService, tradeService, recService)
+	pagesHandler := handlers.NewPagesHandler(log, newsService, stockService, tradeService, recService, learnService)
 	pagesHandler.RegisterRoutes(srv.Echo())
 
 	return srv.Start(ctx)

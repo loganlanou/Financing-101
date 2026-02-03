@@ -1,0 +1,133 @@
+package pages
+
+import (
+	"fmt"
+	"github.com/loganlanou/Financing-101/internal/services"
+	"github.com/loganlanou/Financing-101/web/components"
+)
+
+// CongressPageData contains all data for the congress trades page
+type CongressPageData struct {
+	Trades       []services.Trade
+	FilterMember string
+	FilterAction string
+}
+
+templ CongressPage(data CongressPageData) {
+	@components.Layout(components.PageMeta{
+		Title:       "Congress Trades",
+		Description: "Track congressional stock trading disclosures and filings.",
+		CurrentPath: "/congress",
+	}) {
+		<div class="page-intro">
+			<div>
+				<p class="eyebrow">Public Disclosures</p>
+				<h1 class="page-title">Congressional Trading Activity</h1>
+				<p class="page-subtitle">Track stock trades disclosed by members of Congress. All data is from public filings.</p>
+			</div>
+		</div>
+
+		<div class="filter-bar mb-xl">
+			<div class="filter-group">
+				<select class="form-select" aria-label="Filter by action">
+					<option value="">All Actions</option>
+					<option value="buy">Buys</option>
+					<option value="sell">Sells</option>
+				</select>
+				<input type="text" class="form-input" placeholder="Search member or ticker..." aria-label="Search member or ticker"/>
+			</div>
+			<div class="filter-group">
+				<span class="text-muted">{ fmt.Sprintf("%d disclosures", len(data.Trades)) }</span>
+			</div>
+		</div>
+
+		<div class="panel">
+			<div class="panel__header">
+				<span class="panel__title">Recent Disclosures</span>
+				<div class="risk-disclaimer-compact">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="12" cy="12" r="10"/>
+						<line x1="12" y1="8" x2="12" y2="12"/>
+						<line x1="12" y1="16" x2="12.01" y2="16"/>
+					</svg>
+					<span>Delayed 30-45 days from execution</span>
+				</div>
+			</div>
+			<div class="panel__body">
+				<table class="data-table">
+					<thead>
+						<tr>
+							<th>Member</th>
+							<th>Symbol</th>
+							<th>Action</th>
+							<th>Amount</th>
+							<th>Date</th>
+							<th>Sentiment</th>
+						</tr>
+					</thead>
+					<tbody>
+						for _, trade := range data.Trades {
+							<tr>
+								<td>
+									<div class="col-symbol">{ trade.Member }</div>
+									<div class="col-name">{ trade.Party } - { trade.Chamber }</div>
+								</td>
+								<td>
+									<a href={ templ.SafeURL("/stocks?symbol=" + trade.Symbol) } class="tag tag--ticker">{ trade.Symbol }</a>
+								</td>
+								<td>
+									<span class={ "tag", tradeActionClass(trade.Action) }>{ trade.Action }</span>
+								</td>
+								<td class="col-price">{ trade.Amount }</td>
+								<td class="text-muted">{ trade.ExecutedAt.Format("Jan 2, 2006") }</td>
+								<td>
+									<span class={ "tag", tradeSentimentClass(trade.Sentiment) }>
+										{ fmt.Sprintf("%.2f", trade.Sentiment) }
+									</span>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+			if len(data.Trades) == 0 {
+				<div class="panel__body">
+					<p class="text-muted">No congressional trades available at this time.</p>
+				</div>
+			}
+		</div>
+
+		<div class="risk-disclaimer mt-lg">
+			<div class="risk-disclaimer__icon">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<circle cx="12" cy="12" r="10"/>
+					<line x1="12" y1="8" x2="12" y2="12"/>
+					<line x1="12" y1="16" x2="12.01" y2="16"/>
+				</svg>
+			</div>
+			<div class="risk-disclaimer__content">
+				<strong>Important Disclosure:</strong> Congressional trade disclosures are typically filed 30-45 days after execution. Trades shown here reflect past activity and should not be interpreted as current trading signals or investment recommendations. Always conduct your own research.
+			</div>
+		</div>
+	}
+}
+
+func tradeActionClass(action string) string {
+	switch action {
+	case "Buy", "Purchase":
+		return "tag--bullish"
+	case "Sell", "Sale":
+		return "tag--bearish"
+	default:
+		return "tag--neutral"
+	}
+}
+
+func tradeSentimentClass(sentiment float64) string {
+	if sentiment > 0.2 {
+		return "tag--bullish"
+	} else if sentiment < -0.2 {
+		return "tag--bearish"
+	}
+	return "tag--neutral"
+}

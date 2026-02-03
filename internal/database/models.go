@@ -23,6 +23,43 @@ type CongressTrade struct {
 	SourceUrl      sql.NullString
 }
 
+type GlossaryTerm struct {
+	ID         string
+	Term       string
+	Definition string
+	Category   string
+	CreatedAt  time.Time
+}
+
+type LearningModule struct {
+	ID          string
+	Title       string
+	Description string
+	Category    string
+	SortOrder   int64
+	CreatedAt   time.Time
+}
+
+type LearningTip struct {
+	ID         string
+	Title      string
+	Content    string
+	Category   string
+	LearnUrl   sql.NullString
+	ActiveDate sql.NullTime
+	CreatedAt  time.Time
+}
+
+type Lesson struct {
+	ID        string
+	ModuleID  string
+	Title     string
+	Content   string
+	Summary   string
+	SortOrder int64
+	CreatedAt time.Time
+}
+
 type NewsArticle struct {
 	ID             string
 	Title          string

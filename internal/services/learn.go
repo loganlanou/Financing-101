@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"database/sql"
 	"time"
 
 	"github.com/loganlanou/Financing-101/internal/database"
@@ -179,7 +180,7 @@ func (s *LearnService) GetGlossary(ctx context.Context) ([]GlossaryTerm, error) 
 
 // SearchGlossary searches glossary terms
 func (s *LearnService) SearchGlossary(ctx context.Context, query string) ([]GlossaryTerm, error) {
-	rows, err := s.queries.SearchGlossaryTerms(ctx, query)
+	rows, err := s.queries.SearchGlossaryTerms(ctx, sql.NullString{String: query, Valid: query != ""})
 	if err != nil {
 		return nil, err
 	}

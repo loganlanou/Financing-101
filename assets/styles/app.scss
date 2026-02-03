@@ -1,24 +1,43 @@
 // =============================================
-// FINANCING 101 - Heritage Finance Redesign
+// FINANCING 101 - Dark Theme with Neon Accents
 // =============================================
 
-$color-ink: #0b1f33;
-$color-ink-muted: #445062;
-$color-ink-soft: #6b7280;
-$color-bg: #f7f4ef;
-$color-bg-alt: #f1ede6;
-$color-surface: #ffffff;
-$color-surface-alt: #fbfaf8;
-$color-border: rgba(13, 25, 42, 0.12);
-$color-border-strong: rgba(13, 25, 42, 0.2);
+// Dark Backgrounds
+$color-bg: #0d1117;
+$color-bg-alt: #161b22;
+$color-surface: #21262d;
+$color-surface-alt: #1c2128;
 
-$color-accent: #b88a4a;
-$color-accent-strong: #8f6a34;
-$color-teal: #0f766e;
-$color-teal-soft: rgba(15, 118, 110, 0.15);
-$color-positive: #15803d;
-$color-negative: #b91c1c;
-$color-warning: #b45309;
+// Text Colors (Light for dark theme)
+$color-ink: #e6edf3;
+$color-ink-muted: #8b949e;
+$color-ink-soft: #6e7681;
+
+// Borders
+$color-border: rgba(240, 246, 252, 0.1);
+$color-border-strong: rgba(240, 246, 252, 0.2);
+
+// Neon Accents
+$neon-cyan: #00d9ff;
+$neon-green: #39ff14;
+$neon-blue: #0ea5e9;
+$neon-red: #ff3366;
+$neon-gold: #ffd700;
+
+// Semantic Colors (using neon palette)
+$color-accent: $neon-cyan;
+$color-accent-strong: lighten($neon-cyan, 10%);
+$color-teal: $neon-cyan;
+$color-teal-soft: rgba($neon-cyan, 0.15);
+$color-positive: $neon-green;
+$color-negative: $neon-red;
+$color-warning: $neon-gold;
+
+// Glow Effects
+$glow-cyan: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(0, 217, 255, 0.3);
+$glow-green: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.3);
+$glow-red: 0 0 10px rgba(255, 51, 102, 0.5), 0 0 20px rgba(255, 51, 102, 0.3);
+$glow-gold: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
 
 $font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
 $font-serif: "Fraunces", "Times New Roman", serif;
@@ -29,8 +48,9 @@ $radius-md: 12px;
 $radius-lg: 16px;
 $radius-xl: 20px;
 
-$shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
-$shadow-card: 0 20px 40px rgba(15, 23, 42, 0.1);
+$shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.3);
+$shadow-card: 0 20px 40px rgba(0, 0, 0, 0.4);
+$shadow-glow: 0 0 30px rgba(0, 217, 255, 0.15);
 
 $transition: 180ms ease;
 
@@ -52,8 +72,8 @@ body {
   font-size: 0.95rem;
   line-height: 1.6;
   color: $color-ink;
-  background: radial-gradient(circle at 20% 20%, #ffffff 0%, $color-bg 45%),
-    radial-gradient(circle at 80% 0%, rgba(184, 138, 74, 0.18), transparent 45%),
+  background: radial-gradient(ellipse at 20% 0%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(57, 255, 20, 0.05) 0%, transparent 50%),
     $color-bg;
   min-height: 100vh;
   position: relative;
@@ -63,8 +83,8 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(240, 246, 252, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 246, 252, 0.03) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
   z-index: -1;
@@ -92,7 +112,7 @@ a {
 }
 
 a:hover {
-  color: $color-accent-strong;
+  color: $neon-cyan;
 }
 
 .text-muted {
@@ -126,8 +146,8 @@ a:hover {
   top: 1rem;
   width: auto;
   height: auto;
-  background: $color-ink;
-  color: $color-surface;
+  background: $neon-cyan;
+  color: $color-bg;
   padding: 0.5rem 1rem;
   border-radius: $radius-sm;
   z-index: 10;
@@ -148,7 +168,7 @@ a:hover {
   justify-content: space-between;
   gap: 2rem;
   padding: 1.25rem 3rem;
-  background: rgba(247, 244, 239, 0.9);
+  background: rgba(13, 17, 23, 0.95);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid $color-border;
 }
@@ -211,11 +231,17 @@ a:hover {
   color: $color-ink-muted;
   padding-bottom: 0.3rem;
   border-bottom: 2px solid transparent;
+  transition: color $transition, border-color $transition, text-shadow $transition;
+}
+
+.nav-link:hover {
+  color: $neon-cyan;
 }
 
 .nav-link--active {
-  color: $color-ink;
-  border-color: $color-accent;
+  color: $neon-cyan;
+  border-color: $neon-cyan;
+  text-shadow: $glow-cyan;
 }
 
 .header-actions {
@@ -284,8 +310,8 @@ a:hover {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: $color-teal;
-  color: $color-surface;
+  background: $neon-cyan;
+  color: $color-bg;
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -412,8 +438,16 @@ a:hover {
 }
 
 .btn--primary {
-  background: $color-ink;
-  color: $color-surface;
+  background: $neon-cyan;
+  color: $color-bg;
+  border-color: $neon-cyan;
+  font-weight: 600;
+}
+
+.btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: $glow-cyan;
+  background: lighten($neon-cyan, 5%);
 }
 
 .btn--secondary {
@@ -422,17 +456,22 @@ a:hover {
   border-color: $color-border;
 }
 
+.btn--secondary:hover {
+  transform: translateY(-1px);
+  border-color: $neon-cyan;
+  color: $neon-cyan;
+}
+
 .btn--ghost {
   background: transparent;
   color: $color-ink-muted;
   border-color: $color-border;
 }
 
-.btn--primary:hover,
-.btn--secondary:hover,
 .btn--ghost:hover {
   transform: translateY(-1px);
-  box-shadow: $shadow-soft;
+  border-color: $neon-cyan;
+  color: $neon-cyan;
 }
 
 .btn--sm {
@@ -484,7 +523,8 @@ a:hover {
 }
 
 .kpi-card__meta--positive {
-  color: $color-teal;
+  color: $neon-green;
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
 }
 
 .section-header {
@@ -608,7 +648,7 @@ a:hover {
 
 .data-table td {
   padding: 0.85rem 0;
-  border-bottom: 1px solid rgba(13, 25, 42, 0.08);
+  border-bottom: 1px solid $color-border;
   vertical-align: top;
 }
 
@@ -632,11 +672,13 @@ a:hover {
 }
 
 .col-change--positive {
-  color: $color-positive;
+  color: $neon-green;
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
 }
 
 .col-change--negative {
-  color: $color-negative;
+  color: $neon-red;
+  text-shadow: 0 0 8px rgba(255, 51, 102, 0.4);
 }
 
 .col-actions {
@@ -655,35 +697,37 @@ a:hover {
 }
 
 .tag--default {
-  background: $color-bg-alt;
+  background: $color-surface;
   color: $color-ink-muted;
   border-color: $color-border;
 }
 
 .tag--positive,
 .tag--bullish {
-  background: rgba(21, 128, 61, 0.12);
-  color: $color-positive;
-  border-color: rgba(21, 128, 61, 0.25);
+  background: rgba(57, 255, 20, 0.1);
+  color: $neon-green;
+  border-color: rgba(57, 255, 20, 0.3);
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.3);
 }
 
 .tag--negative,
 .tag--bearish {
-  background: rgba(185, 28, 28, 0.12);
-  color: $color-negative;
-  border-color: rgba(185, 28, 28, 0.25);
+  background: rgba(255, 51, 102, 0.1);
+  color: $neon-red;
+  border-color: rgba(255, 51, 102, 0.3);
+  text-shadow: 0 0 6px rgba(255, 51, 102, 0.3);
 }
 
 .tag--neutral {
-  background: rgba(180, 83, 9, 0.12);
-  color: $color-warning;
-  border-color: rgba(180, 83, 9, 0.25);
+  background: rgba(255, 215, 0, 0.1);
+  color: $neon-gold;
+  border-color: rgba(255, 215, 0, 0.3);
 }
 
 .tag--ticker {
-  background: rgba(15, 118, 110, 0.12);
-  color: $color-teal;
-  border-color: rgba(15, 118, 110, 0.25);
+  background: rgba(0, 217, 255, 0.1);
+  color: $neon-cyan;
+  border-color: rgba(0, 217, 255, 0.3);
 }
 
 .list {
@@ -700,7 +744,7 @@ a:hover {
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(13, 25, 42, 0.08);
+  border-bottom: 1px solid $color-border;
 }
 
 .list-item__title {
@@ -726,10 +770,11 @@ a:hover {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: $color-ink;
-  color: $color-surface;
+  background: $neon-cyan;
+  color: $color-bg;
   font-family: $font-mono;
   font-size: 0.9rem;
+  box-shadow: $glow-cyan;
 }
 
 .conviction {
@@ -742,21 +787,21 @@ a:hover {
 }
 
 .conviction--high {
-  background: rgba(15, 118, 110, 0.12);
-  color: $color-teal;
-  border-color: rgba(15, 118, 110, 0.25);
+  background: rgba(57, 255, 20, 0.1);
+  color: $neon-green;
+  border-color: rgba(57, 255, 20, 0.3);
 }
 
 .conviction--medium {
-  background: rgba(180, 83, 9, 0.12);
-  color: $color-warning;
-  border-color: rgba(180, 83, 9, 0.25);
+  background: rgba(255, 215, 0, 0.1);
+  color: $neon-gold;
+  border-color: rgba(255, 215, 0, 0.3);
 }
 
 .conviction--low {
-  background: rgba(185, 28, 28, 0.12);
-  color: $color-negative;
-  border-color: rgba(185, 28, 28, 0.25);
+  background: rgba(255, 51, 102, 0.1);
+  color: $neon-red;
+  border-color: rgba(255, 51, 102, 0.3);
 }
 
 .news-list {
@@ -772,7 +817,7 @@ a:hover {
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(13, 25, 42, 0.08);
+  border-bottom: 1px solid $color-border;
 }
 
 .news-item__title {
@@ -810,8 +855,8 @@ a:hover {
 }
 
 .status-banner--open {
-  border-color: rgba(15, 118, 110, 0.35);
-  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.18);
+  border-color: rgba(57, 255, 20, 0.4);
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
 }
 
 .status-banner__left {
@@ -838,12 +883,12 @@ a:hover {
 }
 
 .status-dot--live {
-  background: $color-positive;
-  box-shadow: 0 0 0 6px $color-teal-soft;
+  background: $neon-green;
+  box-shadow: 0 0 0 6px rgba(57, 255, 20, 0.2), $glow-green;
 }
 
 .status-dot--closed {
-  background: $color-negative;
+  background: $neon-red;
 }
 
 .sector-grid {
@@ -878,11 +923,13 @@ a:hover {
 
 .sector-item__fill {
   height: 100%;
-  background: $color-teal;
+  background: $neon-cyan;
+  box-shadow: 0 0 6px rgba(0, 217, 255, 0.5);
 }
 
 .sector-item__fill--negative {
-  background: $color-negative;
+  background: $neon-red;
+  box-shadow: 0 0 6px rgba(255, 51, 102, 0.5);
 }
 
 .filter-bar {
@@ -915,7 +962,7 @@ a:hover {
 }
 
 .quote-hero {
-  background: linear-gradient(120deg, rgba(15, 118, 110, 0.12), rgba(184, 138, 74, 0.12)), $color-surface;
+  background: linear-gradient(120deg, rgba(0, 217, 255, 0.08), rgba(57, 255, 20, 0.05)), $color-surface;
   border: 1px solid $color-border;
   border-radius: $radius-xl;
   padding: 2rem;
@@ -961,11 +1008,13 @@ a:hover {
 }
 
 .quote-hero__change--positive {
-  color: $color-positive;
+  color: $neon-green;
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
 }
 
 .quote-hero__change--negative {
-  color: $color-negative;
+  color: $neon-red;
+  text-shadow: 0 0 10px rgba(255, 51, 102, 0.4);
 }
 
 .quote-hero__stats {
@@ -980,8 +1029,8 @@ a:hover {
   gap: 0.2rem;
   padding: 0.75rem 1rem;
   border-radius: $radius-md;
-  background: $color-surface;
-  border: 1px solid rgba(13, 25, 42, 0.08);
+  background: $color-bg-alt;
+  border: 1px solid $color-border;
 }
 
 .stat-item__label {
@@ -1203,8 +1252,8 @@ a:hover {
 
 // Side Panel Enhancements
 .panel-card--highlight {
-  background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(184, 138, 74, 0.08));
-  border-color: rgba(15, 118, 110, 0.25);
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(57, 255, 20, 0.05));
+  border-color: rgba(0, 217, 255, 0.3);
 }
 
 // Learning Tip Widget
@@ -1212,8 +1261,8 @@ a:hover {
   display: flex;
   gap: 1.25rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, $color-teal-soft, rgba(184, 138, 74, 0.08));
-  border: 1px solid rgba(15, 118, 110, 0.2);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(0, 217, 255, 0.05));
+  border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: $radius-lg;
   margin-bottom: 2rem;
 }
@@ -1224,10 +1273,11 @@ a:hover {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: $color-teal;
-  color: $color-surface;
+  background: $neon-gold;
+  color: $color-bg;
   border-radius: $radius-md;
   flex-shrink: 0;
+  box-shadow: $glow-gold;
 }
 
 .learning-tip__content {
@@ -1239,7 +1289,7 @@ a:hover {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $color-teal;
+  color: $neon-gold;
   margin-bottom: 0.35rem;
 }
 
@@ -1263,10 +1313,11 @@ a:hover {
   gap: 0.35rem;
   font-size: 0.85rem;
   font-weight: 500;
-  color: $color-teal;
+  color: $neon-cyan;
 
   &:hover {
-    color: $color-accent-strong;
+    color: $neon-gold;
+    text-shadow: $glow-gold;
   }
 }
 
@@ -1276,14 +1327,14 @@ a:hover {
   align-items: flex-start;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background: rgba(180, 83, 9, 0.08);
-  border: 1px solid rgba(180, 83, 9, 0.2);
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.25);
   border-radius: $radius-md;
   margin: 1.5rem 0;
 }
 
 .risk-disclaimer__icon {
-  color: $color-warning;
+  color: $neon-gold;
   flex-shrink: 0;
   margin-top: 0.1rem;
 }
@@ -1294,7 +1345,7 @@ a:hover {
   line-height: 1.6;
 
   strong {
-    color: $color-warning;
+    color: $neon-gold;
   }
 }
 
@@ -1306,7 +1357,7 @@ a:hover {
   color: $color-ink-soft;
 
   svg {
-    color: $color-warning;
+    color: $neon-gold;
   }
 }
 
@@ -1334,21 +1385,21 @@ a:hover {
 }
 
 .confidence-badge__level--high {
-  background: rgba(15, 118, 110, 0.12);
-  color: $color-teal;
-  border-color: rgba(15, 118, 110, 0.25);
+  background: rgba(57, 255, 20, 0.1);
+  color: $neon-green;
+  border-color: rgba(57, 255, 20, 0.3);
 }
 
 .confidence-badge__level--medium {
-  background: rgba(180, 83, 9, 0.12);
-  color: $color-warning;
-  border-color: rgba(180, 83, 9, 0.25);
+  background: rgba(255, 215, 0, 0.1);
+  color: $neon-gold;
+  border-color: rgba(255, 215, 0, 0.3);
 }
 
 .confidence-badge__level--low {
-  background: rgba(185, 28, 28, 0.12);
-  color: $color-negative;
-  border-color: rgba(185, 28, 28, 0.25);
+  background: rgba(255, 51, 102, 0.1);
+  color: $neon-red;
+  border-color: rgba(255, 51, 102, 0.3);
 }
 
 .confidence-badge__score {
@@ -1426,7 +1477,7 @@ a:hover {
   margin-bottom: 1.25rem;
 
   svg {
-    color: $color-teal;
+    color: $neon-cyan;
   }
 }
 
@@ -1453,7 +1504,7 @@ a:hover {
 .decision-checklist__checkbox {
   width: 18px;
   height: 18px;
-  accent-color: $color-teal;
+  accent-color: $neon-cyan;
   flex-shrink: 0;
   margin-top: 0.15rem;
 }
@@ -1487,7 +1538,7 @@ a:hover {
   color: $color-ink;
 
   svg {
-    color: $color-teal;
+    color: $neon-cyan;
   }
 }
 
@@ -1530,26 +1581,26 @@ a:hover {
       content: "•";
       position: absolute;
       left: 0;
-      color: $color-teal;
+      color: $neon-cyan;
     }
   }
 }
 
 .ai-transparency__list--warning li::before {
   content: "!";
-  color: $color-warning;
+  color: $neon-gold;
   font-weight: 600;
 }
 
 .ai-transparency__list--risk li::before {
   content: "▲";
   font-size: 0.65rem;
-  color: $color-negative;
+  color: $neon-red;
 }
 
 .ai-transparency__list--questions li::before {
   content: "?";
-  color: $color-teal;
+  color: $neon-cyan;
   font-weight: 600;
 }
 
@@ -1581,18 +1632,21 @@ a:hover {
 }
 
 .risk-scale__bar--active.risk-scale__bar--low {
-  background: $color-positive;
-  border-color: $color-positive;
+  background: $neon-green;
+  border-color: $neon-green;
+  box-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
 }
 
 .risk-scale__bar--active.risk-scale__bar--medium {
-  background: $color-warning;
-  border-color: $color-warning;
+  background: $neon-gold;
+  border-color: $neon-gold;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
 }
 
 .risk-scale__bar--active.risk-scale__bar--high {
-  background: $color-negative;
-  border-color: $color-negative;
+  background: $neon-red;
+  border-color: $neon-red;
+  box-shadow: 0 0 6px rgba(255, 51, 102, 0.5);
 }
 
 .risk-scale__text {
@@ -1644,18 +1698,18 @@ a:hover {
 }
 
 .module-card__category--basics {
-  background: rgba(15, 118, 110, 0.12);
-  color: $color-teal;
+  background: rgba(0, 217, 255, 0.1);
+  color: $neon-cyan;
 }
 
 .module-card__category--intermediate {
-  background: rgba(180, 83, 9, 0.12);
-  color: $color-warning;
+  background: rgba(255, 215, 0, 0.1);
+  color: $neon-gold;
 }
 
 .module-card__category--advanced {
-  background: rgba(185, 28, 28, 0.12);
-  color: $color-negative;
+  background: rgba(255, 51, 102, 0.1);
+  color: $neon-red;
 }
 
 .module-card__title {
@@ -1719,7 +1773,7 @@ a:hover {
 }
 
 .inline-glossary__term {
-  border-bottom: 1px dashed $color-teal;
+  border-bottom: 1px dashed $neon-cyan;
   cursor: help;
 }
 
@@ -1732,13 +1786,15 @@ a:hover {
   width: max-content;
   max-width: 280px;
   padding: 0.75rem 1rem;
-  background: $color-ink;
-  color: $color-surface;
+  background: $color-surface;
+  color: $color-ink;
   font-size: 0.8rem;
   line-height: 1.5;
   border-radius: $radius-sm;
   margin-bottom: 0.5rem;
   z-index: 10;
+  border: 1px solid $neon-cyan;
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
 
   &::after {
     content: "";
@@ -1747,7 +1803,7 @@ a:hover {
     left: 50%;
     transform: translateX(-50%);
     border: 6px solid transparent;
-    border-top-color: $color-ink;
+    border-top-color: $neon-cyan;
   }
 }
 
@@ -1758,8 +1814,8 @@ a:hover {
 // Learn Page Hero
 .learn-hero {
   padding: 3rem 2.5rem;
-  background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(184, 138, 74, 0.08));
-  border: 1px solid $color-border;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(57, 255, 20, 0.05));
+  border: 1px solid rgba(0, 217, 255, 0.3);
   border-radius: $radius-xl;
   margin-bottom: 2.5rem;
   text-align: center;
@@ -1881,8 +1937,8 @@ a:hover {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: $color-teal-soft;
-  color: $color-teal;
+  background: rgba(0, 217, 255, 0.15);
+  color: $neon-cyan;
   font-family: $font-mono;
   font-weight: 600;
   border-radius: 50%;
@@ -1922,18 +1978,18 @@ a:hover {
 
 // Tag variants for categories
 .tag--basics {
-  background: rgba(15, 118, 110, 0.12);
-  color: $color-teal;
+  background: rgba(0, 217, 255, 0.1);
+  color: $neon-cyan;
 }
 
 .tag--intermediate {
-  background: rgba(180, 83, 9, 0.12);
-  color: $color-warning;
+  background: rgba(255, 215, 0, 0.1);
+  color: $neon-gold;
 }
 
 .tag--advanced {
-  background: rgba(185, 28, 28, 0.12);
-  color: $color-negative;
+  background: rgba(255, 51, 102, 0.1);
+  color: $neon-red;
 }
 
 @media (max-width: 640px) {
@@ -1966,8 +2022,8 @@ a:hover {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: rgba(15, 118, 110, 0.1);
-  color: $color-teal;
+  background: rgba(0, 217, 255, 0.1);
+  color: $neon-cyan;
   border-radius: $radius-md;
   flex-shrink: 0;
 }
