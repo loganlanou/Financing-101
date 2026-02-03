@@ -1,0 +1,255 @@
+package pages
+
+import (
+	"fmt"
+	"github.com/loganlanou/Financing-101/web/components"
+	"github.com/loganlanou/Financing-101/internal/services"
+)
+
+// LearnPageData contains data for the learn page
+type LearnPageData struct {
+	Modules       []services.LearningModule
+	GlossaryTerms []services.GlossaryTerm
+	TodaysTip     *services.LearningTip
+	Category      string // Filter: basics, intermediate, advanced, or empty for all
+}
+
+// ModuleDetailData contains data for viewing a single module
+type ModuleDetailData struct {
+	Module  *services.LearningModule
+	Lessons []services.Lesson
+}
+
+// GlossaryPageData contains data for the glossary page
+type GlossaryPageData struct {
+	Terms       []services.GlossaryTerm
+	SearchQuery string
+	Categories  []string
+}
+
+templ LearnPage(data LearnPageData) {
+	@components.Layout(components.PageMeta{
+		Title:       "Learn",
+		Description: "Build your investing knowledge with educational modules covering basics to advanced concepts.",
+		CurrentPath: "/learn",
+	}) {
+		<div class="learn-hero">
+			<h1 class="learn-hero__title">Learn to Invest Wisely</h1>
+			<p class="learn-hero__subtitle">
+				Build your knowledge before building your portfolio. Our educational modules help you understand the fundamentals—so you can make informed decisions, not guesses.
+			</p>
+			<div class="learn-hero__cta">
+				<a href="#modules" class="btn btn--primary">Start Learning</a>
+				<a href="/learn/glossary" class="btn btn--ghost">Browse Glossary</a>
+			</div>
+		</div>
+
+		if data.TodaysTip != nil {
+			<div class="learning-tip mb-xl">
+				<div class="learning-tip__icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="12" cy="12" r="10"/>
+						<path d="M12 16v-4M12 8h.01"/>
+					</svg>
+				</div>
+				<div class="learning-tip__content">
+					<span class="learning-tip__label">Today's Learning Tip</span>
+					<h4 class="learning-tip__title">{ data.TodaysTip.Title }</h4>
+					<p class="learning-tip__text">{ data.TodaysTip.Content }</p>
+					if data.TodaysTip.LearnURL != "" {
+						<a href={ templ.SafeURL(data.TodaysTip.LearnURL) } class="learning-tip__link">
+							Learn more
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M5 12h14M12 5l7 7-7 7"/>
+							</svg>
+						</a>
+					}
+				</div>
+			</div>
+		}
+
+		<div id="modules" class="section-header">
+			<div>
+				<h2 class="section-header__title">Learning Modules</h2>
+				<p class="section-header__subtitle">Choose your path from beginner basics to advanced concepts</p>
+			</div>
+		</div>
+
+		<div class="category-tabs mb-lg">
+			<a href="/learn" class={ "category-tab", templ.KV("category-tab--active", data.Category == "") }>All</a>
+			<a href="/learn?category=basics" class={ "category-tab", templ.KV("category-tab--active", data.Category == "basics") }>Basics</a>
+			<a href="/learn?category=intermediate" class={ "category-tab", templ.KV("category-tab--active", data.Category == "intermediate") }>Intermediate</a>
+			<a href="/learn?category=advanced" class={ "category-tab", templ.KV("category-tab--active", data.Category == "advanced") }>Advanced</a>
+		</div>
+
+		<div class="modules-grid mb-xl">
+			for _, module := range data.Modules {
+				@components.ModuleCard(module.Title, module.Description, module.Category, module.LessonCount, fmt.Sprintf("/learn/%s", module.ID))
+			}
+		</div>
+
+		if len(data.Modules) == 0 {
+			<div class="panel">
+				<div class="panel__body" style="text-align: center; padding: 3rem;">
+					<p class="text-muted">No modules found for this category.</p>
+					<a href="/learn" class="btn btn--ghost btn--sm" style="margin-top: 1rem;">View All Modules</a>
+				</div>
+			</div>
+		}
+
+		<div class="section-header">
+			<div>
+				<h2 class="section-header__title">Quick Reference: Glossary</h2>
+				<p class="section-header__subtitle">Key terms every investor should know</p>
+			</div>
+			<a href="/learn/glossary" class="btn btn--ghost btn--sm">Full Glossary</a>
+		</div>
+
+		<div class="panel mb-xl">
+			<div class="panel__body">
+				<dl class="glossary-list">
+					for i, term := range data.GlossaryTerms {
+						if i < 5 {
+							@components.GlossaryItem(components.GlossaryTerm{
+								Term:       term.Term,
+								Definition: term.Definition,
+								Category:   term.Category,
+							})
+						}
+					}
+				</dl>
+				if len(data.GlossaryTerms) > 5 {
+					<div style="text-align: center; margin-top: 1.5rem;">
+						<a href="/learn/glossary" class="btn btn--ghost btn--sm">View All { fmt.Sprintf("%d", len(data.GlossaryTerms)) } Terms</a>
+					</div>
+				}
+			</div>
+		</div>
+
+		@components.RiskDisclaimer()
+	}
+}
+
+templ ModuleDetailPage(data ModuleDetailData) {
+	@components.Layout(components.PageMeta{
+		Title:       data.Module.Title,
+		Description: data.Module.Description,
+		CurrentPath: "/learn",
+	}) {
+		<div class="page-intro">
+			<div>
+				<a href="/learn" class="eyebrow" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M19 12H5M12 19l-7-7 7-7"/>
+					</svg>
+					Back to Learning Modules
+				</a>
+				<span class={ "tag", "tag--" + data.Module.Category } style="margin-bottom: 0.75rem; display: inline-block;">{ data.Module.Category }</span>
+				<h1 class="page-title">{ data.Module.Title }</h1>
+				<p class="page-subtitle">{ data.Module.Description }</p>
+			</div>
+		</div>
+
+		<div class="lessons-list mb-xl">
+			for i, lesson := range data.Lessons {
+				<div class="lesson-card">
+					<div class="lesson-card__number">{ fmt.Sprintf("%d", i+1) }</div>
+					<div class="lesson-card__content">
+						<h3 class="lesson-card__title">{ lesson.Title }</h3>
+						<p class="lesson-card__summary">{ lesson.Summary }</p>
+						<div class="lesson-card__body">
+							{ lesson.Content }
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+
+		if len(data.Lessons) == 0 {
+			<div class="panel">
+				<div class="panel__body" style="text-align: center; padding: 3rem;">
+					<p class="text-muted">Lessons for this module are coming soon.</p>
+				</div>
+			</div>
+		}
+
+		<div class="section-header">
+			<div>
+				<h2 class="section-header__title">Before You Act</h2>
+				<p class="section-header__subtitle">Use this checklist to ensure you've thought through your decisions</p>
+			</div>
+		</div>
+
+		@components.DecisionChecklist()
+
+		<div style="margin-top: 2rem;">
+			@components.RiskDisclaimer()
+		</div>
+	}
+}
+
+templ GlossaryPage(data GlossaryPageData) {
+	@components.Layout(components.PageMeta{
+		Title:       "Glossary",
+		Description: "Financial terms and definitions every investor should know.",
+		CurrentPath: "/learn",
+	}) {
+		<div class="page-intro">
+			<div>
+				<a href="/learn" class="eyebrow" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M19 12H5M12 19l-7-7 7-7"/>
+					</svg>
+					Back to Learning
+				</a>
+				<h1 class="page-title">Financial Glossary</h1>
+				<p class="page-subtitle">Key terms and definitions to help you understand the language of investing.</p>
+			</div>
+		</div>
+
+		<div class="filter-bar mb-xl">
+			<form action="/learn/glossary" method="GET" class="filter-group">
+				<input
+					type="search"
+					name="q"
+					placeholder="Search terms..."
+					value={ data.SearchQuery }
+					class="form-input"
+					style="width: 250px;"
+				/>
+				<button type="submit" class="btn btn--primary btn--sm">Search</button>
+				if data.SearchQuery != "" {
+					<a href="/learn/glossary" class="btn btn--ghost btn--sm">Clear</a>
+				}
+			</form>
+		</div>
+
+		<div class="panel">
+			<div class="panel__body">
+				if len(data.Terms) == 0 {
+					<p class="text-muted" style="text-align: center; padding: 2rem;">
+						if data.SearchQuery != "" {
+							No terms found matching "{ data.SearchQuery }". Try a different search.
+						} else {
+							No glossary terms available.
+						}
+					</p>
+				} else {
+					<dl class="glossary-list">
+						for _, term := range data.Terms {
+							@components.GlossaryItem(components.GlossaryTerm{
+								Term:       term.Term,
+								Definition: term.Definition,
+								Category:   term.Category,
+							})
+						}
+					</dl>
+				}
+			</div>
+		</div>
+
+		<div style="margin-top: 2rem;">
+			@components.RiskDisclaimerCompact()
+		</div>
+	}
+}

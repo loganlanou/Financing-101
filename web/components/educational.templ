@@ -1,0 +1,275 @@
+package components
+
+import "fmt"
+
+// LearningTip represents a daily educational tip
+type LearningTip struct {
+	ID       string
+	Title    string
+	Content  string
+	Category string
+	LearnURL string
+}
+
+// GlossaryTerm represents a financial term definition
+type GlossaryTerm struct {
+	Term       string
+	Definition string
+	Category   string
+}
+
+// InsightContext provides transparency for AI insights
+type InsightContext struct {
+	Reasoning    string
+	DataSources  []string
+	Limitations  []string
+	RiskFactors  []string
+	Questions    []string
+}
+
+// LearningTipWidget displays a daily learning tip on the dashboard
+templ LearningTipWidget(tip LearningTip) {
+	<div class="learning-tip">
+		<div class="learning-tip__icon">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<circle cx="12" cy="12" r="10"/>
+				<path d="M12 16v-4M12 8h.01"/>
+			</svg>
+		</div>
+		<div class="learning-tip__content">
+			<span class="learning-tip__label">Today's Learning Tip</span>
+			<h4 class="learning-tip__title">{ tip.Title }</h4>
+			<p class="learning-tip__text">{ tip.Content }</p>
+			if tip.LearnURL != "" {
+				<a href={ templ.SafeURL(tip.LearnURL) } class="learning-tip__link">
+					Learn more
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M5 12h14M12 5l7 7-7 7"/>
+					</svg>
+				</a>
+			}
+		</div>
+	</div>
+}
+
+// RiskDisclaimer displays a standard risk warning banner
+templ RiskDisclaimer() {
+	<div class="risk-disclaimer">
+		<svg class="risk-disclaimer__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+			<line x1="12" y1="9" x2="12" y2="13"/>
+			<line x1="12" y1="17" x2="12.01" y2="17"/>
+		</svg>
+		<div class="risk-disclaimer__content">
+			<strong>Educational content only.</strong> This is not investment advice. All investments carry risk, including potential loss of principal. Always do your own research before making any investment decisions.
+		</div>
+	</div>
+}
+
+// RiskDisclaimerCompact displays a shorter risk warning
+templ RiskDisclaimerCompact() {
+	<p class="risk-disclaimer-compact">
+		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			<circle cx="12" cy="12" r="10"/>
+			<path d="M12 16v-4M12 8h.01"/>
+		</svg>
+		Not investment advice. Do your own research.
+	</p>
+}
+
+// ConfidenceBadge explains what confidence levels mean
+templ ConfidenceBadge(level string, score float64) {
+	<div class="confidence-badge" data-level={ level }>
+		<div class="confidence-badge__header">
+			<span class={ "confidence-badge__level", "confidence-badge__level--" + levelClass(level) }>{ level }</span>
+			<span class="confidence-badge__score">{ fmt.Sprintf("%.0f", score*100) }%</span>
+		</div>
+		<button class="confidence-badge__help" aria-label="What does this mean?" title="What does this mean?">
+			<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<circle cx="12" cy="12" r="10"/>
+				<path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/>
+			</svg>
+		</button>
+		<div class="confidence-badge__tooltip">
+			<p class="confidence-badge__tooltip-title">What does "{ level } Confidence" mean?</p>
+			if level == "High" {
+				<p>Multiple data points align suggesting this pattern is worth researching. However, no prediction is certain—always verify independently.</p>
+			} else if level == "Medium" {
+				<p>Some indicators suggest this could be interesting to explore, but signals are mixed. More research is recommended.</p>
+			} else {
+				<p>Limited data available or conflicting signals. Consider this a starting point for your own investigation.</p>
+			}
+		</div>
+	</div>
+}
+
+func levelClass(level string) string {
+	switch level {
+	case "High":
+		return "high"
+	case "Medium":
+		return "medium"
+	default:
+		return "low"
+	}
+}
+
+// DecisionChecklist provides a pre-investment checklist
+templ DecisionChecklist() {
+	<div class="decision-checklist">
+		<h4 class="decision-checklist__title">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M9 11l3 3L22 4"/>
+				<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+			</svg>
+			Before You Invest: Questions to Ask
+		</h4>
+		<ul class="decision-checklist__list">
+			<li class="decision-checklist__item">
+				<input type="checkbox" id="check-understand" class="decision-checklist__checkbox"/>
+				<label for="check-understand">Do I understand what this company does?</label>
+			</li>
+			<li class="decision-checklist__item">
+				<input type="checkbox" id="check-afford" class="decision-checklist__checkbox"/>
+				<label for="check-afford">Can I afford to lose this money?</label>
+			</li>
+			<li class="decision-checklist__item">
+				<input type="checkbox" id="check-research" class="decision-checklist__checkbox"/>
+				<label for="check-research">Have I read multiple sources, not just one?</label>
+			</li>
+			<li class="decision-checklist__item">
+				<input type="checkbox" id="check-timeline" class="decision-checklist__checkbox"/>
+				<label for="check-timeline">Does this fit my investment timeline?</label>
+			</li>
+			<li class="decision-checklist__item">
+				<input type="checkbox" id="check-diversified" class="decision-checklist__checkbox"/>
+				<label for="check-diversified">Is my portfolio diversified?</label>
+			</li>
+			<li class="decision-checklist__item">
+				<input type="checkbox" id="check-emotional" class="decision-checklist__checkbox"/>
+				<label for="check-emotional">Am I making this decision calmly, not emotionally?</label>
+			</li>
+		</ul>
+		<p class="decision-checklist__note">Checking these boxes doesn't guarantee success—it helps ensure you've thought things through.</p>
+	</div>
+}
+
+// AITransparencyPanel shows how AI reached its conclusions
+templ AITransparencyPanel(context InsightContext) {
+	<div class="ai-transparency">
+		<div class="ai-transparency__header">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<circle cx="12" cy="12" r="3"/>
+				<path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+			</svg>
+			<span>How AI Reached This Insight</span>
+		</div>
+
+		<div class="ai-transparency__section">
+			<h5 class="ai-transparency__label">Reasoning</h5>
+			<p class="ai-transparency__text">{ context.Reasoning }</p>
+		</div>
+
+		if len(context.DataSources) > 0 {
+			<div class="ai-transparency__section">
+				<h5 class="ai-transparency__label">Data Sources Analyzed</h5>
+				<ul class="ai-transparency__list">
+					for _, source := range context.DataSources {
+						<li>{ source }</li>
+					}
+				</ul>
+			</div>
+		}
+
+		if len(context.Limitations) > 0 {
+			<div class="ai-transparency__section">
+				<h5 class="ai-transparency__label">Known Limitations</h5>
+				<ul class="ai-transparency__list ai-transparency__list--warning">
+					for _, limitation := range context.Limitations {
+						<li>{ limitation }</li>
+					}
+				</ul>
+			</div>
+		}
+
+		if len(context.RiskFactors) > 0 {
+			<div class="ai-transparency__section">
+				<h5 class="ai-transparency__label">Risk Factors to Consider</h5>
+				<ul class="ai-transparency__list ai-transparency__list--risk">
+					for _, risk := range context.RiskFactors {
+						<li>{ risk }</li>
+					}
+				</ul>
+			</div>
+		}
+
+		if len(context.Questions) > 0 {
+			<div class="ai-transparency__section">
+				<h5 class="ai-transparency__label">Questions to Ask Yourself</h5>
+				<ul class="ai-transparency__list ai-transparency__list--questions">
+					for _, question := range context.Questions {
+						<li>{ question }</li>
+					}
+				</ul>
+			</div>
+		}
+	</div>
+}
+
+// RiskScale displays a visual 1-5 risk indicator
+templ RiskScale(level int, label string) {
+	<div class="risk-scale">
+		<span class="risk-scale__label">Risk Level</span>
+		<div class="risk-scale__bars">
+			for i := 1; i <= 5; i++ {
+				<div class={ "risk-scale__bar", templ.KV("risk-scale__bar--active", i <= level), riskBarClass(level, i) }></div>
+			}
+		</div>
+		<span class="risk-scale__text">{ label }</span>
+		<button class="risk-scale__help" aria-label="What does this risk level mean?">?</button>
+	</div>
+}
+
+func riskBarClass(level, position int) string {
+	if position > level {
+		return ""
+	}
+	if level <= 2 {
+		return "risk-scale__bar--low"
+	} else if level <= 3 {
+		return "risk-scale__bar--medium"
+	}
+	return "risk-scale__bar--high"
+}
+
+// ModuleCard displays a learning module
+templ ModuleCard(title, description, category string, lessonCount int, moduleURL string) {
+	<a href={ templ.SafeURL(moduleURL) } class="module-card">
+		<div class={ "module-card__category", "module-card__category--" + category }>{ category }</div>
+		<h3 class="module-card__title">{ title }</h3>
+		<p class="module-card__description">{ description }</p>
+		<div class="module-card__footer">
+			<span class="module-card__lessons">{ fmt.Sprintf("%d lessons", lessonCount) }</span>
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M5 12h14M12 5l7 7-7 7"/>
+			</svg>
+		</div>
+	</a>
+}
+
+// GlossaryItem displays a glossary term with definition
+templ GlossaryItem(term GlossaryTerm) {
+	<div class="glossary-item">
+		<dt class="glossary-item__term">{ term.Term }</dt>
+		<dd class="glossary-item__definition">{ term.Definition }</dd>
+		<span class="glossary-item__category">{ term.Category }</span>
+	</div>
+}
+
+// InlineGlossary creates a hoverable term with definition
+templ InlineGlossary(term, definition string) {
+	<span class="inline-glossary">
+		<span class="inline-glossary__term">{ term }</span>
+		<span class="inline-glossary__tooltip">{ definition }</span>
+	</span>
+}

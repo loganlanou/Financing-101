@@ -1,0 +1,137 @@
+package pages
+
+import (
+	"fmt"
+	"github.com/loganlanou/Financing-101/web/components"
+	"github.com/loganlanou/Financing-101/internal/services"
+)
+
+// AIInsight extends Recommendation with transparency context
+type AIInsight struct {
+	services.Recommendation
+	Context components.InsightContext
+}
+
+// AIInsightsData contains data for the AI insights page
+type AIInsightsData struct {
+	Insights []AIInsight
+}
+
+templ AIInsightsPage(data AIInsightsData) {
+	@components.Layout(components.PageMeta{
+		Title:       "AI Insights",
+		Description: "AI-generated insights worth exploring. Not recommendations—starting points for your own research.",
+		CurrentPath: "/ai",
+	}) {
+		<div class="page-intro">
+			<div>
+				<p class="eyebrow">AI-Assisted Analysis</p>
+				<h1 class="page-title">Insights Worth Exploring</h1>
+				<p class="page-subtitle">
+					Our AI identifies patterns and trends that may be worth investigating. These are <strong>not recommendations</strong>—they're starting points for your own research.
+				</p>
+			</div>
+			<div class="page-actions">
+				<a href="/learn?module=mod-inter-4" class="btn btn--ghost btn--sm">How AI Works</a>
+			</div>
+		</div>
+
+		@components.RiskDisclaimer()
+
+		<div class="ai-explainer mb-xl">
+			<div class="ai-explainer__icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<circle cx="12" cy="12" r="3"/>
+					<path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+				</svg>
+			</div>
+			<div class="ai-explainer__content">
+				<h3 class="ai-explainer__title">How This Works</h3>
+				<p>Our AI analyzes publicly available data—news sentiment, trading patterns, and market trends—to identify stocks that may be worth researching. It cannot predict the future, insider information, or guarantee outcomes. Use these insights as one input among many in your decision-making process.</p>
+			</div>
+		</div>
+
+		<div class="section-header">
+			<div>
+				<h2 class="section-header__title">Current Insights</h2>
+				<p class="section-header__subtitle">Topics identified as potentially worth exploring</p>
+			</div>
+		</div>
+
+		<div class="insights-list">
+			for _, insight := range data.Insights {
+				<div class="insight-card">
+					<div class="insight-card__header">
+						<div class="insight-card__symbol">
+							<span class="insight-card__ticker">{ insight.Symbol }</span>
+							@components.ConfidenceBadge(insight.Conviction, insight.Score)
+						</div>
+						@components.RiskScale(getInsightRiskLevel(insight.Conviction), getRiskLabel(insight.Conviction))
+					</div>
+
+					<div class="insight-card__main">
+						<h3 class="insight-card__title">Worth Researching: { insight.Symbol }</h3>
+						<p class="insight-card__thesis">{ insight.Thesis }</p>
+
+						if insight.Catalyst != "" {
+							<div class="insight-card__catalyst">
+								<span class="insight-card__catalyst-label">Potential Catalyst:</span>
+								<span>{ insight.Catalyst }</span>
+							</div>
+						}
+					</div>
+
+					@components.AITransparencyPanel(insight.Context)
+
+					<div class="insight-card__actions">
+						<a href={ templ.SafeURL(fmt.Sprintf("/stocks?symbol=%s", insight.Symbol)) } class="btn btn--ghost btn--sm">View Stock Details</a>
+						<a href="/learn?module=mod-basics-5" class="btn btn--ghost btn--sm">Learn About Risk</a>
+					</div>
+
+					<div class="insight-card__footer">
+						@components.RiskDisclaimerCompact()
+					</div>
+				</div>
+			}
+		</div>
+
+		if len(data.Insights) == 0 {
+			<div class="panel">
+				<div class="panel__body" style="text-align: center; padding: 3rem;">
+					<p class="text-muted">No insights are currently available. Check back later.</p>
+				</div>
+			</div>
+		}
+
+		<div class="section-header mt-lg">
+			<div>
+				<h2 class="section-header__title">Before You Act</h2>
+				<p class="section-header__subtitle">Use this checklist to ensure you've done your due diligence</p>
+			</div>
+		</div>
+
+		@components.DecisionChecklist()
+	}
+}
+
+func getInsightRiskLevel(conviction string) int {
+	switch conviction {
+	case "High":
+		return 2 // Lower risk indication for high confidence
+	case "Medium":
+		return 3
+	default:
+		return 4 // Higher risk for low confidence
+	}
+}
+
+func getRiskLabel(conviction string) string {
+	switch conviction {
+	case "High":
+		return "Moderate"
+	case "Medium":
+		return "Elevated"
+	default:
+		return "High"
+	}
+}

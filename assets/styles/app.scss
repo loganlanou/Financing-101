@@ -584,6 +584,12 @@ a:hover {
   padding: 1.5rem;
 }
 
+.panel__footer {
+  padding: 0.75rem 1.5rem;
+  background: $color-surface-alt;
+  border-top: 1px solid $color-border;
+}
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -1115,5 +1121,970 @@ a:hover {
   .site-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+// =============================================
+// EDUCATIONAL COMPONENTS
+// =============================================
+
+// Enhanced Footer
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $color-border;
+}
+
+.footer-brand {
+  max-width: 280px;
+}
+
+.footer-logo {
+  font-family: $font-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $color-ink;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.footer-mission {
+  font-size: 0.9rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-column__title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $color-ink;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.footer-disclaimer {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid $color-border;
+
+  p {
+    font-size: 0.8rem;
+    color: $color-ink-soft;
+    line-height: 1.7;
+  }
+
+  strong {
+    color: $color-ink-muted;
+  }
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: $color-ink-soft;
+}
+
+// Side Panel Enhancements
+.panel-card--highlight {
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(184, 138, 74, 0.08));
+  border-color: rgba(15, 118, 110, 0.25);
+}
+
+// Learning Tip Widget
+.learning-tip {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, $color-teal-soft, rgba(184, 138, 74, 0.08));
+  border: 1px solid rgba(15, 118, 110, 0.2);
+  border-radius: $radius-lg;
+  margin-bottom: 2rem;
+}
+
+.learning-tip__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: $color-teal;
+  color: $color-surface;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.learning-tip__content {
+  flex: 1;
+}
+
+.learning-tip__label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $color-teal;
+  margin-bottom: 0.35rem;
+}
+
+.learning-tip__title {
+  font-family: $font-serif;
+  font-size: 1.1rem;
+  color: $color-ink;
+  margin-bottom: 0.5rem;
+}
+
+.learning-tip__text {
+  font-size: 0.9rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.learning-tip__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $color-teal;
+
+  &:hover {
+    color: $color-accent-strong;
+  }
+}
+
+// Risk Disclaimer Banner
+.risk-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(180, 83, 9, 0.08);
+  border: 1px solid rgba(180, 83, 9, 0.2);
+  border-radius: $radius-md;
+  margin: 1.5rem 0;
+}
+
+.risk-disclaimer__icon {
+  color: $color-warning;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.risk-disclaimer__content {
+  font-size: 0.85rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+
+  strong {
+    color: $color-warning;
+  }
+}
+
+.risk-disclaimer-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: $color-ink-soft;
+
+  svg {
+    color: $color-warning;
+  }
+}
+
+// Confidence Badge
+.confidence-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.confidence-badge__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.confidence-badge__level {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.confidence-badge__level--high {
+  background: rgba(15, 118, 110, 0.12);
+  color: $color-teal;
+  border-color: rgba(15, 118, 110, 0.25);
+}
+
+.confidence-badge__level--medium {
+  background: rgba(180, 83, 9, 0.12);
+  color: $color-warning;
+  border-color: rgba(180, 83, 9, 0.25);
+}
+
+.confidence-badge__level--low {
+  background: rgba(185, 28, 28, 0.12);
+  color: $color-negative;
+  border-color: rgba(185, 28, 28, 0.25);
+}
+
+.confidence-badge__score {
+  font-family: $font-mono;
+  font-size: 0.85rem;
+  color: $color-ink-muted;
+}
+
+.confidence-badge__help {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: 1px solid $color-border;
+  border-radius: 50%;
+  color: $color-ink-soft;
+  cursor: pointer;
+  transition: all $transition;
+
+  &:hover {
+    background: $color-bg-alt;
+    color: $color-ink;
+  }
+}
+
+.confidence-badge__tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  width: 280px;
+  padding: 1rem;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  margin-top: 0.5rem;
+}
+
+.confidence-badge:hover .confidence-badge__tooltip {
+  display: block;
+}
+
+.confidence-badge__tooltip-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: $color-ink;
+  margin-bottom: 0.5rem;
+}
+
+.confidence-badge__tooltip p {
+  font-size: 0.85rem;
+  color: $color-ink-muted;
+  line-height: 1.5;
+}
+
+// Decision Checklist
+.decision-checklist {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: 1.5rem;
+}
+
+.decision-checklist__title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: $font-serif;
+  font-size: 1rem;
+  color: $color-ink;
+  margin-bottom: 1.25rem;
+
+  svg {
+    color: $color-teal;
+  }
+}
+
+.decision-checklist__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.decision-checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  label {
+    font-size: 0.9rem;
+    color: $color-ink-muted;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+}
+
+.decision-checklist__checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: $color-teal;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.decision-checklist__note {
+  font-size: 0.8rem;
+  color: $color-ink-soft;
+  font-style: italic;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid $color-border;
+}
+
+// AI Transparency Panel
+.ai-transparency {
+  background: $color-surface-alt;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.ai-transparency__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: $color-surface;
+  border-bottom: 1px solid $color-border;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: $color-ink;
+
+  svg {
+    color: $color-teal;
+  }
+}
+
+.ai-transparency__section {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba($color-border, 0.5);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.ai-transparency__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $color-ink-soft;
+  margin-bottom: 0.5rem;
+}
+
+.ai-transparency__text {
+  font-size: 0.9rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+}
+
+.ai-transparency__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  li {
+    font-size: 0.85rem;
+    color: $color-ink-muted;
+    padding-left: 1.25rem;
+    position: relative;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: $color-teal;
+    }
+  }
+}
+
+.ai-transparency__list--warning li::before {
+  content: "!";
+  color: $color-warning;
+  font-weight: 600;
+}
+
+.ai-transparency__list--risk li::before {
+  content: "▲";
+  font-size: 0.65rem;
+  color: $color-negative;
+}
+
+.ai-transparency__list--questions li::before {
+  content: "?";
+  color: $color-teal;
+  font-weight: 600;
+}
+
+// Risk Scale
+.risk-scale {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.risk-scale__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-ink-soft;
+}
+
+.risk-scale__bars {
+  display: flex;
+  gap: 3px;
+}
+
+.risk-scale__bar {
+  width: 12px;
+  height: 16px;
+  background: $color-bg-alt;
+  border: 1px solid $color-border;
+  border-radius: 2px;
+}
+
+.risk-scale__bar--active.risk-scale__bar--low {
+  background: $color-positive;
+  border-color: $color-positive;
+}
+
+.risk-scale__bar--active.risk-scale__bar--medium {
+  background: $color-warning;
+  border-color: $color-warning;
+}
+
+.risk-scale__bar--active.risk-scale__bar--high {
+  background: $color-negative;
+  border-color: $color-negative;
+}
+
+.risk-scale__text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $color-ink-muted;
+}
+
+.risk-scale__help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 0.7rem;
+  background: transparent;
+  border: 1px solid $color-border;
+  border-radius: 50%;
+  color: $color-ink-soft;
+  cursor: pointer;
+}
+
+// Module Card
+.module-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-soft;
+  transition: transform $transition, box-shadow $transition;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-card;
+  }
+}
+
+.module-card__category {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.module-card__category--basics {
+  background: rgba(15, 118, 110, 0.12);
+  color: $color-teal;
+}
+
+.module-card__category--intermediate {
+  background: rgba(180, 83, 9, 0.12);
+  color: $color-warning;
+}
+
+.module-card__category--advanced {
+  background: rgba(185, 28, 28, 0.12);
+  color: $color-negative;
+}
+
+.module-card__title {
+  font-family: $font-serif;
+  font-size: 1.15rem;
+  color: $color-ink;
+  margin-bottom: 0.5rem;
+}
+
+.module-card__description {
+  font-size: 0.9rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.module-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid $color-border;
+}
+
+.module-card__lessons {
+  font-size: 0.8rem;
+  color: $color-ink-soft;
+}
+
+// Glossary Item
+.glossary-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid $color-border;
+}
+
+.glossary-item__term {
+  font-weight: 600;
+  color: $color-ink;
+  margin-bottom: 0.35rem;
+}
+
+.glossary-item__definition {
+  font-size: 0.9rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.glossary-item__category {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-ink-soft;
+}
+
+// Inline Glossary
+.inline-glossary {
+  position: relative;
+  display: inline;
+}
+
+.inline-glossary__term {
+  border-bottom: 1px dashed $color-teal;
+  cursor: help;
+}
+
+.inline-glossary__tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 280px;
+  padding: 0.75rem 1rem;
+  background: $color-ink;
+  color: $color-surface;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border-radius: $radius-sm;
+  margin-bottom: 0.5rem;
+  z-index: 10;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: $color-ink;
+  }
+}
+
+.inline-glossary:hover .inline-glossary__tooltip {
+  display: block;
+}
+
+// Learn Page Hero
+.learn-hero {
+  padding: 3rem 2.5rem;
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(184, 138, 74, 0.08));
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.learn-hero__title {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.learn-hero__subtitle {
+  font-size: 1.1rem;
+  color: $color-ink-muted;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.learn-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// Category Tabs
+.category-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.35rem;
+  background: $color-bg-alt;
+  border-radius: $radius-md;
+  width: fit-content;
+}
+
+.category-tab {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $color-ink-muted;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition;
+
+  &:hover {
+    color: $color-ink;
+  }
+
+  &--active {
+    background: $color-surface;
+    color: $color-ink;
+    box-shadow: $shadow-soft;
+  }
+}
+
+// Modules Grid
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .modules-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .modules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .learning-tip {
+    flex-direction: column;
+  }
+
+  .learn-hero {
+    padding: 2rem 1.5rem;
+  }
+}
+
+// Lessons
+.lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lesson-card {
+  display: flex;
+  gap: 1.5rem;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: 1.5rem;
+  box-shadow: $shadow-soft;
+}
+
+.lesson-card__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: $color-teal-soft;
+  color: $color-teal;
+  font-family: $font-mono;
+  font-weight: 600;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.lesson-card__content {
+  flex: 1;
+}
+
+.lesson-card__title {
+  font-family: $font-serif;
+  font-size: 1.1rem;
+  color: $color-ink;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-card__summary {
+  font-size: 0.9rem;
+  color: $color-ink-muted;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.lesson-card__body {
+  font-size: 0.95rem;
+  color: $color-ink-muted;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+// Glossary List
+.glossary-list {
+  display: flex;
+  flex-direction: column;
+}
+
+// Tag variants for categories
+.tag--basics {
+  background: rgba(15, 118, 110, 0.12);
+  color: $color-teal;
+}
+
+.tag--intermediate {
+  background: rgba(180, 83, 9, 0.12);
+  color: $color-warning;
+}
+
+.tag--advanced {
+  background: rgba(185, 28, 28, 0.12);
+  color: $color-negative;
+}
+
+@media (max-width: 640px) {
+  .lesson-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .lesson-card__number {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+}
+
+// AI Explainer
+.ai-explainer {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-soft;
+}
+
+.ai-explainer__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(15, 118, 110, 0.1);
+  color: $color-teal;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.ai-explainer__content {
+  flex: 1;
+}
+
+.ai-explainer__title {
+  font-family: $font-serif;
+  font-size: 1rem;
+  color: $color-ink;
+  margin-bottom: 0.5rem;
+}
+
+.ai-explainer__content p {
+  font-size: 0.9rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+}
+
+// AI Insights List
+.insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.insight-card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.insight-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: $color-surface-alt;
+  border-bottom: 1px solid $color-border;
+}
+
+.insight-card__symbol {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.insight-card__ticker {
+  font-family: $font-mono;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $color-ink;
+}
+
+.insight-card__main {
+  padding: 1.5rem;
+  border-bottom: 1px solid $color-border;
+}
+
+.insight-card__title {
+  font-family: $font-serif;
+  font-size: 1.15rem;
+  color: $color-ink;
+  margin-bottom: 0.75rem;
+}
+
+.insight-card__thesis {
+  font-size: 0.95rem;
+  color: $color-ink-muted;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.insight-card__catalyst {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  background: $color-bg-alt;
+  border-radius: $radius-sm;
+}
+
+.insight-card__catalyst-label {
+  font-weight: 600;
+  color: $color-ink;
+}
+
+.insight-card__actions {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: $color-surface-alt;
+  border-bottom: 1px solid $color-border;
+}
+
+.insight-card__footer {
+  padding: 0.75rem 1.5rem;
+  background: $color-bg-alt;
+}
+
+@media (max-width: 640px) {
+  .ai-explainer {
+    flex-direction: column;
+  }
+
+  .insight-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .insight-card__actions {
+    flex-direction: column;
   }
 }

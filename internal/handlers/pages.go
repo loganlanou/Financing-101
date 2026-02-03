@@ -1,13 +1,14 @@
 package handlers
 
 import (
+	"log/slog"
 	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/loganlanou/Financing-101/internal/services"
+	"github.com/loganlanou/Financing-101/web/components"
 	"github.com/loganlanou/Financing-101/web/components/pages"
 	"golang.org/x/sync/errgroup"
-	"log/slog"
 )
 
 // PagesHandler serves all page routes with the modern Layout
@@ -17,6 +18,7 @@ type PagesHandler struct {
 	stockService *services.StockService
 	tradeService *services.TradeService
 	recService   *services.RecommendationService
+	learnService *services.LearnService
 }
 
 func NewPagesHandler(
@@ -25,6 +27,7 @@ func NewPagesHandler(
 	stockService *services.StockService,
 	tradeService *services.TradeService,
 	recService *services.RecommendationService,
+	learnService *services.LearnService,
 ) *PagesHandler {
 	return &PagesHandler{
 		log:          log,
@@ -32,6 +35,7 @@ func NewPagesHandler(
 		stockService: stockService,
 		tradeService: tradeService,
 		recService:   recService,
+		learnService: learnService,
 	}
 }
 
@@ -39,6 +43,10 @@ func (h *PagesHandler) RegisterRoutes(e *echo.Echo) {
 	e.GET("/", h.dashboard)
 	e.GET("/markets", h.markets)
 	e.GET("/stocks", h.stocks)
+	e.GET("/learn", h.learn)
+	e.GET("/learn/glossary", h.glossary)
+	e.GET("/learn/:moduleID", h.moduleDetail)
+	e.GET("/ai", h.aiInsights)
 }
 
 func (h *PagesHandler) dashboard(c echo.Context) error {
@@ -87,6 +95,27 @@ func (h *PagesHandler) dashboard(c echo.Context) error {
 	movers := getMockGainersLosers()
 	marketStatus := getMarketStatus()
 
+	// Get today's learning tip
+	var learningTip components.LearningTip
+	if tip, err := h.learnService.GetTodaysTip(reqCtx); err == nil && tip != nil {
+		learningTip = components.LearningTip{
+			ID:       tip.ID,
+			Title:    tip.Title,
+			Content:  tip.Content,
+			Category: tip.Category,
+			LearnURL: tip.LearnURL,
+		}
+	} else {
+		// Fallback tip
+		learningTip = components.LearningTip{
+			ID:       "default",
+			Title:    "Understanding Risk",
+			Content:  "Every investment carries risk. Make sure you understand what you're investing in before committing any money.",
+			Category: "Risk",
+			LearnURL: "/learn",
+		}
+	}
+
 	data := pages.DashboardData{
 		Indices:         indices,
 		TopGainers:      movers.gainers,
@@ -96,6 +125,7 @@ func (h *PagesHandler) dashboard(c echo.Context) error {
 		Recommendations: recs,
 		MarketStatus:    marketStatus,
 		LastUpdated:     time.Now(),
+		LearningTip:     learningTip,
 	}
 
 	page := pages.DashboardPage(data)
@@ -141,6 +171,175 @@ func (h *PagesHandler) stocks(c echo.Context) error {
 	page := pages.StocksPage(data)
 	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
 	return page.Render(reqCtx, c.Response())
+}
+
+func (h *PagesHandler) learn(c echo.Context) error {
+	reqCtx := c.Request().Context()
+	category := c.QueryParam("category")
+
+	var modules []services.LearningModule
+	var err error
+
+	if category != "" {
+		modules, err = h.learnService.GetModulesByCategory(reqCtx, category)
+	} else {
+		modules, err = h.learnService.GetModules(reqCtx)
+	}
+	if err != nil {
+		h.log.Error("failed to get modules", slog.Any("err", err))
+		modules = []services.LearningModule{}
+	}
+
+	glossary, err := h.learnService.GetGlossary(reqCtx)
+	if err != nil {
+		h.log.Error("failed to get glossary", slog.Any("err", err))
+		glossary = []services.GlossaryTerm{}
+	}
+
+	tip, err := h.learnService.GetTodaysTip(reqCtx)
+	if err != nil {
+		h.log.Warn("failed to get today's tip", slog.Any("err", err))
+		tip = nil
+	}
+
+	data := pages.LearnPageData{
+		Modules:       modules,
+		GlossaryTerms: glossary,
+		TodaysTip:     tip,
+		Category:      category,
+	}
+
+	page := pages.LearnPage(data)
+	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
+	return page.Render(reqCtx, c.Response())
+}
+
+func (h *PagesHandler) moduleDetail(c echo.Context) error {
+	reqCtx := c.Request().Context()
+	moduleID := c.Param("moduleID")
+
+	module, lessons, err := h.learnService.GetModule(reqCtx, moduleID)
+	if err != nil {
+		h.log.Error("failed to get module", slog.String("moduleID", moduleID), slog.Any("err", err))
+		return c.Redirect(302, "/learn")
+	}
+
+	data := pages.ModuleDetailData{
+		Module:  module,
+		Lessons: lessons,
+	}
+
+	page := pages.ModuleDetailPage(data)
+	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
+	return page.Render(reqCtx, c.Response())
+}
+
+func (h *PagesHandler) glossary(c echo.Context) error {
+	reqCtx := c.Request().Context()
+	searchQuery := c.QueryParam("q")
+
+	var terms []services.GlossaryTerm
+	var err error
+
+	if searchQuery != "" {
+		terms, err = h.learnService.SearchGlossary(reqCtx, searchQuery)
+	} else {
+		terms, err = h.learnService.GetGlossary(reqCtx)
+	}
+	if err != nil {
+		h.log.Error("failed to get glossary", slog.Any("err", err))
+		terms = []services.GlossaryTerm{}
+	}
+
+	data := pages.GlossaryPageData{
+		Terms:       terms,
+		SearchQuery: searchQuery,
+	}
+
+	page := pages.GlossaryPage(data)
+	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
+	return page.Render(reqCtx, c.Response())
+}
+
+func (h *PagesHandler) aiInsights(c echo.Context) error {
+	reqCtx := c.Request().Context()
+
+	recs, err := h.recService.TopPicks(reqCtx, 10)
+	if err != nil {
+		h.log.Error("failed to get recommendations", slog.Any("err", err))
+		recs = []services.Recommendation{}
+	}
+
+	// Convert recommendations to insights with transparency context
+	insights := make([]pages.AIInsight, 0, len(recs))
+	for _, rec := range recs {
+		insights = append(insights, pages.AIInsight{
+			Recommendation: rec,
+			Context: components.InsightContext{
+				Reasoning:   getReasoningForRec(rec),
+				DataSources: getDataSourcesForRec(rec),
+				Limitations: getStandardLimitations(),
+				RiskFactors: getRiskFactorsForRec(rec),
+				Questions:   getQuestionsForRec(rec),
+			},
+		})
+	}
+
+	data := pages.AIInsightsData{
+		Insights: insights,
+	}
+
+	page := pages.AIInsightsPage(data)
+	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTMLCharsetUTF8)
+	return page.Render(reqCtx, c.Response())
+}
+
+// AI Insight helper functions
+func getReasoningForRec(rec services.Recommendation) string {
+	return "This insight was generated by analyzing recent news sentiment, trading volume patterns, and sector momentum for " + rec.Symbol + ". " + rec.Thesis
+}
+
+func getDataSourcesForRec(rec services.Recommendation) []string {
+	return []string{
+		"News sentiment analysis (past 7 days)",
+		"Trading volume and price patterns",
+		"Sector performance comparison",
+		"Public financial filings",
+	}
+}
+
+func getStandardLimitations() []string {
+	return []string{
+		"AI cannot predict future stock prices",
+		"Past performance does not guarantee future results",
+		"This analysis may not account for recent breaking news",
+		"Market conditions can change rapidly and unexpectedly",
+	}
+}
+
+func getRiskFactorsForRec(rec services.Recommendation) []string {
+	factors := []string{
+		"Stock prices can decline significantly",
+		"Individual stocks are more volatile than diversified portfolios",
+	}
+
+	if rec.Conviction == "High" {
+		factors = append(factors, "High conviction does not mean guaranteed returns")
+	} else if rec.Conviction == "Low" {
+		factors = append(factors, "Low confidence indicates conflicting or limited data")
+	}
+
+	return factors
+}
+
+func getQuestionsForRec(rec services.Recommendation) []string {
+	return []string{
+		"Have I read multiple sources about this company?",
+		"Do I understand how this company makes money?",
+		"Can I afford to lose my entire investment?",
+		"Does this fit my overall investment strategy?",
+		"Have I considered what could go wrong?",
+	}
 }
 
 // Helper functions

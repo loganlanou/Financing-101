@@ -20,15 +20,14 @@ type PageMeta struct {
 // GetNavItems returns the main navigation items
 func GetNavItems(currentPath string) []NavItem {
 	items := []NavItem{
+		{Name: "Learn", Path: "/learn", Icon: "book"},
 		{Name: "Dashboard", Path: "/", Icon: "dashboard"},
+		{Name: "AI Insights", Path: "/ai", Icon: "brain"},
 		{Name: "Markets", Path: "/markets", Icon: "trending"},
 		{Name: "Stocks", Path: "/stocks", Icon: "chart"},
 		{Name: "News", Path: "/news", Icon: "news"},
 		{Name: "Congress", Path: "/congress", Icon: "capitol"},
-		{Name: "Screener", Path: "/screener", Icon: "filter"},
-		{Name: "Watchlist", Path: "/watchlist", Icon: "star"},
-		{Name: "AI Insights", Path: "/ai", Icon: "brain"},
-		{Name: "Learn", Path: "/learn", Icon: "book"},
+		{Name: "Tools", Path: "/tools", Icon: "filter"},
 	}
 	for i := range items {
 		items[i].Active = items[i].Path == currentPath
@@ -107,7 +106,7 @@ templ Header(meta PageMeta) {
 				</span>
 				<span class="brand-text">
 					<span class="brand-name">Financing 101</span>
-					<span class="brand-tagline">Investment Intelligence</span>
+					<span class="brand-tagline">Learn to Invest Wisely</span>
 				</span>
 			</a>
 		</div>
@@ -148,36 +147,65 @@ templ Header(meta PageMeta) {
 }
 
 templ SidePanel() {
-	<aside class="side-panel" aria-label="Insights panel">
-		<div class="panel-card">
-			<div class="panel-card__label">Market Coverage</div>
-			<div class="panel-card__value">US Equities & Macro</div>
-			<p class="panel-card__meta">Indicative pricing with delayed feeds where required.</p>
+	<aside class="side-panel" aria-label="Learning panel">
+		<div class="panel-card panel-card--highlight">
+			<div class="panel-card__label">Our Mission</div>
+			<div class="panel-card__value">Education First</div>
+			<p class="panel-card__meta">We help you understand markets—not tell you what to buy. Every decision is yours.</p>
 		</div>
 		<div class="panel-card">
-			<div class="panel-card__label">Risk & Compliance</div>
-			<div class="panel-card__value">For Education</div>
-			<p class="panel-card__meta">Not investment advice. Verify with official sources.</p>
+			<div class="panel-card__label">Important Notice</div>
+			<div class="panel-card__value">Not Financial Advice</div>
+			<p class="panel-card__meta">Content is educational only. Always do your own research and consult professionals.</p>
 		</div>
 		<div class="panel-card">
-			<div class="panel-card__label">Refresh Cycle</div>
-			<div class="panel-card__value">Streaming + 15m</div>
-			<p class="panel-card__meta">Market sessions update in near real-time.</p>
+			<div class="panel-card__label">AI Transparency</div>
+			<div class="panel-card__value">AI-Assisted Insights</div>
+			<p class="panel-card__meta">AI helps identify patterns worth exploring. It cannot predict the future.</p>
+		</div>
+		<div class="panel-card">
+			<div class="panel-card__label">Data Sources</div>
+			<div class="panel-card__value">Public Information</div>
+			<p class="panel-card__meta">Market data is delayed 15+ minutes. Verify with official sources before acting.</p>
 		</div>
 	</aside>
 }
 
 templ SiteFooter() {
 	<footer class="site-footer" role="contentinfo">
-		<div class="footer-left">
+		<div class="footer-content">
+			<div class="footer-brand">
+				<span class="footer-logo">Financing 101</span>
+				<p class="footer-mission">Empowering investors through education. We believe informed decisions come from understanding, not tips.</p>
+			</div>
+			<div class="footer-links">
+				<div class="footer-column">
+					<h4 class="footer-column__title">Learn</h4>
+					<a href="/learn" class="footer-link">Getting Started</a>
+					<a href="/learn/glossary" class="footer-link">Glossary</a>
+					<a href="/learn?category=basics" class="footer-link">Investment Basics</a>
+				</div>
+				<div class="footer-column">
+					<h4 class="footer-column__title">Explore</h4>
+					<a href="/markets" class="footer-link">Markets</a>
+					<a href="/stocks" class="footer-link">Stocks</a>
+					<a href="/ai" class="footer-link">AI Insights</a>
+				</div>
+				<div class="footer-column">
+					<h4 class="footer-column__title">Legal</h4>
+					<a href="/terms" class="footer-link">Terms of Use</a>
+					<a href="/privacy" class="footer-link">Privacy Policy</a>
+					<a href="/disclosures" class="footer-link">Disclosures</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer-disclaimer">
+			<p><strong>Educational Content Only.</strong> This platform is for informational and educational purposes only. Nothing on this site constitutes investment advice, a recommendation, or a solicitation to buy or sell any security. Past performance is not indicative of future results. Always conduct your own research and consult with a qualified financial advisor before making investment decisions.</p>
+		</div>
+		<div class="footer-bottom">
 			<span>© 2024 Financing 101</span>
 			<span class="footer-dot">•</span>
-			<span>Data for educational use only</span>
-		</div>
-		<div class="footer-right">
-			<a href="/learn" class="footer-link">Investor Education</a>
-			<a href="/news" class="footer-link">Market News</a>
-			<a href="/congress" class="footer-link">Disclosures</a>
+			<span>Built for learners, by learners</span>
 		</div>
 	</footer>
 }

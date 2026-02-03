@@ -89,6 +89,7 @@ func run(ctx context.Context, cfg config.Config, log *slog.Logger) error {
 	stockService := services.NewStockService(log, queries)
 	tradeService := services.NewTradeService(log, queries)
 	recService := services.NewRecommendationService(log, queries)
+	learnService := services.NewLearnService(log, queries)
 
 	newsIngestor := ingest.NewNewsIngestor(log, queries, cfg.NewsFeeds)
 	if err := newsIngestor.Refresh(ctx, 20); err != nil {

@@ -17,6 +17,7 @@ type DashboardData struct {
 	Recommendations []services.Recommendation
 	MarketStatus    string
 	LastUpdated     time.Time
+	LearningTip     components.LearningTip
 }
 
 templ DashboardPage(data DashboardData) {
@@ -27,15 +28,17 @@ templ DashboardPage(data DashboardData) {
 	}) {
 		<div class="page-intro">
 			<div>
-				<p class="eyebrow">Daily Briefing</p>
-				<h1 class="page-title">Market intelligence, curated.</h1>
-				<p class="page-subtitle">A clean snapshot of momentum, sentiment, and institutional activity.</p>
+				<p class="eyebrow">Your Daily Learning Dashboard</p>
+				<h1 class="page-title">Understand the markets, make informed decisions.</h1>
+				<p class="page-subtitle">Educational insights to help you learn—always research before investing.</p>
 			</div>
 			<div class="page-actions">
+				<a href="/learn" class="btn btn--primary btn--sm">Start Learning</a>
 				<button class="btn btn--ghost btn--sm">Export Brief</button>
-				<button class="btn btn--primary btn--sm">Create Alert</button>
 			</div>
 		</div>
+
+		@components.LearningTipWidget(data.LearningTip)
 
 		<div class="kpi-grid mb-xl">
 			<div class="kpi-card">
@@ -66,9 +69,9 @@ templ DashboardPage(data DashboardData) {
 				<div class="kpi-card__meta">Latest disclosures</div>
 			</div>
 			<div class="kpi-card">
-				<div class="kpi-card__label">AI Recommendations</div>
+				<div class="kpi-card__label">AI Insights</div>
 				<div class="kpi-card__value">{ fmt.Sprintf("%d", len(data.Recommendations)) }</div>
-				<div class="kpi-card__meta">High conviction picks</div>
+				<div class="kpi-card__meta">Topics worth exploring</div>
 			</div>
 		</div>
 
@@ -186,11 +189,11 @@ templ DashboardPage(data DashboardData) {
 				</ul>
 			</div>
 
-			<!-- AI Recommendations -->
+			<!-- AI Insights -->
 			<div class="panel">
 				<div class="panel__header">
-					<span class="panel__title">AI Recommendations</span>
-					<a href="/ai" class="btn btn--ghost btn--sm">Signal Deck</a>
+					<span class="panel__title">AI Insights</span>
+					<a href="/ai" class="btn btn--ghost btn--sm">Explore Insights</a>
 				</div>
 				<ul class="list">
 					for _, rec := range data.Recommendations {
@@ -206,6 +209,9 @@ templ DashboardPage(data DashboardData) {
 						</li>
 					}
 				</ul>
+				<div class="panel__footer">
+					@components.RiskDisclaimerCompact()
+				</div>
 			</div>
 		</div>
 	}
